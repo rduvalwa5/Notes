@@ -1,0 +1,128 @@
+Git Notes on C1246895-OSX
+
+1) Eclipse EGit
+http://eclipse.org/egit/download/
+
+2) http://eclipse.org/egit/download/
+
+INSTALLATION
+============
+
+Step 1 - Install Package
+------------------------
+Double-click the package in this disk image to install. This installs
+git to /usr/local/git. Root access is required.
+
+
+UNINSTALLING
+============
+Git installer has you sad? Wipe out /usr/local/git, /etc/paths.d/git,
+and /etc/manpaths.d/git to rid it from your system. Or you can run the
+provided uninstall.sh script.
+
+_________________________________________________________________
+A  http://schacon.github.com/git/gittutorial.html
+  502  whoami
+  503  mail rduvalwa2@c1246895-osx
+  504  mail
+  505  man git-log
+  506  git help
+  507  git config --global user.name "rduvalwa2"
+  508  git config --global user.email rduvalwa2@c1246895-osx
+  509  ls
+  510  pwd
+  511  ls -la
+  512  ls .gitconfig
+  513  vi .gitconfig 
+
+B Initialize an empty repository
+/Users/rduvalwa2/DevTools/Code/Git_Projects/Git_Repos/HttpSender
+Copy HttpSender project from  /Users/rduvalwa2/DevTools/Code/Git_Projects to /Users/rduvalwa2/DevTools/Code/Git_Projects/Git_Repos/HttpSender
+
+  570  cd Git
+  571  cd Git_Projects/
+  573  cd Git_Repos/
+  575  cd HttpSender/
+  577  git init
+  579  git add .
+  580  git commit
+  583  vi .git
+
+__________________________________________________________________
+Git Quick Start
+Cloning and Creating a Patch
+
+$ git clone git://github.com/git/hello-world.git
+$ cd hello-world
+$ (edit files)
+$ git add (files)
+$ git commit -m 'Explain what I changed'
+$ git format-patch origin/master
+
+Creating and Commiting
+
+$ cd (project-directory)
+$ git init
+$ (add some files)
+$ git add .
+$ git commit -m 'Initial commit'
+
+
+------------------------------------------------------
+Oct 25 2011
+
+/Users/rduvalwa2/projects/HttpSender
+511  cd HttpSender/
+  512  ls
+  513  git init
+  514  ls
+  515  ls -la
+  516  git branch
+  517  git branch 'test_project'
+  518  git checkout test_project
+  519  git branch
+  520  ls
+  521  git status
+  522  ls
+  523  javac HttpGet.java
+  524  ls
+  525  git status
+  526  git add HttpGet.class
+  527  git commit
+  528  git log
+  529  pwd
+  530  history
+c1246895-osx:HttpSender rduvalwa2$ 
+
+------------------------------------------------------
+Apri 27 2012
+
+GIT as a cental repository
+http://toroid.org/ams/git-central-repo-howto
+
+----------------------------------------------------
+Initiallizing a GIT repository in Eclipse
+1) Setting up a GIT project with Eclipse
+    a.  Select project in Eclipse
+    b. Mouse right click on the project -> Team -> Share Project
+         - pop up Share PRoject Window select Git
+         - pop up Configure Git Repository
+               * check Use or create repository in parent folder of project
+               * Select Git repository location 
+                     - select location
+                     - click Create Repository
+                     - click Finish
+         -  Files and folders are now marked with ? to indicate they need to be added to the repository
+     c. Commit work to project repository
+         - right click on  file or folder to commit
+         - Team -> Commit
+         - Commit Changes to Git Repository pop up
+                - select by check box the items to commit
+                - provide (type) commit message
+                
+2) When Eclise syncs with a GIT project the branch is displayed
+ 
+
+
+
+

@@ -1,0 +1,85 @@
+1000  ls -la .ssh
+
+1001  ssh-keygen
+
+1002  ls -la .ssh -t dsa
+
+1003  ssh-keygen  -d dsa
+
+1004  ssh-keygen  -d rsa
+
+1005  ssh-keygen  -t dsa
+
+1006  scp .ssh/id_dsa.pub  rduval@davinci.corp.cmates.com:~/sglog01_key
+
+1007  scp .ssh/id_dsa.pub  rduval@davinci.corp.cmates.com:~/sglog01_key
+
+1008  scp .ssh/id_dsa.pub  rduval@davinci.corp.cmates.com:~/sglog01_key
+
+1009  ls
+
+1010  crontab -l
+
+1011  cd
+
+1012  ls
+
+1013  cd sandbox/
+
+1014  ls
+
+1015  cd log_audit/
+
+1016  ls
+
+1017  cvs up
+
+1018  less Send_Archive.sh
+
+1019  vi Send_Archive.sh
+
+1020  ./Send_Archive.sh
+
+1021  mv Send_Archive.sh  Send_Archive.ssh
+
+1022  cvs up
+
+1023  cvs login
+
+1024  ls
+
+1025  cvs up
+
+1026  ssh davinci.corp.cmates.com hostname
+
+1027  history
+
+ 
+
+ 
+
+1009  cat sglog01_key  >> .ssh/authorized_keys
+
+1010  chmod 600 .ssh/authorized_keys
+
+1011  ls -latr
+
+1012  cd .ssh
+
+1013  ls
+
+1014  ls -latr
+
+1015  cp authorized_keys  authorized_keys2
+
+1016  ls
+
+1017  cd
+
+1018  ls
+
+1019  cd /home/qa/public_html/
+
+1020  ls
+
+1021  cd tools

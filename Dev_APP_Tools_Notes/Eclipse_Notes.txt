@@ -1,0 +1,41 @@
+Eclipse Notes
+
+*** Controlling Eclipse Work Space List
+
+1) Delele unused work space:
+	a.  Preferencse > Start Up Shutdown > Workspaces > Prompt for workspace on startup = check
+	b.  Number of recent workspace to remember  = set number
+	c.  Recent Work Spaces
+		- select workspace to be removed and click remove
+
+
+
+
+http://127.0.0.1/mediawiki/index.php/Eclipse_Notes
+
+Eclipse Notes
+
+[edit] Ruby Aptana plugin
+
+1) Link that answered question about preferred Ruby IDE http://stackoverflow.com/questions/16991/what-ruby-ide-do-you-prefer
+2) Aptana Eclipse Plug-in Installation link http://aptana.org/downloads/start
+    Installing via Eclipse
+    a)  Please copy the following Update Site URL to your clipboard and then follow the steps listed below to add this URL to your Available Software Sites list. Attempting to access this URL using your web browser will return an Access Denied error.
+        -   http://download.aptana.com/studio3/plugin/install  
+    b)  From the Help menu, select Install New Software... to open the Install New Software dialog.
+    c) Paste the URL for the update site into the Work With text box, and hit the Enter (or Return) key.
+    d) In the populated table below, check the box next to the name of the plug-in, and then click the Next button.
+    e) Click the Next button to go to the license page.
+    f) Choose the option to accept the terms of the license agreement, and click the Finish button.
+       You may need to restart Eclipse to continue.
+3) User Guide for Aptana http://aptana.org/products/studio3/getting_started
+[edit] Finding Eclipse Version
+
+for those times you need to verify that a plugin will work for you.
+1) Select Help -> Search
+2) Type About
+3) From the Drop down results list select "About Eclipse"
+4) From About Eclipse window select "Installation Details"
+5) From Installation Details Eclipse Platform -> Eclipse Platform
+The version will be in the column labeled version and look like this:
+3.7.1.M20110909-1335

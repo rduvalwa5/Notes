@@ -1,0 +1,33 @@
+Windows 7 Notes
+
+1) God how I hate Windows
+
+2) Problem you want to transfer a license to another computer
+	a. Deactviate the original license on the computer that has it.
+		- 1) Start Command Prompt: Click the Start Menu Button Orb (On Lower left), In the Start Search Box, key in: cmd And RIGHT CLICK IT, and Run as Administrator.
+				You can also Manually open CMD, by going to: START> ALL PROGRAMS> ACCESSORIES> Command Prompt
+
+				And Run as Admin
+
+			2) Key in the following CAREFULLY:	slmgr.vbs -ipk 3YFJ7-3486F-7488V-3VDMF-2PJMW
+
+				Hit Enter
+
+				This key is a deactivated key from Microsoft, and does NOT work for activating
+
+			3) wait a few seconds to a minute to deactivate Windows 7.
+
+			4) Once you see a pop up related to deactivation, check and see if Windows is deactivated. Go to:
+
+				Start> Right Click Computer> Click Properties, on fdiskthe bottom it should tell you a time Limit
+				
+3) Added drive using unused disk space:  "Disk Management" tool, simple disk		
+
+4) II7S uses the same port as Apache and blocks the Apache Installation
+******* IIS7 server internet information services 
+	Turn off or Disable
+		Click Start, type: turn windows features on or off
+		Hit Enter on your keyboard
+		From there you can uncheck Internet Information Services
+		Click OK
+		Restart if prompted.

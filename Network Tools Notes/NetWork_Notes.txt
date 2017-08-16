@@ -1,0 +1,39 @@
+Network Security Notes:
+
+http://www.brighthub.com/internet/security-privacy/articles/77093.aspx
+
+
+
+
+
+
+
+
+
+Network_Notes
+
+1) Subject:	MAC address spoofing	Link:	http://feross.org/spoofmac/
+
+
+Network drivers   "IP network driver code"  "writing cable modem driver code"
+	http://www.tldp.org/LDP/LG/issue93/bhaskaran.html
+
+	http://tldp.org/HOWTO/Modem-HOWTO-2.html
+	
+	http://www.linuxjournal.com/article/7353
+	
+	http://en.wikibooks.org/wiki/Serial_Programming/Modems_and_AT_Commands
+	
+	http://www.linux-usb.org/usbnet/
+	
+	http://matthias.vallentin.net/blog/2007/04/writing-a-linux-kernel-driver-for-an-unknown-usb-device/
+	
+	https://www.freebsd.org/doc/en/articles/serial-uart/
+	
+	https://developer.apple.com/library/mac/documentation/HardwareDrivers/Reference/CCLScriptingRef/CCLScriptingRef.pdf
+	
+	http://ipxe.org/gsoc
+	
+	
+	"writing ethernet driver code"
+	https://developer.apple.com/library/mac/documentation/DeviceDrivers/Conceptual/NetworkDriver/4_Writing%20the%20Driver/NetworkController.html

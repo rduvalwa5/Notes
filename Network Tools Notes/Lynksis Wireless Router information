@@ -1,0 +1,16 @@
+Lynksis Router Info
+
+ssid:  BLUE
+channel: 8
+Encryption: WEP(64 bit)
+Passphrase: reddog
+KEY: e1136fb544
+
+To Perform Administrative functions:
+
+1.  Connect by way of wired ehternet port
+2.  192.168.1.1
+  - this takes you in directectly to the adminstartive functions
+
+Wireless access:  
+uid  = admin  pwd = reddog

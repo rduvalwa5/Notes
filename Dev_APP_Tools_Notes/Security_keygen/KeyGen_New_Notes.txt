@@ -1,0 +1,62 @@
+Creating and exchanging public and private keys
+
+1) On the server that will be logged onto
+	1.  $ ssh-keygen
+	Generating RSA keys:  Key generation complete.
+	Enter file in which to save the key (/home/rduval/.ssh/identity): redkey
+	Enter passphrase (empty for no passphrase):
+	Enter same passphrase again:
+	Your identification has been saved in redkey.
+	Your public key has been saved in redkey.pub.
+	The key fingerprint is:
+	fa:24:30:34:99:4f:41:6b:c6:c9:ef:fd:fe:a2:d6:83 rduval@C1246895-U.mshome.net
+	$ ls
+	code            redkey          redkey.pub
+	$ pwd
+	/home/rduval
+
+2) FTP or copy public key from server that is going to be logged onto to the server that will
+be initiating the log on.
+Create a .ssh directory to put the public key into
+
+
+3)  test the access by: ssh <user on server to access>@<server>
+
+C:\Documents and Settings\RDuval\.ssh>ssh rduval@c1246895-u
+rduval@c1246895-u's password:
+Last login: Mon Sep 12 20:18:29 2005 from C1246895-A
+Copyright (c) 1980, 1983, 1986, 1988, 1990, 1991, 1993, 1994
+        The Regents of the University of California.  All rights reserved.
+FreeBSD 4.4-RELEASE (GENERIC) #0: Tue Sep 18 11:57:08 PDT 2001
+
+Welcome to FreeBSD!
+
+Before seeking technical support, please use the following resources:
+
+o  Security advisories and updated errata information for all releases are
+   at http://www.FreeBSD.org/releases/ - always consult the ERRATA section
+   for your release first as it's updated frequently.
+
+o  The Handbook and FAQ documents are at http://www.FreeBSD.org/ and,
+   along with the mailing lists, can be searched by going to
+   http://www.FreeBSD.org/search/  If the doc distribution has
+   been installed, they're also available formatted in /usr/share/doc.
+
+If you still have a question or problem, please take the output of
+`uname -a',  along with any relevant error messages, and email it
+as a question to the questions@FreeBSD.org mailing list.  If you are
+unfamiliar with FreeBSD's directory layout, please refer to the hier(7)
+man page. If you are not familiar with man pages, type `man man'.
+You may also use `/stand/sysinstall' to re-enter the installation and
+configuration utility.  Edit /etc/motd to change this login announcement.
+
+$
+
+
+4) test scp: 
+C:\Documents and Settings\RDuval>scp ./netstat rduval@c1246895-u
+
+C:\Documents and Settings\RDuval>ls -l netstat
+-rwx------+ 1 RDuval None 0 Aug 20 09:28 netstat
+
+C:\Documents and Settings\RDuval>

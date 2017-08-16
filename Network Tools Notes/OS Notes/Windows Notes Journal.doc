@@ -1,0 +1,732 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\froman\fcharset0 Times New Roman;}{\f1\fswiss\fcharset0 Arial;}{\f2\fmodern\fcharset0 Courier New;}{\f3\froman\fcharset0 Times;}}
+{\colortbl ;\red0\green0\blue255;\red255\green255\blue255;\red0\green0\blue0;}
+{\stylesheet{ Normal;}{\s1 heading 1;}{\s2 heading 2;}{\s3 heading 3;}{\s4 heading 4;}{\s5 heading 5;}}
+{\*\generator Msftedit 5.41.15.1507;}\viewkind4\uc1\pard\sb240\tx9360\tx10224\tx10260\ul\b\i\f0\fs36 Windows Notes Journal \tab\tab\tab\par
+\pard\tx10260\ulnone\b0\i0\fs20\par
+\pard\li1728\sb120\tx9360\tx9450\par
+\pard\keepn\s1\sb120\sa60\tx10170\kerning28\ul\b\f1\fs28 DEc 8, 2007\tab\par
+\pard\keepn\s2\li432\sb120\tx9360\tx9450\kerning0\ulnone\fs24 Controlling Services:\par
+\pard\keepn\s3\li720\sb120\sa60\tx9360\tx9450 Command Line\par
+\pard{\pntext\f0 1)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart1\pndec{\pntxta)}}
+\fi-360\li1080\tx1080\b0\f0\fs20 Study subject IP programing in C\par
+\pard{\pntext\f0 a)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart1\pnlcltr{\pntxta)}}
+\fi-360\li1440\tx1440 Web site \cf1\ul http://www.cooperstown.com/izb/UNIXSP/ussp99ae\cf0\ulnone\par
+\pard{\pntext\f0 b)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart2\pnlcltr{\pntxta)}}
+\fi-360\li1440\tx1440 Library htons \par
+\pard\fi720\li720 The Windows Sockets \cf2\b htons\cf0\b0  function converts a \b u_short\b0  from host to TCP/IP network byte order (which is\par
+ big-endian).\par
+\pard\keepn\s1\sb120\sa60\tx10170 C:\\Documents and Settings\\RDuval>sc\par
+DESCRIPTION:\par
+        SC is a command line program used for communicating with the\par
+        NT Service Controller and services.\par
+USAGE:\par
+        sc <server> [command] [service name] <option1> <option2>...\par
+\par
+        The option <server> has the form "\\\\ServerName"\par
+        Further help on commands can be obtained by typing: "sc [command]"\par
+        Commands:\par
+          query-----------Queries the status for a service, or\par
+                          enumerates the status for types of services.\par
+          queryex---------Queries the extended status for a service, or\par
+                          enumerates the status for types of services.\par
+          start-----------Starts a service.\par
+          pause-----------Sends a PAUSE control request to a service.\par
+          interrogate-----Sends an INTERROGATE control request to a service.\par
+          continue--------Sends a CONTINUE control request to a service.\par
+          stop------------Sends a STOP request to a service.\par
+          config----------Changes the configuration of a service (persistant).\par
+          description-----Changes the description of a service.\par
+          failure---------Changes the actions taken by a service upon failure.\par
+          qc--------------Queries the configuration information for a service.\par
+          qdescription----Queries the description for a service.\par
+          qfailure--------Queries the actions taken by a service upon failure.\par
+          delete----------Deletes a service (from the registry).\par
+          create----------Creates a service. (adds it to the registry).\par
+          control---------Sends a control to a service.\par
+          sdshow----------Displays a service's security descriptor.\par
+          sdset-----------Sets a service's security descriptor.\par
+          GetDisplayName--Gets the DisplayName for a service.\par
+          GetKeyName------Gets the ServiceKeyName for a service.\par
+          EnumDepend------Enumerates Service Dependencies.\par
+\par
+        The following commands don't require a service name:\par
+        sc <server> <command> <option>\par
+          boot------------(ok | bad) Indicates whether the last boot should\par
+                          be saved as the last-known-good boot configuration\par
+          Lock------------Locks the Service Database\par
+          QueryLock-------Queries the LockStatus for the SCManager Database\par
+EXAMPLE:\par
+        sc start MyService\par
+\par
+Would you like to see help for the QUERY and QUERYEX commands? [ y | n ]: y\par
+QUERY and QUERYEX OPTIONS :\par
+        If the query command is followed by a service name, the status\par
+        for that service is returned.  Further options do not apply in\par
+        this case.  If the query command is followed by nothing or one of\par
+        the options listed below, the services are enumerated.\par
+    type=    Type of services to enumerate (driver, service, all)\par
+             (default = service)\par
+    state=   State of services to enumerate (inactive, all)\par
+             (default = active)\par
+    bufsize= The size (in bytes) of the enumeration buffer\par
+             (default = 4096)\par
+    ri=      The resume index number at which to begin the enumeration\par
+             (default = 0)\par
+    group=   Service group to enumerate\par
+             (default = all groups)\par
+SYNTAX EXAMPLES\par
+sc query                - Enumerates status for active services & drivers\par
+sc query messenger      - Displays status for the messenger service\par
+sc queryex messenger    - Displays extended status for the messenger service\par
+sc query type= driver   - Enumerates only active drivers\par
+sc query type= service  - Enumerates only Win32 services\par
+sc query state= all     - Enumerates all services & drivers\par
+sc query bufsize= 50    - Enumerates with a 50 byte buffer.\par
+sc query ri= 14         - Enumerates with resume index = 14\par
+sc queryex group= ""    - Enumerates active services not in a group\par
+sc query type= service type= interact - Enumerates all interactive services\par
+sc query type= driver group= NDIS     - Enumerates all NDIS drivers\par
+\par
+\par
+C:\\Documents and Settings\\RDuval>\par
+C:\\Documents and Settings\\RDuval>sc query Apache2\par
+\par
+SERVICE_NAME: Apache2\par
+        TYPE               : 10  WIN32_OWN_PROCESS\par
+        STATE              : 1  STOPPED\par
+                                (NOT_STOPPABLE,NOT_PAUSABLE,IGNORES_SHUTDOWN)\par
+        WIN32_EXIT_CODE    : 0  (0x0)\par
+        SERVICE_EXIT_CODE  : 0  (0x0)\par
+        CHECKPOINT         : 0x0\par
+        WAIT_HINT          : 0x0\par
+C:\\Documents and Settings\\RDuval>\par
+\par
+\par
+\par
+\kerning28\ul\b\f1\fs28 March 30, 2002\tab\par
+\pard\keepn\s2\li432\sb120\tx9360\tx9450\kerning0\ulnone\fs24 Programming  Notes:\par
+\pard\keepn\s3\li720\sb120\sa60\tx9360\tx9450 Lang. C\par
+\pard{\pntext\f0 1)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart1\pndec{\pntxta)}}
+\fi-360\li1080\tx1080\b0\f0\fs20 Command prompt environment using autoexec1.bat (icon on the desk top)\par
+\pard{\pntext\f0 2)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart2\pndec{\pntxta)}}
+\fi-360\li1080\tx1080 To set the \b Microsoft\b0  Environment for C or C++ Compiler\par
+\pard{\pntext\f0 a)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart1\pnlcltr{\pntxta)}}
+\fi-360\li1440\tx1440 cenv.bat  calls up the \par
+\pard\fi360\li1080 cd  C:\\Code\\C++\\Projects\par
+rem Set C environment\par
+C:\\progra~1\\micros~2\\vc98\\bin\\VCVARS32.BAT\par
+\pard\tab         b)  CC and cc will work after, \par
+\pard{\pntext\f0 3)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart3\pndec{\pntxta)}}
+\fi-360\li1080\tx1080\b Intel\b0  5 compiler\par
+\pard{\pntext\f0 a)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart1\pnlcltr{\pntxta)}}
+\fi-360\li1440\tx1440 CmdLine > icl <options> <filename>\par
+\pard{\pntext\f0 b)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart2\pnlcltr{\pntxta)}}
+\fi-360\li1440\tx1440\f2 C:\\Program Files\\Intel\\Compiler50\\ia32\\bin\f0\par
+\pard{\pntext\f0 c)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart3\pnlcltr{\pntxta)}}
+\fi-360\li1440\tx1440\f2 C:\\Program Files\\Intel\\Compiler50\\ia64\\bin\f0\par
+\pard{\pntext\f0 4)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart4\pndec{\pntxta)}}
+\fi-360\li1080\tx1080 Intel compiler failed to install because Intel failed to send a useable license file\par
+\pard{\pntext\f0 5)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart5\pndec{\pntxta)}}
+\fi-360\li1080\tx1080 Intel also failed to respond to an email to support or the organization that sent the license\par
+\pard\fi720\li720\par
+\pard\keepn\s1\sb120\sa60\tx10170\kerning28\ul\b\f1\fs28 April 8, 2002\tab\par
+\pard\keepn\s2\li432\sb120\tx9360\tx9450\kerning0\ulnone\fs24 Programming  Notes:\par
+\pard\keepn\s3\li720\sb120\sa60\tx9360\tx9450 Lang. C++\par
+\pard{\pntext\f0 1)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart1\pndec{\pntxta)}}
+\fi-360\li1080\tx1080\b0\f0\fs20 Problem running prg8.cpp in C:\\Code\\C++\\Projects\\Prg8\par
+\pard{\pntext\f0 2)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart2\pndec{\pntxta)}}
+\fi-360\li1080\tx1080 I was getting linker errors when I tried to build the executable.  The problem turned to procedural.\par
+\pard{\pntext\f0 a)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart1\pnlcltr{\pntxta)}}
+\fi-360\li1440\tx1440 When building a multi file project all the files have to be included into the project.\par
+\pard{\pntext\f0 b)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart2\pnlcltr{\pntxta)}}
+\fi-360\li1440\tx1440 In this case There was the main file, prg8.cpp, stack.cpp, list.cpp, list.h and stack.h\par
+\pard{\pntext\f0 c)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart3\pnlcltr{\pntxta)}}
+\fi-360\li1440\tx1440 I left out list.cpp\par
+\pard{\pntext\f0 d)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart4\pnlcltr{\pntxta)}}
+\fi-360\li1440\tx1440 Also path statements have to be included into the IDE in window Tools> Options>Directories>Show Directories For and the pull down options to review are Include and Source.\par
+\pard{\pntext\f0 e)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart5\pnlcltr{\pntxta)}}
+\fi-360\li1440\tx1440 When running set the argument in Project>Setting>Debug>Arguments window\par
+\pard{\pntext\f0 f)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart6\pnlcltr{\pntxta)}}
+\fi-360\li1440\tx1440 This program compiled and linked on MSDV 4 (HP-XP) and MSDV 6(C1246895-A)\par
+\pard{\pntext\f0 3)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart3\pndec{\pntxta)}}
+\fi-360\li1080\tx1080 Program 8 development process(to be continued)\par
+\pard{\pntext\f0 b)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart2\pnlcltr{\pntxta)}}
+\fi-360\li1440\tx1440  \par
+\pard\keepn\s1\sb120\sa60\tx10170\kerning28\ul\b\f1\fs28 May 13, 2002\tab\par
+\pard\keepn\s2\li432\sb120\tx9360\tx9450\kerning0\ulnone\fs24 Programming  Notes:\par
+\pard\keepn\s3\li720\sb120\sa60\tx9360\tx9450 VARWRITE. CPP\par
+\pard{\pntext\f0 1)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart1\pndec{\pntxta)}}
+\fi-360\li1080\tx1080\b0\f0\fs20 This program re-writes AUTOEXEC1.BAT\par
+\pard{\pntext\f0 2)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart2\pndec{\pntxta)}}
+\fi-360\li1080\tx1080 Over writes variable LASTDIR with the current path on exit  \par
+\pard{\pntext\f0 3)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart3\pndec{\pntxta)}}
+\fi-360\li1080\tx1080 This feature allows the batch file AUTOEXEC1.BAT to always return to the last working location\par
+\pard{\pntext\f0 4)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart4\pndec{\pntxta)}}
+\fi-360\li1080\tx1080 This feature should save setup time.\par
+\pard{\pntext\f0 5)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart5\pndec{\pntxta)}}
+\fi-360\li1080\tx1080\b AUTOEXE1.BAT\par
+\pard\li1080\b0\f2\fs16 SET windir=C:\\WINDOWS\par
+SET winbootdir=C:\\WINDOWS\par
+SET COMSPEC=C:\\WINDOWS\\COMMAND.COM\par
+SET PATH=C:\\BATCH;c:\\bin;C:\\mksnt;C:\\WINDOWS;C:\\WINDOWS\\COMMAND;C:\\BATCH;C:\\progra~1\\micros~2\\vc98\\bin;C:\\java\\bin;C:\\Progra~1\\Intel\\Compiler50\\ia32\\bin;C:\\Progra~1\\Intel\\Compiler50\\ia64\\bin\par
+SET TEMP=C:\\WINDOWS\\TEMP\par
+SET TMP=C:\\WINDOWS\\TEMP\par
+SET ROOTDIR=C:/\par
+SET HOME=C:/\par
+SET TMPDIR=C:/WINDOWS/TEMP\par
+SET SHELL=C:/mksnt/sh.exe\par
+SET LOGNAME=mks\par
+SET CODE=C:\\code\par
+SET JCODE=C:\\code\\java\\src\\week3\par
+SET RESUME=C:\\mydocu~1\\resume\par
+SET JAVAHOME=C:\\java\par
+SET CLASSPATH=.;c:\\java\\lib\\classes.zip\par
+SET LASTDIR=C:\\Code\\Java\\src\\week3\\day17\par
+cd %LASTDIR%\par
+SET PROMPT=$n$$ \par
+doskey\par
+command.com\par
+varwrite.exe\par
+\pard\li720\f0\fs20\par
+\pard{\pntext\f0 6)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart6\pndec{\pntxta)}}
+\fi-360\li1080\tx1080 VARWRITE.CPP\par
+\pard\li1080\f1\fs16 /* FULLPATH.C: This program demonstrates how _fullpath\par
+ * creates a full path from a partial path.\par
+ */\par
+\par
+#include <stdio.h>\par
+#include <conio.h>\par
+#include <stdlib.h>\par
+#include <direct.h>\par
+#include <string.h>\par
+#define MAX 200\par
+\par
+char full[_MAX_PATH], part[_MAX_PATH];\par
+\par
+void main( void )\par
+\{ FILE *fp;\par
+  FILE *fp1;\par
+char line[200];\par
+line[0] = '\\n';\par
+char lastdir[100] = \{"SET LASTDIR="\};\par
+// get current directory\par
+_fullpath( full, part, _MAX_PATH);\par
+strcat(lastdir,full);\par
+strcat(lastdir,"\\n");\par
+//backup autoexec1.bat\par
+printf( "Back up 'autoexec1.bat'\\n" );\par
+system("cp C:\\\\autoexec1.bat autoexec1.bak");\par
+system("cp C:\\\\autoexec1.bat autoexec1.sav");\par
+\par
+//open for writing autoexec1.bat\par
+if( (fp  = fopen("C:\\\\autoexec1.bak", "r" )) == NULL )\par
+\{   printf( "The file C:\\\\autoexec1.bak was not opened\\n" );\par
+\}else printf( "The file C:\\\\autoexec1.bak was opened\\n" );\par
+\par
+if( (fp1  = fopen("C:\\\\autoexec1.bat", "w+" )) == NULL )\par
+\{   printf( "The file C:\\\\autoexec1.bat was not opened\\n" );\par
+\}\par
+else\tab printf( "The file C:\\\\autoexec1.bat was opened\\n" );\par
+\par
+while(fgets(line,200,fp) != NULL)\par
+\{\par
+\tab if(strncmp("SET LASTDIR",line,11) == 0)\par
+\tab\{\par
+\tab\tab fputs(lastdir, fp1);\par
+\tab\tab fputs(lastdir,stdout);\par
+\tab\}\par
+\tab else\tab\{\par
+\tab\tab  fputs(line,stdout);\par
+\tab\tab  fputs(line,fp1);\par
+\tab\tab\}\par
+\}\par
+/* Close files */\par
+fclose(fp);\par
+printf( "The file 'autoexec1.bat' was closed\\n" );\par
+fclose(fp1);\par
+printf( "The file 'autoexec1.bak' was closed\\n" );\par
+return; \par
+\}\par
+\f0\fs20\par
+\pard\keepn\s1\sb120\sa60\tx10170\kerning28\ul\b\f1\fs28 May 12, 2003\tab\par
+\pard\keepn\s2\sb120\tx9360\tx9450\kerning0\ulnone\fs24 Programming  Notes:\par
+\pard\keepn\s3\sb120\sa60\tx9360\tx9450 mypwd\par
+\pard\b0\f0\fs20 This program works like Unix pwd in that it returns the absolute path of the current directory.  I do not recall how I developed this code.  I believe it was part of the development of varwrite program that does not work with the Windows XP system but mypwd does. \par
+C:\\Code\\C\\Mypwd\par
+\f2\fs16 /* FULLPATH.C: This program demonstrates how _fullpath\par
+ * creates a full path from a partial path.\par
+ */\par
+#include <stdio.h>\par
+#include <conio.h>\par
+#include <stdlib.h>\par
+#include <direct.h>\par
+#include <string.h>\par
+//char full[_MAX_PATH], part[_MAX_PATH], command[100] = \{"SET LASTDIR="\};\par
+char full[_MAX_PATH], part[_MAX_PATH], AbsolutePath[300] = \{""\};\par
+void main( void )\par
+\{\par
+_fullpath( full, part, _MAX_PATH);\par
+strcat(AbsolutePath,full);\par
+//system("command");\par
+printf( "%s", AbsolutePath );\par
+return; \par
+\}\par
+\fs20\par
+\f0\par
+\par
+\par
+\pard{\pntext\f0 1)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart1\pndec{\pntxta)}}
+\fi-360\li1080\tx1080 See C++ help on registry objects\par
+\pard{\pntext\f0 2)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart2\pndec{\pntxta)}}
+\fi-360\li1080\tx1080 RegCreateKey and RegCreateKeyEx for Windows 32 bit OS\par
+\pard{\pntext\f0 3)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart3\pndec{\pntxta)}}
+\fi-360\li1080\tx1080\par
+\pard{\pntext\f0 4)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart4\pndec{\pntxta)}}
+\fi-360\li1080\tx1080\par
+\pard\par
+\pard\keepn\s4\cf3\b\f3\fs28 May 27 2003\par
+\pard\fs20 C programming with Gcc or G++ on BSD 4.4\cf0\fs24\par
+\b0\par
+\pard\keepn\s4\cf3\b\fs28 May 28, 2003\par
+\pard\cf0\b0\fs24\par
+\cf3\b\fs20 TCPIP Socket programming using BSD compiler:\cf0\fs24\par
+\b0\par
+\cf3\fs20 The following information from the book TCP/IP Sockets In C, Practical Guide for Programmers by Micheal J. Donahoo and Kenneth L. Calvert.  This book is part of a series "The Proctical Guide Series"\cf0\fs24\par
+\par
+\cf3\b\fs20 2.1\par
+\b0 int socket(int protocolFamily, int type, int protocal)\cf0\fs24\par
+\f0\fs20\par
+The return value is positive value if successful and \endash 1 if failed.  The positive value is the \b handle socket descriptor\b0  like a file descriptor.  It is used in the connect() call.\par
+\par
+protocolFamily argc[1] = PF_INET is the protocol family\par
+type argc[2] = SOCK_STREAM (message with boundaries) or SOCK_DGRAM (best effort)\par
+protocal is the end to end protocol argc[3] = IPPPROTO_TCP or IPPPROTO_UDP\par
+\tab default 0 is specifies the default for the protocolFamily in argc[1]\par
+\par
+\b 2.2 Addresses\par
+\cf3\b0\f3 The socket API was developed for expansion capability.  That is although there is only one current Protocal family in use by this API, the socket API is designed to provide structure access to other protocal families.\cf0\fs24\par
+\f0\fs20\par
+struct sockaddr\par
+\{\tab\par
+\tab unsigned short sa_family;  //Adress family(AF_INET)\par
+\tab char sa_data[14];  // data blob parsed by information derived from sa_family\par
+\};\par
+  \par
+sockaddr    sa_family\tab\tab sa_data\par
+\trowd\trgaph108\trleft900\trpaddl108\trpaddr108\trpaddfl3\trpaddfr3
+\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx1800\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx9720\pard\intbl Family\cell Blob (14 bytes)\cell\row\trowd\trgaph108\trleft900\trpaddl108\trpaddr108\trpaddfl3\trpaddfr3
+\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx1800\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx3060\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx5850\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx9720\pard\intbl 2 bytes\cell 2 bytes\cell 4 bytes\cell 8 bytes\cell\row\trowd\trgaph108\trleft900\trpaddl108\trpaddr108\trpaddfl3\trpaddfr3
+\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx1800\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx3060\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx5850\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx9720\pard\intbl Family\cell Port\cell Internet address\cell Unused\cell\row\pard sockaddr_in  sin_family\tab sin_port\tab\tab sin_addr\tab\tab\tab   sin_zero\par
+\par
+Due to the structure sockaddr_in can be cast to sockaddr.  This enables the generic structuring that will allow for expansion of the protocol family.\par
+\par
+ struct \b in_addr\b0\par
+ \{ unsinged long s_addr;  // 32 bit Internet address  \};\par
+\par
+struct sockaddr_in\par
+\{  unsigned short sin_family; // Internet protocol  AF_INET\par
+    unsigned short sin_port;  // address port 16 bits\par
+   struct \b in_addr\b0  sin_addr;  // Internet address 32 bits\par
+   char sing_zero[8];\tab // Not used\par
+\};\par
+\par
+\pard\fi-360\li360\tx360\b 2.3\tab TCP Client\par
+\pard  \b0\par
+Four basic steps for client server communication:\par
+\pard{\pntext\f0 1)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart1\pndec{\pntxta)}}
+\fi-360\li360\tx360 Create a TCP socket using socket().\par
+\pard{\pntext\f0 2)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart2\pndec{\pntxta)}}
+\fi-360\li360\tx360 Establish connection to the server (passive listening) thru connect().\par
+\pard{\pntext\f0 3)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart3\pndec{\pntxta)}}
+\fi-360\li360\tx360 Communicate with server using send() and recv().\par
+\pard{\pntext\f0 4)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart4\pndec{\pntxta)}}
+\fi-360\li360\tx360 Close connection with close().\par
+\pard\par
+int connect(int socket, struct sockaddr *foreignAddress, unsigned int addressLength)\par
+\pard{\pntext\f0 1.\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart1\pndec{\pntxta.}}
+\fi-360\li360\tx360 socket is the socket descriptor created by socket()\par
+\pard{\pntext\f0 2.\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart2\pndec{\pntxta.}}
+\fi-360\li360\tx360 foreignAddress is a pointer to sockaddr because the API is generic\par
+\pard{\pntext\f0 3.\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart3\pndec{\pntxta.}}
+\fi-360\li360\tx360 addresslength is sizeof(struct sockaddr_in)\par
+\pard\par
+When the connect completes successfully, communication can proceed with send() and recv() calls\par
+\par
+int send(int socket, const void *msg, unsigned int msgLength, int flags)\par
+int recv(int socket, void *rcvBuffer, unsigned int bufferLength, int flags)\par
+\par
+send() behavior is to block until all data is sent.  Flags are to change the default behavior.\par
+\par
+TCPEchoClient.c\par
+\b\par
+\pard\fi-360\li360\tx360 2.4\tab Xxxxx\par
+2.5\tab xxxxx\par
+\pard\par
+\pard\keepn\s4\cf3\f3\fs28 November 23, 2003\par
+\pard\fs20 C programming with Gcc or G++ on BSD 4.4\cf0\fs24\par
+\b0\par
+\pard\keepn\s5\b Subject:  Linked List in C and Queues\par
+\pard\b0\f0\fs20\par
+Keywords:  \b const\b0  and \b volitale\par
+\b0 A variable can be declared as both.\par
+Example:\par
+volatile const int systemClock;\par
+const volatile int * clock;\par
+\par
+The purpose of these declarations in ANSI C is for compiler opimization.  If ta variable is declared a const the compiler might cache that value knowing that the program cannot change it.  The volatile keyword tells the compiler that the variable maybe changed.  The book used the example of a system clock being referenced in a block of code.  This value is const from the perspective of the code because the code cannot change it but the system clock is volatile because the OS is changing the value.\par
+\b\f3\fs24\par
+\f0\fs20\par
+\pard\keepn\s1\sb120\sa60\tx10260\kerning28\ul\f1\fs28 April 25, 2004\tab\par
+\pard\keepn\s2\li432\sb120\tx9360\tx9450\kerning0\ulnone\fs24 Programming  Notes:\par
+\pard\keepn\s3\li720\sb120\sa60\tx9360\tx9450 Compiling C++ command line with multiple class files\par
+\pard{\pntext\f0 1)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart1\pndec{\pntxta)}}
+\fi-360\li1368\sb120\tx1368\tx9360\tx9450\f0\fs20   File locations\par
+\pard\b0\f2 Randall Duval@c1246895-a /cygdrive/c/Code/C++/plusProjects/prg8\par
+$ ls\par
+Debug     list.h    prg8.dep  prg8.exe  prg8.obj  stack.cpp  stack.plg\par
+Prg8.doc  list.obj  prg8.dsp  prg8.mak  prg8.opt  stack.h\par
+list.cpp  prg8.cpp  prg8.dsw  prg8.ncb  prg8.plg  stack.obj\par
+\pard\li1008\sb120\tx9360\tx9450\f0\par
+\pard{\pntext\f0 2)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart2\pndec{\pntxta)}}
+\fi-360\li1368\sb120\tx1368\tx9360\tx9450\b Compiling C++ command line with multiple class files using Microsoft command line compiler\par
+\pard\b0\f2 $ cl prg8.cpp list.cpp stack.cpp\par
+Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 12.00.8804 for 80x86\par
+Copyright (C) Microsoft Corp 1984-1998. All rights reserved.\par
+\par
+prg8.cpp\par
+list.cpp\par
+stack.cpp\par
+Generating Code...\par
+Microsoft (R) Incremental Linker Version 6.00.8447\par
+Copyright (C) Microsoft Corp 1992-1998. All rights reserved.\par
+\par
+/out:prg8.exe\par
+prg8.obj\par
+list.obj\par
+stack.obj\par
+\pard{\pntext\f0 3)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart3\pndec{\pntxta)}}
+\fi-360\li1368\sb120\tx1368\tx9360\tx9450\b\f0 Using GNU C++ command line compiler\par
+\pard\b0\f2 $ g++ prg8.cpp list.cpp stack.cpp\par
+In file included from /usr/include/c++/3.3.1/backward/iostream.h:31,\par
+                 from prg8.cpp:20:\par
+/usr/include/c++/3.3.1/backward/backward_warning.h:32:2: warning: #warning This file includes at lea\par
+st one deprecated or antiquated header. Please consider using one of the 32 headers found in section\par
+ 17.4.1.2 of the C++ standard. Examples include substituting the <X> header for the <X.h> header for\par
+ C++ includes, or <sstream> instead of the deprecated header <strstream.h>. To disable this warning\par
+use -Wno-deprecated.\par
+prg8.cpp:43:2: warning: no newline at end of file\par
+In file included from /usr/include/c++/3.3.1/backward/iostream.h:31,\par
+                 from list.cpp:2:\par
+/usr/include/c++/3.3.1/backward/backward_warning.h:32:2: warning: #warning This file includes at lea\par
+st one deprecated or antiquated header. Please consider using one of the 32 headers found in section\par
+ 17.4.1.2 of the C++ standard. Examples include substituting the <X> header for the <X.h> header for\par
+ C++ includes, or <sstream> instead of the deprecated header <strstream.h>. To disable this warning\par
+use -Wno-deprecated.\par
+In file included from /usr/include/c++/3.3.1/backward/iostream.h:31,\par
+                 from stack.cpp:3:\par
+/usr/include/c++/3.3.1/backward/backward_warning.h:32:2: warning: #warning This file includes at lea\par
+st one deprecated or antiquated header. Please consider using one of the 32 headers found in section\par
+ 17.4.1.2 of the C++ standard. Examples include substituting the <X> header for the <X.h> header for\par
+ C++ includes, or <sstream> instead of the deprecated header <strstream.h>. To disable this warning\par
+use -Wno-deprecated.\par
+\pard\li1008\sb120\tx9360\tx9450\f0\par
+\pard{\pntext\f0 4)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart4\pndec{\pntxta)}}
+\fi-360\li1368\sb120\tx1368\tx9360\tx9450\b Result of program\par
+\pard\b0\f2 $ ./prg8.exe 5\par
+2  0x00321390\par
+Start c:\\Code\\C++\\plusProjects\\prg8\\prg8.exe\par
+n is 5\par
+stack.cpp getmax m is 5 top is 0 elem is 1\par
+list.cpp elem is 1\par
+list.cpp nmax is 5\par
+stack.cpp getmax m is 5 top is 1 elem is 2\par
+list.cpp elem is 2\par
+list.cpp nmax is 5\par
+stack.cpp getmax m is 5 top is 2 elem is 3\par
+list.cpp elem is 3\par
+list.cpp nmax is 5\par
+stack.cpp getmax m is 5 top is 3 elem is 4\par
+list.cpp elem is 4\par
+list.cpp nmax is 5\par
+stack.cpp getmax m is 5 top is 4 elem is 5\par
+list.cpp elem is 5\par
+list.cpp nmax is 5\par
+stack.cpp getmax m is 5 top is 5 elem is 6\par
+stack.cpp print elem is 5\par
+stack.cpp print elem is 4\par
+stack.cpp print elem is 3\par
+stack.cpp print elem is 2\par
+stack.cpp print elem is 1\par
+1st 1\par
+2nd 3277384\par
+\pard\keepn\s1\sb120\sa60\tx10170\kerning28\ul\b\f1\fs28 May 7, 2006\tab\par
+\pard\sb120\tx9360\tx9450\kerning0\ulnone\f2 Bitwise operators\par
+\fs20 Bitwise operators only work on char, int and variants(signed int)\par
+\fs24 AND &\par
+\b0\fs20 Truth table 0 = false 1 = true\par
+\trowd\trgaph108\trleft-108\trpaddl108\trpaddr108\trpaddfl3\trpaddfr3
+\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx1530\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx3150\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx5040\pard\intbl\sb120\tx9360\tx9450 Operator 1\cell Operator 1\cell Result Value\cell\row\trowd\trgaph108\trleft-108\trpaddl108\trpaddr108\trpaddfl3\trpaddfr3
+\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx1530\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx3150\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx5040\pard\intbl\sb120\tx9360\tx9450 0\cell 0\cell 0\cell\row\trowd\trgaph108\trleft-108\trpaddl108\trpaddr108\trpaddfl3\trpaddfr3
+\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx1530\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx3150\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx5040\pard\intbl\sb120\tx9360\tx9450 0\cell 1\cell 0\cell\row\trowd\trgaph108\trleft-108\trpaddl108\trpaddr108\trpaddfl3\trpaddfr3
+\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx1530\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx3150\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx5040\pard\intbl\sb120\tx9360\tx9450 1\cell 0\cell 0\cell\row\trowd\trgaph108\trleft-108\trpaddl108\trpaddr108\trpaddfl3\trpaddfr3
+\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx1530\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx3150\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx5040\pard\intbl\sb120\tx9360\tx9450 1\cell 1\cell 1\cell\row\trowd\trgaph108\trleft-108\trpaddl108\trpaddr108\trpaddfl3\trpaddfr3
+\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx1530\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx3150\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx5040\pard\intbl\sb120\tx9360\tx9450\cell\cell\cell\row\pard\sb120\tx9360\tx9450\b Both values have to be True to result in a True\tab\par
+\fs24 OR |\par
+\b0\fs20 Truth table 0 = false 1 = true\par
+\trowd\trgaph108\trleft-108\trpaddl108\trpaddr108\trpaddfl3\trpaddfr3
+\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx1530\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx3150\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx5040\pard\intbl\sb120\tx9360\tx9450 Operator 1\cell Operator 1\cell Result Value\cell\row\trowd\trgaph108\trleft-108\trpaddl108\trpaddr108\trpaddfl3\trpaddfr3
+\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx1530\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx3150\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx5040\pard\intbl\sb120\tx9360\tx9450 0\cell 0\cell 0\cell\row\trowd\trgaph108\trleft-108\trpaddl108\trpaddr108\trpaddfl3\trpaddfr3
+\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx1530\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx3150\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx5040\pard\intbl\sb120\tx9360\tx9450 0\cell 1\cell 1\cell\row\trowd\trgaph108\trleft-108\trpaddl108\trpaddr108\trpaddfl3\trpaddfr3
+\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx1530\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx3150\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx5040\pard\intbl\sb120\tx9360\tx9450 1\cell 0\cell 1\cell\row\trowd\trgaph108\trleft-108\trpaddl108\trpaddr108\trpaddfl3\trpaddfr3
+\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx1530\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx3150\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx5040\pard\intbl\sb120\tx9360\tx9450 1\cell 1\cell 1\cell\row\trowd\trgaph108\trleft-108\trpaddl108\trpaddr108\trpaddfl3\trpaddfr3
+\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx1530\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx3150\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx5040\pard\intbl\sb120\tx9360\tx9450\cell\cell\cell\row\pard\sb120\tx9360\tx9450\b Either or both values being compared have to be true to result in true.\par
+\b0\par
+\par
+\b\fs24 XOR ^ Exclusive OR\par
+\b0\fs20 Truth table 0 = false 1 = true\par
+\trowd\trgaph108\trleft-108\trpaddl108\trpaddr108\trpaddfl3\trpaddfr3
+\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx1530\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx3150\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx5040\pard\intbl\sb120\tx9360\tx9450 Operator 1\cell Operator 1\cell Result Value\cell\row\trowd\trgaph108\trleft-108\trpaddl108\trpaddr108\trpaddfl3\trpaddfr3
+\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx1530\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx3150\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx5040\pard\intbl\sb120\tx9360\tx9450 0\cell 0\cell 0\cell\row\trowd\trgaph108\trleft-108\trpaddl108\trpaddr108\trpaddfl3\trpaddfr3
+\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx1530\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx3150\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx5040\pard\intbl\sb120\tx9360\tx9450 1\cell 0\cell 1\cell\row\trowd\trgaph108\trleft-108\trpaddl108\trpaddr108\trpaddfl3\trpaddfr3
+\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx1530\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx3150\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx5040\pard\intbl\sb120\tx9360\tx9450 1\cell 1\cell 0\cell\row\trowd\trgaph108\trleft-108\trpaddl108\trpaddr108\trpaddfl3\trpaddfr3
+\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx1530\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx3150\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx5040\pard\intbl\sb120\tx9360\tx9450 0\cell 1\cell 1\cell\row\trowd\trgaph108\trleft-108\trpaddl108\trpaddr108\trpaddfl3\trpaddfr3
+\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx1530\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx3150\clbrdrl\brdrw15\brdrs\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs \cellx5040\pard\intbl\sb120\tx9360\tx9450\cell\cell\cell\row\pard\sb120\tx9360\tx9450\b Only one value can be true to result in a True\par
+\b0\par
+\pard\li1008\sb120\tx9360\tx9450\par
+\pard\keepn\s1\sb120\sa60\tx10170\kerning28\ul\b\f1\fs28 Feb 1, 2007\tab\par
+\pard\kerning0\ulnone\b0\f2\fs20\par
+\par
+\pard\keepn\s4\cf3\lang9\b\f3\fs28 21.4.3 Broken-down Time\par
+\pard\sb100\sa100\cf0\b0\f0\fs24 Calendar time is represented by the usual GNU C library functions as an elapsed time since a fixed base calendar time. This is convenient for computation, but has no relation to the way people normally think of calendar time. By contrast, \i broken-down time\i0  is a binary representation of calendar time separated into year, month, day, and so on. Broken-down time values are not useful for calculations, but they are useful for printing human readable time information. \par
+A broken-down time value is always relative to a choice of time zone, and it also indicates which time zone that is. \par
+The symbols in this section are declared in the header file \f2 time.h\f0 . \par
+\pard\fs20\emdash  Data Type: \b struct tm\b0\par
+\pard\sb100\sa100\fs24 This is the data type used to represent a broken-down time. The structure contains at least the following members, which can appear in any order. \par
+\pard\f2\fs20 int tm_sec\f0  \par
+\pard\li720 This is the number of full seconds since the top of the minute (normally in the range \f2 0\f0  through \f2 59\f0 , but the actual upper limit is \f2 60\f0 , to allow for leap seconds if leap second support is available). \par
+\pard\f2 int tm_min\f0  \par
+\pard\li720 This is the number of full minutes since the top of the hour (in the range \f2 0\f0  through \f2 59\f0 ). \par
+\pard\f2 int tm_hour\f0  \par
+\pard\li720 This is the number of full hours past midnight (in the range \f2 0\f0  through \f2 23\f0 ). \par
+\pard\f2 int tm_mday\f0  \par
+\pard\li720 This is the ordinal day of the month (in the range \f2 1\f0  through \f2 31\f0 ). Watch out for this one! As the only ordinal number in the structure, it is inconsistent with the rest of the structure. \par
+\pard\f2 int tm_mon\f0  \par
+\pard\li720 This is the number of full calendar months since the beginning of the year (in the range \f2 0\f0  through \f2 11\f0 ). Watch out for this one! People usually use ordinal numbers for month-of-year (where January = 1). \par
+\pard\f2 int tm_year\f0  \par
+\pard\li720 This is the number of full calendar years since 1900. \par
+\pard\f2 int tm_wday\f0  \par
+\pard\li720 This is the number of full days since Sunday (in the range \f2 0\f0  through \f2 6\f0 ). \par
+\pard\f2 int tm_yday\f0  \par
+\pard\li720 This is the number of full days since the beginning of the year (in the range \f2 0\f0  through \f2 365\f0 ). \par
+\pard\f2 int tm_isdst\f0  \par
+\pard\li720 This is a flag that indicates whether Daylight Saving Time is (or was, or will be) in effect at the time described. The value is positive if Daylight Saving Time is in effect, zero if it is not, and negative if the information is not available. \par
+\pard\f2 long int tm_gmtoff\f0  \par
+\pard\li720 This field describes the time zone that was used to compute this broken-down time value, including any adjustment for daylight saving; it is the number of seconds that you must add to UTC to get local time. You can also think of this as the number of seconds east of UTC. For example, for U.S. Eastern Standard Time, the value is \f2 -5*60*60\f0 . The \f2 tm_gmtoff\f0  field is derived from BSD and is a GNU library extension; it is not visible in a strict ISO\~C environment. \par
+\pard\f2 const char *tm_zone\f0  \par
+\pard\li720 This field is the name for the time zone that was used to compute this broken-down time value. Like \f2 tm_gmtoff\f0 , this field is a BSD and GNU extension, and is not visible in a strict ISO\~C environment. \par
+\pard\emdash  Function: struct tm * \b localtime\b0  (\i const time_t *time\i0 )\par
+\pard\sb100\sa100\fs24 The \f2\fs20 localtime\f0\fs24  function converts the simple time pointed to by \i time\i0  to broken-down time representation, expressed relative to the user's specified time zone. \par
+The return value is a pointer to a static broken-down time structure, which might be overwritten by subsequent calls to \f2\fs20 ctime\f0\fs24 , \f2\fs20 gmtime\f0\fs24 , or \f2\fs20 localtime\f0\fs24 . (But no other library function overwrites the contents of this object.) \par
+The return value is the null pointer if \i time\i0  cannot be represented as a broken-down time; typically this is because the year cannot fit into an \f2\fs20 int\f0\fs24 . \par
+Calling \f2\fs20 localtime\f0\fs24  has one other effect: it sets the variable \f2\fs20 tzname\f0\fs24  with information about the current time zone. See \cf1\ul Time Zone Functions\cf0\ulnone . \par
+Using the \f2\fs20 localtime\f0\fs24  function is a big problem in multi-threaded programs. The result is returned in a static buffer and this is used in all threads. POSIX.1c introduced a variant of this function. \par
+\pard\fs20\emdash  Function: struct tm * \b localtime_r\b0  (\i const time_t *time, struct tm *resultp\i0 )\par
+\pard\sb100\sa100\fs24 The \f2\fs20 localtime_r\f0\fs24  function works just like the \f2\fs20 localtime\f0\fs24  function. It takes a pointer to a variable containing a simple time and converts it to the broken-down time format. \par
+But the result is not placed in a static buffer. Instead it is placed in the object of type \f2\fs20 struct tm\f0\fs24  to which the parameter \i resultp\i0  points. \par
+If the conversion is successful the function returns a pointer to the object the result was written into, i.e., it returns \i resultp\i0 . \par
+\pard\fs20\emdash  Function: struct tm * \b gmtime\b0  (\i const time_t *time\i0 )\par
+\pard\sb100\sa100\fs24 This function is similar to \f2\fs20 localtime\f0\fs24 , except that the broken-down time is expressed as Coordinated Universal Time (UTC) (formerly called Greenwich Mean Time (GMT)) rather than relative to a local time zone. \par
+As for the \f2\fs20 localtime\f0\fs24  function we have the problem that the result is placed in a static variable. POSIX.1c also provides a replacement for \f2\fs20 gmtime\f0\fs24 . \par
+\pard\fs20\emdash  Function: struct tm * \b gmtime_r\b0  (\i const time_t *time, struct tm *resultp\i0 )\par
+\pard\sb100\sa100\fs24 This function is similar to \f2\fs20 localtime_r\f0\fs24 , except that it converts just like \f2\fs20 gmtime\f0\fs24  the given time as Coordinated Universal Time. \par
+If the conversion is successful the function returns a pointer to the object the result was written into, i.e., it returns \i resultp\i0 . \par
+\pard\fs20\emdash  Function: time_t \b mktime\b0  (\i struct tm *brokentime\i0 )\par
+\pard\sb100\sa100\fs24 The \f2\fs20 mktime\f0\fs24  function is used to convert a broken-down time structure to a simple time representation. It also \ldblquote normalizes\rdblquote  the contents of the broken-down time structure, by filling in the day of week and day of year based on the other date and time components. \par
+The \f2\fs20 mktime\f0\fs24  function ignores the specified contents of the \f2\fs20 tm_wday\f0\fs24  and \f2\fs20 tm_yday\f0\fs24  members of the broken-down time structure. It uses the values of the other components to determine the calendar time; it's permissible for these components to have unnormalized values outside their normal ranges. The last thing that \f2\fs20 mktime\f0\fs24  does is adjust the components of the \i brokentime\i0  structure (including the \f2\fs20 tm_wday\f0\fs24  and \f2\fs20 tm_yday\f0\fs24 ). \par
+If the specified broken-down time cannot be represented as a simple time, \f2\fs20 mktime\f0\fs24  returns a value of \f2\fs20 (time_t)(-1)\f0\fs24  and does not modify the contents of \i brokentime\i0 . \par
+Calling \f2\fs20 mktime\f0\fs24  also sets the variable \f2\fs20 tzname\f0\fs24  with information about the current time zone. See \cf1\ul Time Zone Functions\cf0\ulnone . \par
+\pard\fs20\emdash  Function: time_t \b timelocal\b0  (\i struct tm *brokentime\i0 )\par
+\pard\sb100\sa100\f2 timelocal\f0\fs24  is functionally identical to \f2\fs20 mktime\f0\fs24 , but more mnemonically named. Note that it is the inverse of the \f2\fs20 localtime\f0\fs24  function. \par
+\b Portability note:\b0  \f2\fs20 mktime\f0\fs24  is essentially universally available. \f2\fs20 timelocal\f0\fs24  is rather rare. \par
+\pard\fs20\emdash  Function: time_t \b timegm\b0  (\i struct tm *brokentime\i0 )\par
+\pard\sb100\sa100\f2 timegm\f0\fs24  is functionally identical to \f2\fs20 mktime\f0\fs24  except it always takes the input values to be Coordinated Universal Time (UTC) regardless of any local time zone setting. \par
+Note that \f2\fs20 timegm\f0\fs24  is the inverse of \f2\fs20 gmtime\f0\fs24 . \par
+\b Portability note:\b0  \f2\fs20 mktime\f0\fs24  is essentially universally available. \f2\fs20 timegm\f0\fs24  is rather rare. For the most portable conversion from a UTC broken-down time to a simple time, set the \f2\fs20 TZ\f0\fs24  environment variable to UTC, call \f2\fs20 mktime\f0\fs24 , then set \f2\fs20 TZ\f0\fs24  back. \par
+\pard\lang1033\f2\fs20\par
+\par
+/* This program does something =) */ \par
+\par
+#include <stdio.h>\par
+#define loc "[5;23f"\~\~\~\~\~\~\~\~\~\~\~ /* define row and column */\par
+#define erasetoend "[0J"\~\~\~\~\~\~\~ /* clear the screen\~\~\~\~\~ */\~ \par
+#define cursorhome "[0H"\~\~\~\~\~\~\~ /* send the cursor home\~ */\par
+#define clearscreen "[2J"\~ /* clear screen and send curor home */\par
+#define revvideo "[7m"\~\~\~ /* reverse video */\par
+#define reset "[0m"\par
+#define bold "[1m"\par
+#define underline "[4m"\par
+#define black "[30m"\par
+#define red "[0;31m"\par
+#define green "[0;32m"\par
+#define brown "[0;33m"\par
+#define blue "[0;34m"\par
+#define purple "[0;35m"\par
+#define cyan "[0;36m"\par
+#define yellow "[1;33m"\~\~ /* bold yellow */\par
+#define bred "[1;31m"\par
+#define bgreen "[1;32m"\par
+#define bblue "[1;34m"\par
+#define bpurple "[1;35m"\par
+#define bcyan "[1;36m"\par
+#define bwhite "[1;37m"\par
+#define dred "[30;31m"\~\~\~ /* same as plain red\~\~\~ */\par
+#define dgreen "[30;32m"\~ /* same as plain green\~ */\par
+#define dblue "[30;34m"\~\~ /* same as plain blue\~\~ */\par
+#define dpurple "[30;35m" /* same as plain purple */\par
+#define dcyan "[30;36m"\~\~ /* same as plain cyan\~\~ */\par
+#define grey "[30;37m"\par
+\par
+/*\par
+\~\~\~\~ Black\~\~\~\~\~\~ _[0;30m\~\~\~\~ Dark Gray\~\~\~\~ _[1;30m\par
+\~\~\~\~ Blue\~\~\~\~\~\~\~ _[0;34m\~\~\~\~ Light Blue\~\~\~ _[1;34m\par
+\~\~\~\~ Green\~\~\~\~\~\~ _[0;32m\~\~\~\~ Light Green\~\~ _[1;32m\par
+\~\~\~\~ Cyan\~\~\~\~\~\~\~ _[0;36m\~\~\~\~ Light Cyan\~\~\~ _[1;36m\par
+\~\~\~\~ Red\~\~\~\~\~\~\~ \~_[0;31m\~\~\~\~ Light Red\~\~\~\~ _[1;31m\par
+\~\~\~\~ Purple\~\~\~\~\~ _[0;35m\~\~\~\~ Light Purple\~ _[1;35m\par
+\~\~\~\~ Brown\~\~\~\~\~\~ _[0;33m\~\~\~\~ Yellow\~\~\~\~\~\~\~ _[1;33m\par
+\~\~\~\~ Light Gray\~ _[0;37m\~\~\~\~ White\~\~\~\~\~\~\~\~ _[1;37m\par
+\par
+\par
+Black background\~\~\~\~ Dark Gray text\~\~\~\~ _[40;1;30m\par
+Black background\~\~\~\~ Light Red text\~\~\~\~ _[40;1;31m\par
+Black background\~\~\~\~ Light Green text\~\~ _[40;1;32m\par
+Black background\~\~\~\~ Yellow text\~\~\~\~\~\~\~ _[40;1;33m\par
+Black background\~\~\~\~ Light Blue text\~\~\~ _[40;1;34m\par
+Black background\~\~\~\~ Light Purple text\~ _[40;1;35m\par
+Black background\~\~\~\~ Light Cyan text\~\~\~ _[40;1;36m\par
+Black background\~\~\~\~ White text\~\~\~\~\~\~\~\~ _[40;1;37m\par
+Dark Red background\~ Dark Gray text\~\~\~\~ _[41;1;30m\par
+Dark Red background\~ Light Red text\~\~\~\~ _[41;1;31m\par
+Dark Red background\~ Light Green text\~\~ _[41;1;32m\par
+Dark Red background\~ Yellow text\~\~\~\~\~\~\~ _[41;1;33m\par
+Dark Red background\~ Light Blue text\~\~\~ _[41;1;34m\par
+Dark Red background\~ Light Purple text\~ _[41;1;35m\par
+Dark Red background\~ Light Cyan text\~\~\~ _[41;1;36m\par
+Dark Red background\~ White text\~\~\~\~\~\~\~\~ _[41;1;37m\par
+Green background\~\~\~\~ Dark Gray text\~\~\~\~ _[42;1;30m\par
+Green background\~\~\~\~ Light Red text\~\~\~\~ _[42;1;31m\par
+Green background\~\~\~\~ Light Green text\~\~ _[42;1;32m\par
+Green background\~\~\~\~ Yellow text\~\~\~\~\~\~\~ _[42;1;33m\par
+Green background\~\~\~\~ Light Blue text\~\~\~ _[42;1;34m\par
+Green background\~\~\~\~ Light Purple text\~ _[42;1;35m\par
+Green background\~\~\~\~ Light Cyan text\~\~\~ _[42;1;36m\par
+Green background\~\~\~\~ White text\~\~\~\~\~\~\~\~ _[42;1;37m\par
+Brown background\~\~\~\~ Dark Gray text\~\~\~\~ _[43;1;30m\par
+Brown background\~\~\~\~ Light Red text\~\~\~\~ _[43;1;31m\par
+Brown background\~\~\~\~ Light Green text\~\~ _[43;1;32m\par
+Brown background\~\~\~\~ Yellow text\~\~\~\~\~\~\~ _[43;1;33m\par
+Brown background\~\~\~\~ Light Blue text\~\~\~ _[43;1;34m\par
+Brown background\~\~\~\~ Light Purple text\~ _[43;1;35m\par
+Brown background\~\~\~\~ Light Cyan text\~\~\~ _[43;1;36m\par
+Brown background\~\~\~\~ White text\~\~\~\~\~\~\~\~ _[43;1;37m\par
+Blue background\~\~\~\~\~ Dark Gray text\~\~\~\~ _[44;1;30m\par
+Blue background\~\~\~\~\~ Light Red text\~\~\~\~ _[44;1;31m\par
+Blue background\~\~\~\~\~ Light Green text\~\~ _[44;1;32m\par
+Blue background\~\~\~\~\~ Yellow text\~\~\~\~\~\~\~ _[44;1;33m\par
+Blue background\~\~\~\~\~ Light Blue text\~\~\~ _[44;1;34m\par
+Blue background\~\~\~\~\~ Light Purple text\~ _[44;1;35m\par
+Blue background\~\~\~\~\~ Light Cyan text\~\~\~ _[44;1;36m\par
+Blue background\~\~\~\~\~ White text\~\~\~\~\~\~\~\~ _[44;1;37m\par
+Purple background\~\~\~ Dark Gray text\~\~\~\~ _[45;1;30m\par
+Purple background\~\~\~ Light Red text\~\~\~\~ _[45;1;31m\par
+Purple background\~\~\~ Light Green text\~\~ _[45;1;32m\par
+Purple background\~\~\~ Yellow text\~\~\~\~\~\~\~ _[45;1;33m\par
+Purple background\~\~\~ Light Blue text\~\~\~ _[45;1;34m\par
+Purple background\~\~\~ Light Purple text\~ _[45;1;35m\par
+Purple background\~\~\~ Light Cyan text\~\~\~ _[45;1;36m\par
+Purple background\~\~\~ White text\~\~\~\~\~\~\~\~ _[45;1;37m\par
+Cyan background\~\~\~\~\~ Dark Gray text\~\~\~\~ _[46;1;30m\par
+Cyan background\~\~\~\~\~ Light Red text\~\~\~\~ _[46;1;31m\par
+Cyan background\~\~\~\~\~ Light Green text\~\~ _[46;1;32m\par
+Cyan background\~\~\~\~\~ Yellow text\~\~\~\~\~\~\~ _[46;1;33m\par
+Cyan background\~\~\~\~\~ Light Blue text\~\~\~ _[46;1;34m\par
+Cyan background\~\~\~\~\~ Light Purple text\~ _[46;1;35m\par
+Cyan background\~\~\~\~\~ Light Cyan text\~\~\~ _[46;1;36m\par
+Cyan background\~\~\~\~\~ White text\~\~\~\~\~\~\~\~ _[46;1;37m\par
+Grey background\~\~\~\~\~ Dark Gray text\~\~\~\~ _[47;1;30m\par
+Grey background\~\~\~\~\~ Light Red text\~\~\~\~ _[47;1;31m\par
+Grey background\~\~\~\~\~ Light Green text\~\~ _[47;1;32m\par
+Grey background\~\~\~\~\~ Yellow text\~\~\~\~\~\~\~ _[47;1;33m\par
+Grey background\~\~\~\~\~ Light Blue text\~\~\~ _[47;1;34m\par
+Grey background\~\~\~\~\~ Light Purple text\~ _[47;1;35m\par
+Grey background\~\~\~\~\~ Light Cyan text\~\~\~ _[47;1;36m\par
+Grey background\~\~\~\~\~ White text\~\~\~\~\~\~\~\~ _[47;1;37m\par
+*/\par
+\par
+char esc = 27;\~\~\~\~\~\~\~\~\~\~\~ /* escape character */\par
+char bell = 7;\~\~\~\~\~\~\~\~\~\~\~ /* the bell\~\~\~\~\~\~\~\~ */\par
+char ret;\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~ /* holds return key */\par
+\par
+int main()\{\par
+\~ printf("%c%s",esc,clearscreen);\~\~\~\~\~\~\~ /*clear screen*/\par
+\~ puts("ESC characters\\n\\n");\par
+\par
+\~ printf("%c%sBlack%c%s<-- Black\\n",esc,black,esc,reset);\par
+\~ printf("%c%sGrey%c%s\\n",esc,grey,esc,reset);\par
+\~\~printf("%c%sRed\\n",esc,red);\par
+\~ printf("%c%sGreen\\n",esc,green);\par
+\~ printf("%c%sBlue\\n",esc,blue);\par
+\~ printf("%c%sPurple\\n",esc,purple);\par
+\~ printf("%c%sCyan\\n",esc,cyan);\par
+\~ printf("%c%sBrown%c%s\\n",esc,brown,esc,reset);\par
+\~ puts("-Hit Return Key-");\par
+\~ scanf("%c",&ret); \~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~ /*read carriage ret.*/\par
+\~ printf("%c", bell);\par
+\par
+\~ printf("%c%s%c%sBold Plain Text\\n",esc,reset,esc,bold);\par
+\~ printf("%c%sBold Black%c%s\\n",esc,black,esc,reset);\~\~ /* This will show but will look dark grey */\par
+\~ printf("%c%sBold Yellow\\n",esc,yellow);\par
+\~ printf("%c%sBold Red\\n",esc,bred);\par
+\~ printf("%c%sBold Green\\n",esc,bgreen);\par
+\~ printf("%c%sBold Blue\\n",esc,bblue);\par
+\~ printf("%c%sBold Purple\\n",esc,bpurple);\par
+\~ printf("%c%sBold Cyan\\n",esc,bcyan);\par
+\~ printf("%c%sBold White%c%s\\n\\n",esc,bwhite,esc,reset);\par
+\~ puts("-Hit Return Key-");\par
+\~ scanf("%c",&ret); \~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~ /*read carriage ret.*/\par
+\~ printf("%c", bell);\par
+\par
+\~ printf("%c%s",esc,revvideo);\~\~\~ /* reverse the color, doesn't work on color thats not in bold */\par
+\~ printf("%c%s%c%s reverse Bold Black \\n",esc,bold,esc,black);\par
+\~ printf("%c%s reverse Yellow \\n",esc,yellow);\par
+\~ printf("%c%s reverse Red \\n",esc,bred);\par
+\~ printf("%c%s reverse Green \\n",esc,bgreen);\par
+\~ printf("%c%s reverse Blue \\n",esc,bblue);\par
+\~ printf("%c%s reverse Purple \\n",esc,bpurple);\par
+\~ printf("%c%s reverse Cyan \\n",esc,bcyan);\par
+\~ printf("%c%s reverse White %c%s\\n",esc,bwhite,esc,reset);\par
+\~ printf("%c%s",esc,revvideo);\par
+\~ printf("%c%s reverse Bold Text %c%s\\n\\n",esc,bold,esc,reset);\~\~\~\~ /* had\par
+to turn off white for this to work */\par
+\~ puts("-Hit Return Key-");\par
+\~ scanf("%c",&ret); \~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~ /*read carriage ret.*/\par
+\~ printf("%c", bell);\par
+\par
+\~ printf("%c%sUnderlined Plain text\\n",esc,underline);\par
+\~ printf("%c%sUndelined Bold\\n",esc,bold);\~\~\~\~ /* the rest of the colors need to be in bold */\par
+\~ printf("%c%sUndelined Bold Black\\n",esc,black);\par
+\~ printf("%c%sUndelined Bold Red\\n",esc,bred);\par
+\~ printf("%c%sUndelined Bold Green\\n",esc,bgreen);\par
+\~ printf("%c%sUndelined Bold Blue\\n",esc,bblue);\par
+\~ printf("%c%sUndelined Bold Purple\\n",esc,bpurple);\par
+\~ printf("%c%sUndelined Bold Cyan\\n",esc,bcyan);\par
+\~ printf("%c%sUndelined Bold White%c%s\\n",esc,bwhite,esc,reset);\par
+\~ printf("%c", bell);\par
+\par
+\~ puts("\\nFear The Col0rs");\par
+\}\par
+\f1\par
+\par
+\f0\par
+}
+ 

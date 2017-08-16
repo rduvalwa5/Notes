@@ -1,0 +1,100 @@
+#!/bin/bash
+
+mysql -A -h centos-sv-db2.hq.allstardirectories.com -P 3356 -u dbweb -pnorichid
+
+
+-------------------------------------------------
+
+
+shell> mysql < batch-file 
+
+mysql> source filename;
+
+dba asd_dba
+
+
+-------------------------------------------------------------
+
+To run scripts dd to
+[randalld@dev PROJ_EMAIL_ONE_0801R1]$ pwd
+/data/users/randalld/workspace/projemailone0801r1/sites/schema/PROJ_EMAIL_ONE_0801R1
+
+
+
+[randalld@dev PROJ_EMAIL_ONE_0801R1]$ ls
+001_prod_add-requestinfo-columns.sql  003_prod_add-mailinglist.sql
+002_prod_add-group-fields.sql         004_prod_add-scrubbing-defaults.sql
+[randalld@dev PROJ_EMAIL_ONE_0801R1]$ view 001_prod_add-requestinfo-columns.sql
+[randalld@dev PROJ_EMAIL_ONE_0801R1]$ grep -c use 001_prod_add-requestinfo-columns.sql
+19
+
+------------------------------------
+Logging into MySql as dba
+
+
+more ~/bin/log_dba.sh
+
+#!/bin/bash
+
+mysql -A -h centos-sv-db2.hq.allstardirectories.com -P 3356 -u dba -p
+
+-------------------------------------------------------
+
+Running scripts
+
+mysql> source 001_prod_add-requestinfo-columns.sql;
+
+start time 12:10 PM
+end time 
+
+
+
+
+
+
+1) Test 
+select count(aas.requestInfo.email) from aas.requestInfo
+where createTime < '2006-01-02'
+
+
+150,584
+
+
+select count(aas.requestInfo.email) from aas.requestInfo
+where aas.requestInfo.emailProcessed='too-old'
+
+150,584.
+
+select count(aas.requestInfo.email) from aas.requestInfo
+where aas.requestInfo.emailProcessed= NULL
+
+0
+
+select count(aas.requestInfo.email) from aas.requestInfo
+where aas.requestInfo.emailProcessed= 'none'
+
+154,904.
+
+
+2) Total records should equal Too Old plus none;
+
+305,488.
+
+
+
+3) Script is supposed to set default
+
+select count(aas.requestInfo.email) from aas.requestInfo
+where aas.requestInfo.emailOptIn = null
+
+0.
+
+select count(aas.requestInfo.email) from aas.requestInfo
+where aas.requestInfo.emailOptIn = 'none'
+
+305,488.
+
+
+---------------------------------
+
+ 

@@ -1,0 +1,102 @@
+Centos Mac Notes
+
+*** 04-29-2015 ***
+Problem I want to solve:  track TCP connection attempts to a server.
+https://tournasdimitrios1.wordpress.com/2011/02/12/monitor-tcp-connectionstrafic-with-tcptrack-on-rhel-centos-5-x/
+
+Mac OSX:
+The Norton Firewall has a utility to log connection and applications.  This log can be
+saved to a file.
+
+http://www.macinstruct.com/node/420
+http://www.nirsoft.net/utils/cports.html
+http://packetsender.com
+
+LSOF  - List Open Files
+https://people.freebsd.org/~abe/
+*** 04-27-2015 ***
+********* Intall Telnet Server on server: *******************
+1. sudo yum install telnet-server
+
+Start/Stop/Restart Telnet service
+2. systemctl start telnet.socket
+3. systemctl stop telnet.socket
+4. systemctl restart telnet.socket
+
+To get status of the telnet service on CentOS 7 / RHEL 7 use the command –
+5. systemctl status telnet.socket
+
+Check listening port by telnet
+6. ss -tnlp|grep 23
+	[root@localhost ~]# ss -tnlp|grep 23
+	LISTEN     0      128                      :::23                      :::*      users:(("systemd",1,53))
+	[root@localhost ~]# 
+	
+
+Allow telnet from firewalld
+	We strictly recommend to use the telnet-server inside LAN only. 
+	It should not be accessible from Public network.
+	In below section, we are allowing source subnet 192.168.56.0/24 to access the telnet service by using firewalld command.
+	(Replace the 192.168.56.0/24 with your LAN network subnet or client ip address)
+
+7. firewall-cmd --permanent --add-rich-rule='rule family="ipv4" source address="192.168.1.20/25" service name="telnet" log prefix="telnet" level="info" limit value="1/m" accept'
+
+Access telnet-server
+
+To access telnet-server, use the following command syntax
+Syntax: Replace telnet-server-ip-address with ip address of telnet server.
+
+telnet telnet-server-ip-address
+It will prompt for giving username and password. Use system username other than root.
+
+sharad@linuxworld:~/Desktop$ telnet 192.168.56.101
+Trying 192.168.56.101...
+telnet: Unable to connect to remote host: No route to host
+sharad@linuxworld:~/Desktop$ telnet 192.168.56.101
+Trying 192.168.56.101...
+Connected to 192.168.56.101.
+Escape character is '^]'.
+
+Kernel 3.10.0-123.el7.x86_64 on an x86_64
+localhost login: test
+Password: 
+Last login: Sat Dec  6 08:01:10 from ::ffff:192.168.56.1
+[test@localhost ~]$
+
+*********** Apr 28 2015 *********************
+
+************* Firewalld **********************
+How to Stop and Disable Firewalld on CentOS 7
+These instructions are intended specifically for stopping and disabling firewalld CentOS 7.
+1) Disable Firewalld
+	To disable firewalld, run the following command as root:
+
+	systemctl disable firewalld
+
+2) Stop Firewalld
+	To stop firewalld, run the following command as root:
+
+	systemctl stop firewalld
+
+3) Check the Status of Firewalld
+	To check the status of firewalld, run the following command as root:
+
+	systemctl status firewalld
+	
++++++++++++++++++++++++++++++++++++++
+[rduvalwa2@c1246895-centos xinetd.d]$ systemctl status firewalld
+firewalld.service - firewalld - dynamic firewall daemon
+   Loaded: loaded (/usr/lib/systemd/system/firewalld.service; enabled)
+   Active: active (running) since Mon 2015-04-27 19:49:20 PDT; 17h ago
+ Main PID: 793 (firewalld)
+   CGroup: /system.slice/firewalld.service
+           └─793 /usr/bin/python -Es /usr/sbin/firewalld --nofork --nopid
+
+[rduvalwa2@c1246895-centos xinetd.d]$ su root
+Password: 
+ABRT has detected 2 problem(s). For more info run: abrt-cli list --since 1426522351
+[root@c1246895-centos xinetd.d]# systemctl disable firewalld
+rm '/etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service'
+rm '/etc/systemd/system/basic.target.wants/firewalld.service'
+[root@c1246895-centos xinetd.d]# 
+

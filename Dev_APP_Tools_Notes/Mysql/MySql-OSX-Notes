@@ -1,0 +1,42 @@
+MySql Install on OSX
+
+To set a path on MacOSX
+
+1) /etc/paths
+
+
+
+
+1) See install ReadMe.txt
+2) After down load install image (.dmg) by double clicking on it
+3) Install MSQL.prePane (shows the status of the MySql Instance)
+	- this is the application that is accessed from System Preferences
+4) Install MysqlStartupItem.pkg
+5) Go into System Preferences - select MySql to get status of server
+6) Install MySQL Workbench
+
+
+Installed MacOsx 10.6 for Subversion Collabnet
+http://www.open.collab.net/
+
+Post-Installation Notes
+You have successfully installed the Subversion 1.6.13 universal binary for OS X Snow Leopard (10.6).  Please remember to prepend /opt/subversion/bin to your PATH environment variable.  This can be done a multitude of ways but an easy one is to add the following to the end of ~/.profile:
+
+export PATH=/opt/subversion/bin:$PATH
+
+If you plan on running an Apache-based Subversion server, you will also need to prepend the DYLD_LIBRARY_PATH variable in /usr/sbin/envvars with /opt/subversion/lib so that the Subversion libraries shipped with this binary are used instead of those supplied by the operating system.  Here is an example snippet of what /usr/sbin/envvars might look like after making these changes:
+
+...
+DYLD_LIBRARY_PATH="/opt/subversion/lib:/usr/lib:$DYLD_LIBRARY_PATH"
+...
+
+You will also need to update the SSL portion of your httpd.conf if you're using SSL:
+
+SSLProtocol ALL -SSLv2 -TLSv1
+
+What this does is disable SSL v2 and TLS which would force SSLv3.  The reason for this is to work around a bug in the OpenSSL library shipped with OS X.
+
+
+** Feb 22 2015 ***********************************
+
+1) SQL with variables

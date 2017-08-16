@@ -1,0 +1,30 @@
+#!/bin/bash
+
+mysql -A -h centos-sv-db2.hq.allstardirectories.com -P 3356 -u dbweb -pnorichid
+
+
+-------------------------------------------------
+
+
+shell> mysql < batch-file 
+
+mysql> source filename;
+
+
+asd_dba
+
+
+------------------------------------------------
+
+[randalld@dev PROJ_EMAIL_TWO_0801R6]$ ls
+001_prod_filtered_leads.sql  002_prod_add_subscriber_table.sql  003_prod_add_mailinglist_fields.sql
+[randalld@dev PROJ_EMAIL_TWO_0801R6]$ ls
+001_prod_filtered_leads.sql  002_prod_add_subscriber_table.sql  003_prod_add_mailinglist_fields.sql
+[randalld@dev PROJ_EMAIL_TWO_0801R6]$ mysql -A -h centos-sv-db2.hq.allstardirectories.com -P 3356 -u dba
+ERROR 1045 (28000): Access denied for user 'dba'@'192.168.208.46' (using password: NO)
+[randalld@dev PROJ_EMAIL_TWO_0801R6]$ mysql -A -h centos-sv-db2.hq.allstardirectories.com -P 3356 -u dba -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 384 to server version: 5.0.41-community-log
+
+Type 'help;' or '\h' for help. Type '\c' to clear the buffer.

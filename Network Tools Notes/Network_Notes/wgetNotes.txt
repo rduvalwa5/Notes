@@ -1,0 +1,30 @@
+WGET Notes:
+
+
+[randalld@dev trunk]$ wget http://trunk.randalld.dev.allbusinessschools.com/ http-user=randalld http-password=jazz4blu
+--15:06:57--  http://trunk.randalld.dev.allbusinessschools.com/
+           => `index.html'
+Resolving trunk.randalld.dev.allbusinessschools.com... 192.168.208.46
+Connecting to trunk.randalld.dev.allbusinessschools.com[192.168.208.46]:80... connected.
+HTTP request sent, awaiting response... 401 Authorization Required
+Authorization failed.
+--15:06:57--  http://http-user=randalld/
+           => `index.html'
+Resolving http-user=randalld... failed: Host not found.
+--15:06:57--  http://http-password=jazz4blu/
+           => `index.html'
+Resolving http-password=jazz4blu... failed: Host not found.
+
+FINISHED --15:06:57--
+Downloaded: 0 bytes in 0 files
+
+
+
+Login issues
+
+http://www.scit.wlv.ac.uk/cgi-bin/mansec?4+netrc
+
+http://stuff.mit.edu/afs/sipb/machine/charon2/conf/usr/local/etc/wgetrc
+
+http://theory.uwinnipeg.ca/gnu/wget/wget_29.html
+http://info2html.sourceforge.net/cgi-bin/info2html-demo/info2html?(wget.info.gz)Wgetrc%2520Commands

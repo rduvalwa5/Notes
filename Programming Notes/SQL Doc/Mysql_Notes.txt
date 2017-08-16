@@ -1,0 +1,62 @@
+Mysql notes
+
+1) Ini file:
+
+Uncommented bind-address, port
+I think this allowed the server to start running.
+
+#This File was made using the WinMySQLAdmin 1.4 Tool
+#4/14/2006 10:35:48 AM
+
+#Uncomment or Add only the keys that you know how works.
+#Read the MySQL Manual for instructions
+
+[mysqld]
+basedir=C:/mysql
+bind-address=67.183.130.100
+datadir=C:/mysql/data
+#language=C:/mysql/share/your language directory
+#slow query log#=
+#tmpdir#=
+port=3306
+#set-variable=key_buffer=16M
+[WinMySQLadmin]
+Server=C:/mysql/bin/mysqld-max-nt.exe
+user=rduval
+password=reddog
+
+----------------------------------------------
+
+
+1) login as root
+C:\Documents and Settings\RDuval>mysql -h localhost -u root
+
+2) Show existing databases
+mysql>  show databases;
++----------+
+| Database |
++----------+
+| mysql    |
+| test     |
++----------+
+2 rows in set (0.00 sec)
+
+3) Create database
+mysql> create database mux;
+
+mysql> show databases;
++----------+
+| Database |
++----------+
+| mux      |
+| mysql    |
+| test     |
++----------+
+3 rows in set (0.00 sec)
+
+3) Add user mux
+mysql>  grant all on mux.* to mux@'C1246895-a' identified by 'mux';
+Query OK, 0 rows affected (0.03 sec)
+
+
+

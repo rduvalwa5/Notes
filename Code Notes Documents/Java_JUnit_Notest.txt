@@ -1,0 +1,140 @@
+Java Notes
+
+Setting up class path is very important.  Always set up local directory.
+
+CLASSPATH
+.;C:\Program Files\Java\junit4.3.1\junit-4.3.1.jar;\Program Files\Java\junit4.3.1
+
+-------------------------------------------
+Junit
+-------------------------------------------
+
+Adding JUnit to ECLIPSE
+
+Setting Up JUnit using external JUnit libraries
+
+1) Load Project
+2) Project > Properties > Java Build Path
+  a) Add External Jars
+  b) Navigate thru directory to jar
+  c) select jar and open
+
+The path to the jar should be added.
+
+-----------------------------------
+Compile classes and make sure to compile in correct order, watch classpath.
+
+
+D:\Code\Java\src\Projects\Junit_Test>ls -lt
+total 30
+-rwxr-xr-x+ 1 RDuval None 1066 Apr 28 13:45 ShoppingCart.class
+-rwxr-xr-x+ 1 RDuval None  229 Apr 28 13:45 ProductNotFoundException.class
+-rwxr-xr-x+ 1 RDuval None  625 Apr 28 13:38 Product.class
+drwxr-xr-x+ 2 RDuval None    0 Apr 28 12:17 META-INF
+-rwxr-xr-x+ 1 RDuval None 3070 Apr 28 12:15 junitprimer_src.zip
+-rwxr-xr-x+ 1 RDuval None 2143 Dec 18  2004 ShoppingCartTest.java
+-rwxr-xr-x+ 1 RDuval None  973 Dec 18  2004 ShoppingCart.java
+-rwxr-xr-x+ 1 RDuval None  285 Dec 18  2004 ProductNotFoundException.java
+-rwxr-xr-x+ 1 RDuval None  606 Dec 18  2004 Product.java
+-rwxr-xr-x+ 1 RDuval None  831 Dec 18  2004 EcommerceTestSuite.java
+
+D:\Code\Java\src\Projects\Junit_Test>javac ShoppingCartTest2.java
+------------------------
+JUNIT Test Failure:
+------------------------
+D:\Code\Java\src\Projects\Junit_Test>java junit.textui.TestRunner ShoppingCartTest2
+...F..
+Time: 0.01
+There was 1 failure:
+1) testMultiAddItem(ShoppingCartTest2)junit.framework.AssertionFailedError: expected:<179.9> but was:<209.85000000000002>
+        at ShoppingCartTest2.testMultiAddItem(ShoppingCartTest2.java:82)
+        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+        at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+
+FAILURES!!!
+Tests run: 5,  Failures: 1,  Errors: 0
+------------------------
+JUNIT Test Failure:
+------------------------
+
+
+D:\Code\Java\src\Projects\Junit_Test>java junit.textui.TestRunner ShoppingCartTest
+....
+Time: 0.02
+
+OK (4 tests)
+
+
+
+-------------------------------
+Create Jar file:
+
+jar <options> <jar file name>  <files to be added>
+
+>jar cvf DirDisply.jar mymanifext DirDisplay.class
+added manifest
+adding: DirDisplay.class(in = 1479) (out= 897)(deflated 39%)
+
+javac DiveLog.java
+jar cvfm DiveLog.jar mymanifest DiveLog.class DiveLog$1.class DiveLog$2.class Welcome.class
+
+
+
+-------------------------------
+verify jar file contents
+
+C:\cygwin\Code\JCODE\FileCode\DirDisplay>jar tvf DirDisply.jar
+     0 Mon Jan 29 11:19:48 PST 2007 META-INF/
+    71 Mon Jan 29 11:19:48 PST 2007 META-INF/MANIFEST.MF
+  1479 Mon Jan 29 11:13:56 PST 2007 DirDisplay.class
+
+-------------------------------
+extract from jar file
+
+jar xf jar-file [archived-file(s)]
+
+-------------------------------
+update jar file
+
+jar uf jar-file input-file(s)
+
+C:\cygwin\Code\JCODE\FileCode\DirDisplay>ls
+DirDisplay  DirDisplay.class  DirDisplay.java  DirDisply.jar
+
+C:\cygwin\Code\JCODE\FileCode\DirDisplay>jar uvf DirDisply.jar DirDisplay.class
+adding: DirDisplay.class(in = 1479) (out= 897)(deflated 39%)
+
+-------------------------------
+
+Running code from a Jar file:
+
+java -jar jar-file
+
+
+C:\cygwin\Code\JCODE\FileCode\DirDisplay>ls
+DirDisplay.class  DirDisplay.jar  DirDisplay.java  META-INF  compile.bat  xxMANIFEST.MF
+
+
+C:\cygwin\Code\JCODE\FileCode\DirDisplay>more xxMANIFEST.MF
+Manifest-Version: 1.0
+Main-Class: DirDisplay.class
+Created-By: 1.4.2_11 (Sun Microsystems Inc.)
+
+
+C:\cygwin\Code\JCODE\FileCode\DirDisplay\META-INF>more MANIFEST.MF
+Manifest-Version: 1.0
+Created-By: 1.4.2_11 (Sun Microsystems Inc.)
+Main-Class: DirDisplay.class
+
+
+
+Problem
+C:\cygwin\Code\JCODE\FileCode\DirDisplay>java -jar DirDisplay.jar
+Exception in thread "main" java.lang.NoClassDefFoundError: DirDisplay/class
+---------------------------------------------------------------------------
+
+
+
+
+

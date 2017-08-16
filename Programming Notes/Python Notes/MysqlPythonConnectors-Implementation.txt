@@ -1,0 +1,90 @@
+MysqlPythonConnectors-Implementation: http://dev.mysql.com/doc/connector-python/en/connector-python-connectargs.html
+
+7.1 Connector/Python Connection Arguments
+	A connection with the MySQL server can be established using either the mysql.connector.connect() function 
+	or the mysql.connector.MySQLConnection() class:
+
+	cnx = mysql.connector.connect(user='joe', database='test')
+	cnx = MySQLConnection(user='joe', database='test')
+
+	The following table describes the arguments that can be used to initiate a connection. 
+	An asterisk (*) following an argument indicates a synonymous argument name, 
+	available only for compatibility with other Python MySQL drivers. 
+	Oracle recommends not to use these alternative names.
+
+	Table 7.1 Connection Arguments for Connector/Python
+	Argument 			Name				Default	Description
+	user		 		(username*)	 		The user name used to authenticate with the MySQL server.
+	password	 		(passwd*)		 	The password to authenticate the user with the MySQL server.
+	database			(db*)	 			The database name to use when connecting with the MySQL server.
+	host				127.0.0.1			The host name or IP address of the MySQL server.
+	port				3306				The TCP/IP port of the MySQL server. Must be an integer.
+	unix_socket	 							The location of the Unix socket file.
+	auth_plugin	 							Authentication plugin to use. Added in 1.2.1.
+	use_unicode			True				Whether to use Unicode.
+	charset	utf8							Which MySQL character set to use.
+	collation								utf8_general_ci	Which MySQL collation to use.
+	autocommit			False				Whether to autocommit transactions.
+	time_zone	 							Set the time_zone session variable at connection time.
+	sql_mode							 	Set the sql_mode session variable at connection time.
+	get_warnings		False				Whether to fetch warnings.
+	raise_on_warnings	False				Whether to raise an exception on warnings.
+	connection_timeout	(connect_timeout*)	Timeout for the TCP and Unix socket connections.
+	client_flags		MySQL 				client flags.
+	buffered			False				Whether cursor objects fetch the results immediately after executing queries.
+	raw					False				Whether MySQL results are returned as is, rather than converted to Python types.
+	ssl_ca								 	File containing the SSL certificate authority.
+	ssl_cert							 	File containing the SSL certificate file.
+	ssl_key	 								File containing the SSL key.
+	ssl_verify_cert		False				When set to True, checks the server certificate against the certificate 
+											file specified by the ssl_ca option. Any mismatch causes a ValueError exception.
+	force_ipv6			False				When set to True, uses IPv6 when an address resolves to both IPv4 and IPv6. By default, IPv4 is used in such cases.
+	dsn	 									Not supported (raises NotSupportedError when used).
+	pool_name	 							Connection pool name. Added in 1.1.1.
+	pool_size			5					Connection pool size. Added in 1.1.1.
+	pool_reset_session	True				Whether to reset session variables when connection is returned to pool. Added in 1.1.5.
+	compress			False				Whether to use compressed client/server protocol. Added in 1.1.2.
+	converter_class	 						Converter class to use. Added in 1.1.2.
+	fabric	 								MySQL Fabric connection arguments. Added in 1.2.0.
+	failover	 							Server failover sequence. Added in 1.2.1.
+	option_files	 									Which option files to read. Added in 2.0.0.
+	option_groups	['client', 'connector_python']		Which groups to read from option files. Added in 2.0.0.
+	allow_local_infile	True				Whether to enable LOAD DATA LOCAL INFILE. Added in 2.0.0.
+	
+5.4 Querying Data Using Connector/Python    http://dev.mysql.com/doc/connector-python/en/connector-python-example-cursor-select.html
+	a.	example shows how to query data using a cursor created using the connection's cursor() method. 
+	    The data returned is formatted and printed on the console.
+    b.  select all employees hired in the year 1999 and print their names and hire dates to the console
+		import datetime
+		import mysql.connector
+		
+		cnx = mysql.connector.connect(user='scott', database='employees')
+		cursor = cnx.cursor()
+		
+		query = ("SELECT first_name, last_name, hire_date FROM employees "
+		         "WHERE hire_date BETWEEN %s AND %s")
+		
+		hire_start = datetime.date(1999, 1, 1)
+		hire_end = datetime.date(1999, 12, 31)
+		
+		cursor.execute(query, (hire_start, hire_end))
+		
+		for (first_name, last_name, hire_date) in cursor:
+		  print("{}, {} was hired on {:%d %b %Y}".format(
+		    last_name, first_name, hire_date))
+		
+		cursor.close()
+		cnx.close()
+		
+9.2.6 Method MySQLConnection.cursor() http://dev.mysql.com/doc/connector-python/en/connector-python-api-mysqlconnection-cursor.html
+
+9.5.6 Method MySQLCursor.fetchall()  http://dev.mysql.com/doc/connector-python/en/connector-python-api-mysqlcursor-fetchall.html
+		Syntax:
+		rows = cursor.fetchall()
+		The method fetches all (or all remaining) rows of a query result set and returns a list of tuples. If no more rows are available, it returns an empty list.
+		
+		The following example shows how to retrieve the first two rows of a result set, and then retrieve any remaining rows:
+]		>>> cursor.execute("SELECT * FROM employees ORDER BY emp_no")
+		>>> head_rows = cursor.fetchmany(size=2)
+		>>> remaining_rows = cursor.fetchall()
+		You must fetch all rows for the current query before executing new statements using the same connection.

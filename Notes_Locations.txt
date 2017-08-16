@@ -1,0 +1,12 @@
+Repository
+OSXAir		/Users/rduvalwa2/Workspace/GitRepos
+
+OSXAir:GitRepos rduvalwa2$ ls
+Basic_Python.git		MathExamples.git		OReilly_Python_Air.git.old	Py_Servers.git
+Current_Notes.git		OReilly_Python_Air.git		OReilly_Python_New.git
+
+Server		Location					GIT
+
+Google Drive	Google Drive/Current_Notes			False
+C1246895-XPS	/home/rduvalwa2/Current_Notes			True
+OSXAir		/Users/rduvalwa2/Workspace/Current_Notes	True

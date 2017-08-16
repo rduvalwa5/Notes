@@ -1,0 +1,159 @@
+In mySql:
+
+Command line access:  mysql -u USERNAME -pPASSWORD -h HOSTNAMEORIP DATABASENAME 
+c1246895-osx:site-packages rduvalwa2$ mysql -u rduval -h localhost  password -p
+Enter password: 
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 5.6.20 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2014, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show tables;
++--------------------+
+| Tables_in_password |
++--------------------+
+| active_passwords   |
+| ap                 |
+| import_ap          |
+| password           |
+| uuid               |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql>exit
+Bye
+c1246895-osx:site-packages rduvalwa2$ 
+
+select * from ap;
+ update ap set ap = 'mysql_db' where apid = 39;
+ update ap set ap = 'password_db' where apid = 40;
+ select apid from ap where ap like 'mysql';
+ 
+ insert into ap values ('mysql',39,'mysql -u root -h localhost  password -p','Active',"");
+ insert into ap values ('password',40,'mysql -u rduval -h localhost  password -p','Active',"");
+ commit;
+ 
+ insert into uuid values ('root',(select apid from ap where ap like 'mysql_db'),now());
+ insert into uuid values ('rduval',(select apid from ap where ap like 'password_db'),now());
+ 
+insert into password values ('reddog',(select apid from ap where ap like 'password_db'),now());
+insert into password values ('reddog',(select apid from ap where ap like 'mysql_db'),now());
+
+
+
+
+
+
+
+      1)  Create database
+	mysql> create database myYellow;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> connect myYellow
+Connection id:    29
+Current database: myYellow
+mysql> quit
+Bye	
+
+Alternative:  C:\Documents and Settings\rduval\My Documents\Code\Perl\log_audit>mysqladmin -urduval -preddog create muBluDB
+
+     2)  drop data base
+C:\Documents and Settings\rduval\My Documents\Code\Perl\log_audit>mysqladmin -urduval -preddog drop database
+Dropping the database is potentially a very bad thing to do.
+Any data stored in the database will be destroyed.
+
+Do you really want to drop the 'database' database [y/N]	 y
+Database "database" dropped
+
+3)  Create user:
+
+mysql> GRANT ALL
+    -> ON NextDb.*
+    -> TO rubberduck@localhost
+    -> IDENTIFIED BY "yellow";
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> desc user
+    -> ;
+ERROR 1046 (3D000): No database selected
+mysql> connect mysql
+Connection id:    27
+Current database: mysql
+
+mysql> desc user;
++-----------------------+-----------------------------------+------+-----+---------+-------+
+| Field                 | Type                              | Null | Key | Default | Extra |
++-----------------------+-----------------------------------+------+-----+---------+-------+
+| Host                  | varchar(60)                       |      | PRI |         |       |
+| User                  | varchar(16)                       |      | PRI |         |       |
+| Password              | varchar(41)                       |      |     |         |       |
+| Select_priv           | enum('N','Y')                     |      |     | N       |       |
+| Insert_priv           | enum('N','Y')                     |      |     | N       |       |
+| Update_priv           | enum('N','Y')                     |      |     | N       |       |
+| Delete_priv           | enum('N','Y')                     |      |     | N       |       |
+| Create_priv           | enum('N','Y')                     |      |     | N       |       |
+| Drop_priv             | enum('N','Y')                     |      |     | N       |       |
+| Reload_priv           | enum('N','Y')                     |      |     | N       |       |
+| Shutdown_priv         | enum('N','Y')                     |      |     | N       |       |
+| Process_priv          | enum('N','Y')                     |      |     | N       |       |
+| File_priv             | enum('N','Y')                     |      |     | N       |       |
+| Grant_priv            | enum('N','Y')                     |      |     | N       |       |
+| References_priv       | enum('N','Y')                     |      |     | N       |       |
+| Index_priv            | enum('N','Y')                     |      |     | N       |       |
+| Alter_priv            | enum('N','Y')                     |      |     | N       |       |
+| Show_db_priv          | enum('N','Y')                     |      |     | N       |       |
+| Super_priv            | enum('N','Y')                     |      |     | N       |       |
+| Create_tmp_table_priv | enum('N','Y')                     |      |     | N       |       |
+| Lock_tables_priv      | enum('N','Y')                     |      |     | N       |       |
+| Execute_priv          | enum('N','Y')                     |      |     | N       |       |
+| Repl_slave_priv       | enum('N','Y')                     |      |     | N       |       |
+| Repl_client_priv      | enum('N','Y')                     |      |     | N       |       |
+| ssl_type              | enum('','ANY','X509','SPECIFIED') |      |     |         |       |
+| ssl_cipher            | blob                              |      |     |         |       |
+| x509_issuer           | blob                              |      |     |         |       |
+| x509_subject          | blob                              |      |     |         |       |
+| max_questions         | int(11) unsigned                  |      |     | 0       |       |
+| max_updates           | int(11) unsigned                  |      |     | 0       |       |
+| max_connections       | int(11) unsigned                  |      |     | 0       |       |
++-----------------------+-----------------------------------+------+-----+---------+-------+
+31 rows in set (0.00 sec)
+
+mysql> select * from user where host like 'localhost';
++-----------+------------+-------------------------------------------+-------------+-------------+-------------+-------------+-------------
+-----------+--------------+-----------+------------+-----------------+------------+------------+--------------+------------+---------------
+-----------+-----------------+------------------+----------+------------+-------------+--------------+---------------+-------------+-------
+| Host      | User       | Password                                  | Select_priv | Insert_priv | Update_priv | Delete_priv | Create_priv
+tdown_priv | Process_priv | File_priv | Grant_priv | References_priv | Index_priv | Alter_priv | Show_db_priv | Super_priv | Create_tmp_tab
+ecute_priv | Repl_slave_priv | Repl_client_priv | ssl_type | ssl_cipher | x509_issuer | x509_subject | max_questions | max_updates | max_co
++-----------+------------+-------------------------------------------+-------------+-------------+-------------+-------------+-------------
+-----------+--------------+-----------+------------+-----------------+------------+------------+--------------+------------+---------------
+-----------+-----------------+------------------+----------+------------+-------------+--------------+---------------+-------------+-------
+| localhost |            |                                           | Y           | Y           | Y           | Y           | Y
+           | Y            | Y         | Y          | Y               | Y          | Y          | Y            | Y          | Y
+           | Y               | Y                |          |            |             |              |             0 |           0 |
+| localhost | rduval     | *5ABF3CE5A280F6A2CF875E43DA36C3698518C479 | Y           | Y           | Y           | Y           | Y
+           | Y            | Y         | Y          | Y               | Y          | Y          | Y            | Y          | Y
+           | Y               | Y                |          |            |             |              |             0 |           0 |
+| localhost | red        | *06E7232D5B52F642D2954867DF6702BED8EFD62B | N           | N           | N           | N           | N
+           | N            | N         | N          | N               | N          | N          | N            | N          | N
+           | N               | N                |          |            |             |              |             0 |           0 |
+| localhost | root       | *5ABF3CE5A280F6A2CF875E43DA36C3698518C479 | Y           | Y           | Y           | Y           | Y
+           | Y            | Y         | Y          | Y               | Y          | Y          | Y            | Y          | Y
+           | Y               | Y                |          |            |             |              |             0 |           0 |
+| localhost | rubberduck | *AF15838AFEAB7D9998836ED81A887E03FF32290A | N           | N           | N           | N           | N
+           | N            | N         | N          | N               | N          | N          | N            | N          | N
+           | N               | N                |          |            |             |              |             0 |           0 |
++-----------+------------+-------------------------------------------+-------------+-------------+-------------+-------------+-------------
+-----------+--------------+-----------+------------+-----------------+------------+------------+--------------+------------+---------------
+-----------+-----------------+------------------+----------+------------+-------------+--------------+---------------+-------------+-------
+5 rows in set (0.02 sec)

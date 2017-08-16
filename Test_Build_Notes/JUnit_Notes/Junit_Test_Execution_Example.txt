@@ -1,0 +1,195 @@
+C:\Users\rduval\workspace\CDM\CallQueryTest\src\callQueryTest>java -cp "C:\Users\rduval\workspace\CDM\CdmTest\external_classes\junit-4.10.jar;C:\Users\rduval\workspace\CDM\CallQueryTest
+\bin;C:\Users\rduval\workspace\CDM\CdmTest\external_classes\selenium-java-2.42.2.jar;C:\Users\rduval\workspace\CDM\CdmTest\external_classes\selenium-server-standalone-2.42.2.jar" org.ju
+nit.runner.JUnitCore callQueryTest.testCallQueryAdhoc
+JUnit version 4.10
+.Click Refine Query
+Begin looking for States
+E
+Time: 64.032
+There was 1 failure:
+1) testCallQureyAdHoc(callQueryTest.testCallQueryAdhoc)
+org.junit.ComparisonFailure: expected:<Test []Police Department> but was:<Test [ATT ]Police Department>
+        at org.junit.Assert.assertEquals(Assert.java:125)
+        at org.junit.Assert.assertEquals(Assert.java:147)
+        at callQueryTest.testCallQueryAdhoc.testCallQureyAdHoc(testCallQueryAdhoc.java:147)
+        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+        at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+        at java.lang.reflect.Method.invoke(Unknown Source)
+        at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+        at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+        at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+        at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+        at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+        at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+        at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+        at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+        at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+        at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+        at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+        at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+        at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+        at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+        at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+        at org.junit.runners.Suite.runChild(Suite.java:128)
+        at org.junit.runners.Suite.runChild(Suite.java:24)
+        at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+        at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+        at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+        at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+        at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+        at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+        at org.junit.runner.JUnitCore.run(JUnitCore.java:157)
+        at org.junit.runner.JUnitCore.run(JUnitCore.java:136)
+        at org.junit.runner.JUnitCore.run(JUnitCore.java:117)
+        at org.junit.runner.JUnitCore.runMain(JUnitCore.java:98)
+        at org.junit.runner.JUnitCore.runMainAndExit(JUnitCore.java:53)
+        at org.junit.runner.JUnitCore.main(JUnitCore.java:45)
+
+FAILURES!!!
+Tests run: 1,  Failures: 1
+
+*********************************************************************************************************
+Using Test Suite Failure
+*********************************************************************************************************
+C:\Users\rduval\workspace\CDM\CallQueryTest\src\callQueryTest>java -cp "C:\Users\rduval\workspace\CDM\CdmTest\external_classes\junit-4.10.jar;C:\Users\rduval\workspace\CDM\CallQueryTest
+\bin;C:\Users\rduval\workspace\CDM\CdmTest\external_classes\selenium-java-2.42.2.jar;C:\Users\rduval\workspace\CDM\CdmTest\external_classes\selenium-server-standalone-2.42.2.jar" org.ju
+nit.runner.JUnitCore callQueryTest.Adhoc_Suite
+JUnit version 4.10
+.Click Refine Query
+Begin looking for States
+E
+Time: 62.496
+There was 1 failure:
+1) testCallQureyAdHoc(callQueryTest.testCallQueryAdhoc)
+org.junit.ComparisonFailure: expected:<Test []Police Department> but was:<Test [ATT ]Police Department>
+        at org.junit.Assert.assertEquals(Assert.java:125)
+        at org.junit.Assert.assertEquals(Assert.java:147)
+        at callQueryTest.testCallQueryAdhoc.testCallQureyAdHoc(testCallQueryAdhoc.java:147)
+        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+        at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+        at java.lang.reflect.Method.invoke(Unknown Source)
+        at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+        at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+        at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+        at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+        at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+        at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+        at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+        at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+        at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+        at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+        at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+        at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+        at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+        at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+        at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+        at org.junit.runners.Suite.runChild(Suite.java:128)
+        at org.junit.runners.Suite.runChild(Suite.java:24)
+        at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+        at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+        at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+        at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+        at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+        at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+        at org.junit.runners.Suite.runChild(Suite.java:128)
+        at org.junit.runners.Suite.runChild(Suite.java:24)
+        at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+        at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+        at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+        at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+        at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+        at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+        at org.junit.runner.JUnitCore.run(JUnitCore.java:157)
+        at org.junit.runner.JUnitCore.run(JUnitCore.java:136)
+        at org.junit.runner.JUnitCore.run(JUnitCore.java:117)
+        at org.junit.runner.JUnitCore.runMain(JUnitCore.java:98)
+        at org.junit.runner.JUnitCore.runMainAndExit(JUnitCore.java:53)
+        at org.junit.runner.JUnitCore.main(JUnitCore.java:45)
+
+FAILURES!!!
+Tests run: 1,  Failures: 1
+
+*********************************************************************************************************
+Using Test Suite Success
+*********************************************************************************************************
+
+C:\Users\rduval\workspace\CDM\CallQueryTest\src\callQueryTest>java -cp "C:\Users\rduval\workspace\CDM\CdmTest\external_classes\junit-4.10.jar;C:\Users\rduval\workspace\CDM\CallQueryTest
+\bin;C:\Users\rduval\workspace\CDM\CdmTest\external_classes\selenium-java-2.42.2.jar;C:\Users\rduval\workspace\CDM\CdmTest\external_classes\selenium-server-standalone-2.42.2.jar" org.ju
+nit.runner.JUnitCore callQueryTest.Adhoc_Suite
+JUnit version 4.10
+.Click Refine Query
+Begin looking for States
+
+Time: 62.749
+
+OK (1 test)
+
+
+C:\Users\rduval\workspace\CDM\CallQueryTest\src\callQueryTest>
+
+*********************************************************************************************************
+Using 2 Test Suite Success and failure
+*********************************************************************************************************
+C:\Users\rduval\workspace\CDM\CallQueryTest\src\callQueryTest>java -cp %CLASSPATH% org.junit.runner.JUnitCore callQueryTest.testCallQueryAdhoc
+JUnit version 4.10
+.Click Refine Query
+Begin looking for States
+E.Click Refine Query
+Begin looking for States
+
+Time: 123.922
+There was 1 failure:
+1) testCallQureyAdHoc(callQueryTest.testCallQueryAdhoc)
+org.junit.ComparisonFailure: expected:<Test []Police Department> but was:<Test [ATT ]Police Department>
+        at org.junit.Assert.assertEquals(Assert.java:125)
+        at org.junit.Assert.assertEquals(Assert.java:147)
+        at callQueryTest.testCallQueryAdhoc.testCallQureyAdHoc(testCallQueryAdhoc.java:147)
+        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+        at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+        at java.lang.reflect.Method.invoke(Unknown Source)
+        at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+        at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+        at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+        at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+        at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+        at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+        at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+        at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+        at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+        at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+        at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+        at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+        at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+        at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+        at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+        at org.junit.runners.Suite.runChild(Suite.java:128)
+        at org.junit.runners.Suite.runChild(Suite.java:24)
+        at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+        at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+        at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+        at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+        at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+        at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+        at org.junit.runners.Suite.runChild(Suite.java:128)
+        at org.junit.runners.Suite.runChild(Suite.java:24)
+        at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+        at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+        at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+        at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+        at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+        at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+        at org.junit.runner.JUnitCore.run(JUnitCore.java:157)
+        at org.junit.runner.JUnitCore.run(JUnitCore.java:136)
+        at org.junit.runner.JUnitCore.run(JUnitCore.java:117)
+        at org.junit.runner.JUnitCore.runMain(JUnitCore.java:98)
+        at org.junit.runner.JUnitCore.runMainAndExit(JUnitCore.java:53)
+        at org.junit.runner.JUnitCore.main(JUnitCore.java:45)
+
+FAILURES!!!
+Tests run: 2,  Failures: 1
+
+
+C:\Users\rduval\workspace\CDM\CallQueryTest\src\callQueryTest>java -cp %CLASSPATH% org.junit.runner.JUnitCore callQueryTest.testCallQueryAdhoc

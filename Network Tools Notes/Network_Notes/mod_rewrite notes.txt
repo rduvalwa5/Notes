@@ -1,0 +1,48 @@
+http://articles.sitepoint.com/article/apache-mod_rewrite-examples/2
+http://httpd.apache.org/docs/1.3/mod/mod_rewrite.html
+
+D:\Apache2.2\manual
+
+1) Flags:
+	a) mod_rewrite flags provide rewrite conditions and rules features
+	b) appended to end of the condition or rule  and encased sqare brackets [],in [feature 1,feature 2] and features separated by
+		example RewriteRule ^/google-sitemap-index.php /sitemap-index.xml [L,R=301], L mean last R=301 tells the rule the type of code
+		- last|L
+		- nocase|NC
+		- redirect|R  Apache defaults to 302 
+		-qsappend|QSA  query string append ( I could not find an example of this)
+		- forbidden|F  tell Apache when not to provide a page
+		- ornext|OR   default is AND
+		- next|N 	
+2) Tutorial hands on:  http://www.systemengineers.de/apache/tutorials/mod_rewrite_part1
+	a) set Up for tutorieal:
+		1) find Apache on mac osx
+			- c1246895-osx:/ rduvalwa2$ sudo which httpd
+										/usr/sbin/httpd
+			- /etc/apache2
+			- sudo vi httpd.conf
+			- 	http://www.procata.com/blog/archives/2007/10/28/working-with-php-5-in-mac-os-x-105/
+				#LoadModule php4_module
+				#AddModule mod_php4.c
+				#AddType application/x-httpd-php .php
+				#AddType application/x-httpd-php-source .phps
+				
+				ON MACOSX DO THIS
+				http://www.procata.com/blog/archives/2007/10/28/working-with-php-5-in-mac-os-x-105/
+				#LoadModule php5_module libexec/apache2/libphp5.so
+				
+				- sudo apachectl start  or sudo apachectl restart
+					Test
+						1) http://localhost/.      results in "It works!"
+						2) http://localhost/manual/   Apache Manual
+						3) Test PHP by creating a test file  and saving it in webserver documents:  /Library/WebServer/Documents
+						    - text =      <?php phpinfo(); ?>
+						    - file name = info.php  
+						    - http://localhost/info.php   results in PHP Version 5.3.1 and a lot more
+						4) Create PHP file to test with printVariable.php
+						   <?php echo $_SERVER['HTTP_USER_AGENT']; ?>
+
+3) Start learning Mod_Rewrite
+
+							
+						

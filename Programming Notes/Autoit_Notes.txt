@@ -1,0 +1,160 @@
+Autoit NotesAutoit Notes
+
+Tutorial Core Language
+http://www.autoitscript.com/wiki/Tutorial_Core_Language
+
+Comments
+Two types of comments
+	1.
+	- Comments are simply lines/blocks of code that are meant as guidelines 
+	- notes to help understand what the code is doing.
+  Inline/Single-line comments may be added using a preceeding semicolon
+  Example:
+  	; This is a single-line comment
+	msgbox(1,"Title","Text") ; This is an inline comment
+	
+	2. multiline comments are a little less intuitive
+	#comments-start
+  	All code within this block is commented and will not be interpretted at compile/run time.
+	#comments-end
+	shorthand method to this
+	#cs
+ 	All code within this block is commented as well.
+	#ce
+	
+Variables
+	Declarations
+	variable is a placeholder in memory where we can store some kind of data
+	In AutoIt the data is:
+	  - a string
+	  - number
+	  - reference to an array
+	Three keywords to declare a variable
+	  - Global
+	  - Local
+	  - Dim
+	All variable names start with a $ sign
+	Example:
+		- Global $gVar
+ 		- Local $Var
+ 		- Dim $i
+Arrays 
+	- are collections of variables 
+	- stored under a common name using addresses as a means of defining
+	- their position within memorySimilar to defining a variable
+	- the only difference in defining an array is expressing the number of elements to be attributed to that collection
+	Example:
+		- Global $aarr[4] ; 4 elements allocated.
+		- Local  $barr[1] ; 1 element allocated.
+		- Dim    $carr[3] ; 3 elements allocated. ; Try to avoid Dim, use Global and Local.
+		- http://www.autoitscript.com/wiki/Arrays
+		
+Scope
+	scope pertains to the length of time for which a variable is visible
+		- more precisely how long a variable is stored in memory before it returns to a free state
+	allocation(declaration) and deallocation(trash collection)
+		- variable is usually left up to the compiler/interpreter
+		- can given to the user to play with
+		- rule of thumb, all information stored in memory for a program
+			-  deallocated upon completion of the program
+	Scope tracks and reuses variable names for multiple occurances
+		Imagine having to create a unique name for every single variable stored in memory at that point
+		You would have to compensate for all the variable names used in the operating system
+		other programs running parallel to yours, and every name in your own script. 
+		It wouldn't be long before randomly generated 256 character names would be more efficient than a list of used names.
+
+	Three methods of declaring a variable explained above have different scopes in mind:
+	- Global variables are given scope over the entire program's run.
+	- Local variables have a scope that is immediately related to the block of code they're currently a member of.
+	- Dim variables are hybrid-like depending upon whether or not the name is already defined in a global variable status:
+		Global variable exists of the same name
+				- Overwrites the Global variable
+		Global variable does not exist
+				- Creates a Local variable for that block
+
+Assignment
+	Assigning a value to a variable is the only way to get things going
+	AutoIt uses loose typing...
+		Local $x = "Hi there!"  ; $x is a string
+		$x = 7                  ; $x is an integer
+		$x = .15                ; $x is a float
+		$x = 123456789          ; $x is a double
+		$x = "Hello again!"     ; $x is back to a string
+	Loose typing simply means a variable
+	  - malleable and its format can be changed to your liking
+	  - this also means that you have to watch your scope and what's going in and out of that variable
+
+	Arrays are handled a bit differently. 
+		- may contain several different types
+		- those types are loosely typed 
+		- the array must have a predetermined size
+			Local $y[3]
+			$y[0] = 1        ; first address is an integer
+			$y[1] = "two"    ; second address is a string
+			$y[2] = 3.33333  ; third address is a float
+
+Equivalently
+	Local $z[3] = [1,"two",3.3333]
+	You may also declare and assign several variables at the same time.
+ 		Local $x = 1, $y = "", $z[3] = [1,2,3]
+ 		
+Operators
+	Assignment
+	=	Assignment operator. e.g. $var = 5
+	&=	Concatenation assignment. e.g. $var &= "Hello" equivalent to $var = $var & "Hello"
+	
+	Mathematical Operation
+	+	Addition operator. e.g. 10 + 20
+	-	Subtraction operator. e.g. 20 - 10
+	*	Multiplication operator. e.g. 20 * 10
+	/	Division operator. e.g. 20 / 10
+	^	Powers operator. e.g. 2 ^ 4
+	+=	Addition assignment. e.g. $var += 1 is equivalent to $var = $var + 1
+	-=	Subtraction assignment. e.g. $var -= 1 is equivalent to $var = $var -1
+	*=	Multiplicative assignment. e.g. $var *= 2 is equivalent to $var = $var * 2
+	/=	Divisive assignment. e.g. $var /= 2 is equivalent to $var = $var / 2
+
+	Mathematical Comparison
+	=	Equivalence operator. e.g. If $var = 5 Then ...
+	==	Equivalence operator. e.g. If $var == 5 Then ...
+	<>	Not equal operator. e.g. If $var <> 5 Then ...
+	>	Greater-than operator. e.g. If $var > 5 Then ...
+	>=	Greater-than-or-Equal-to operator. e.g. If $var >= 5 Then ...
+	<	Less-than operator. e.g. If $var < 5 Then ...
+	<=	Less-than-or-Equal-to operator. e.g. If $var <= 5 Then ...
+
+	String Comparison
+	=	Equivalence operator. e.g. If $var = "Hi" Then ... ; case insensitive.
+	==	Equivalence operator. e.g. If $var == "Bye" Then ... ; case sensitive.
+	<>	Not equivalent operator. e.g. If $var <> "blah" Then ... ; case insensitive.
+	Not <>	Not equivalent combinative operator. e.g. If Not $var <> "blah" Then ... ; case sensitive.
+
+	Logical
+	And	Binary logical And operator. e.g. If $var > 5 And $var < 3 Then ...
+	Or	Binary logical Or operator. e.g. If $var <> 5 Or $var <> 6 Then ...
+	Not	Unary inversion operator. e.g. If Not $var > 5 Then ...
+
+Precedence
+	list of precedences that define when an operator is to be evaluated
+	Operators with equal precedence are evaluated from left to right.
+	From highest to lowest:
+	  '''Not'''
+	  ''' ^ '''
+	  '''* /'''
+	  '''+ -'''
+	  ''' & '''
+	  '''< > <= >= = <> =='''
+	  '''And Or'''
+	
+	It should be noted that the use of And/Or operators evaluate from left to right such that
+ 		If $x < 5 And $x > 3 Then
+	checks the $x < 5 first and if it returns false will not evaluate $x > 3.
+	Similarly for Or
+ 		If $x <> 5 Or $x <> 6 Then
+	will evaluate $x <> 5 and if it returns true will not evaluate $x <> 6
+	
+	All tables and information adapted from the AutoIt intro.
+	http://www.autoitscript.com/autoit3/docs/intro/lang_operators.htm
+	
+	
+	

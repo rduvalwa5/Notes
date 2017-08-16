@@ -1,0 +1,750 @@
+****************************************************
+******* Jenkins Installation Mac OSX ***************
+****************************************************
+
+** Important configuration note:
+        Glassfish requires the use of port 8080.  This conflicts with Jenkin.  I know how to change Jenkins at this time but not Glassfish.
+        So Jenkins is going to run on port 8090.
+    
+
+Links: 
+http://jenkins-ci.org
+http://mirrors.jenkins-ci.org/osx/latest
+
+1) Down Load
+2) Install Package
+	- selected Allow All Connections to access service
+		This should allow access by other computers
+3) http://localhost:8080
+	- Apache still works on port 80 http://localhost:80
+4) http://localhost:8080/manage 
+	- Url to Jenkins Management
+
+Jenkins control:
+https://wiki.jenkins-ci.org/display/JENKINS/Starting+and+Accessing+Jenkins
+http://stackoverflow.com/questions/26483089/launchd-is-not-starting-jenkins-server-on-os-x-yosemite
+
+Starting Jenkins Mac OSX and changing port
+
+    1.  sudo chown jenkins /var/log/jenkins/jenkins.log
+    2.  sudo defaults write /Library/Preferences/org.jenkins-ci httpPort 9090
+        Password:
+    2.  sudo launchctl unload /Library/LaunchDaemons/org.jenkins-ci.plist
+    3.  sudo launchctl load /Library/LaunchDaemons/org.jenkins-ci.plist
+    4.  launchctl start /Library/Launc hDaemons/org.jenkins-ci.plist
+    5.  ps -ef | grep jenkins
+       247 33608     1   0  3:26PM ??         0:18.62 /usr/bin/java -Dfile.encoding=UTF-8 -XX:PermSize=256m -XX:MaxPermSize=512m -Xms256m -Xmx512m -Djava.io.tmpdir=/Users/Shared/Jenkins/tmp -jar /Applications/Jenkins/jenkins.war --httpPort=9090
+       503 33631 26031   0  3:27PM ttys000    0:00.00 grep jenkins
+    6. C1246895-Air:Jenkins rduvalwa2$ pwd
+        /Applications/Jenkins
+
+** Starting Jenkins **************************************
+** On April 28 2015 **************************************
+  552  sudo chown jenkins /var/log/jenkins/jenkins.log
+  553  ls  /var/log/jenkins/jenkins.log
+  554  ls -l  /var/log/jenkins/jenkins.log
+  555  sudo launchctl unload /Library/LaunchDaemons/org.jenkins-ci.plist
+  556  sudo defaults write /Library/Preferences/org.jenkins-ci httpPort 9090
+  557  sudo launchctl load /Library/LaunchDaemons/org.jenkins-ci.plist
+  558  launchctl start /Library/LaunchDaemons/org.jenkins-ci.plist
+  559  ps -ef | grep jenkins
+
+** Accessing running Jenkins **********
+http://localhost:9090/
+
+
+
+** Find if Jenkins is running ***************
+1)  OSXAir:Current_Notes rduvalwa2$ ps -ef |grep jenkin
+    247 27043     1   0  1:52PM ??         1:54.51 /usr/bin/java -Dfile.encoding=UTF-8 -XX:PermSize=256m -XX:MaxPermSize=512m -Xms256m -Xmx512m -Djava.io.tmpdir=/Users/Shared/Jenkins/tmp -jar /Applications/Jenkins/jenkins.war --httpPort=9090
+    503 28355 22952   0 10:04PM ttys001    0:00.00 grep jenkin
+  
+2)  OSXAir:Current_Notes rduvalwa2$ sudo lsof | grep jenkins
+java      27043         jenkins  cwd       DIR                1,4       1224        2 /
+java      27043         jenkins  txt       REG                1,4      99312  1920938 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/bin/java
+java      27043         jenkins  txt       REG                1,4       6928  2073019 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/access-modifier-annotation-1.4.jar
+java      27043         jenkins  txt       REG                1,4      49472  1921164 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/libverify.dylib
+java      27043         jenkins  txt       REG                1,4     212084  1921131 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/libjava.dylib
+java      27043         jenkins  txt       REG                1,4      32768 25769431 /private/var/folders/dd/42hn81j1067ffd9kt7yf8cnr00007q/T/hsperfdata_jenkins/27043
+java      27043         jenkins  txt       REG                1,4      36600  1921165 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/libzip.dylib
+java      27043         jenkins  txt       REG                1,4      12849  8480290 /System/Library/Java/Extensions/MRJToolkit.jar
+java      27043         jenkins  txt       REG                1,4     113593  1921100 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/jce.jar
+java      27043         jenkins  txt       REG                1,4   15674884  1921191 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/server/libjvm.dylib
+java      27043         jenkins  txt       REG                1,4   66118059  1921179 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/rt.jar
+java      27043         jenkins  txt       REG                1,4     210544  8420791 /System/Library/Frameworks/JavaVM.framework/Versions/A/Frameworks/JavaRuntimeSupport.framework/Versions/A/JavaRuntimeSupport
+java      27043         jenkins  txt       REG                1,4     164688  8420774 /System/Library/Frameworks/JavaVM.framework/Versions/A/Frameworks/JavaNativeFoundation.framework/Versions/A/JavaNativeFoundation
+java      27043         jenkins  txt       REG                1,4     109488  8420877 /System/Library/Frameworks/JavaVM.framework/Versions/A/JavaVM
+java      27043         jenkins  txt       REG                1,4      98656  8535911 /System/Library/PrivateFrameworks/JavaLaunching.framework/Versions/A/JavaLaunching
+java      27043         jenkins  txt       REG                1,4   26287392 23917468 /usr/share/icu/icudt55l.dat
+java      27043         jenkins  txt       REG                1,4   67619385  2072206 /Applications/Jenkins/jenkins.war
+java      27043         jenkins  txt       REG                1,4     271584 25769454 /Users/Shared/Jenkins/tmp/jna--1712433994/jna8782557996033489239.tmp
+java      27043         jenkins  txt       REG                1,4       8286  1921065 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/ext/dnsns.jar
+java      27043         jenkins  txt       REG                1,4         64  2073511 /Users/Shared/Jenkins/Home/secret.key
+java      27043         jenkins  txt       REG                1,4     110892  1921153 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/libosxapp.dylib
+java      27043         jenkins  txt       REG                1,4     331127  2072927 /Users/Shared/Jenkins/Home/war/WEB-INF/plugins/junit.hpi
+java      27043         jenkins  txt       REG                1,4      52528  1921147 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/libmanagement.dylib
+java      27043         jenkins  txt       REG                1,4      39773  1921070 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/ext/sunec.jar
+java      27043         jenkins  txt       REG                1,4     278033  1921071 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/ext/sunjce_provider.jar
+java      27043         jenkins  txt       REG                1,4     237973  2072928 /Users/Shared/Jenkins/Home/war/WEB-INF/plugins/matrix-project.hpi
+java      27043         jenkins  txt       REG                1,4      34685  2073565 /Users/Shared/Jenkins/Home/plugins/antisamy-markup-formatter/WEB-INF/lib/antisamy-markup-formatter.jar
+java      27043         jenkins  txt       REG                1,4       7579  2074084 /Users/Shared/Jenkins/Home/plugins/windows-slaves/WEB-INF/lib/jinterop-proxy-1.1.jar
+java      27043         jenkins  txt       REG                1,4     548722  2072948 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/acegi-security-1.0.7.jar
+java      27043         jenkins  txt       REG                1,4      70869  2072966 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/activation-1.1.1-hudson-1.jar
+java      27043         jenkins  txt       REG                1,4      19294  2073016 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/akuma-1.9.jar
+java      27043         jenkins  txt       REG                1,4      15622  2072958 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/annotation-indexer-1.7.jar
+java      27043         jenkins  txt       REG                1,4      18429  2072985 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/ant-launcher-1.8.4.jar
+java      27043         jenkins  txt       REG                1,4     443432  2073060 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/antlr-2.7.6.jar
+java      27043         jenkins  txt       REG                1,4       4467  2073059 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/aopalliance-1.0.jar
+java      27043         jenkins  txt       REG                1,4      75144  1921079 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/fonts/LucidaBrightDemiBold.ttf
+java      27043         jenkins  txt       REG                1,4      38073  2072919 /Users/Shared/Jenkins/Home/war/WEB-INF/plugins/javadoc.hpi
+java      27043         jenkins  txt       REG                1,4      89974  2073572 /Users/Shared/Jenkins/Home/plugins/antisamy-markup-formatter/WEB-INF/lib/owasp-html-sanitizer-r88.jar
+java      27043         jenkins  txt       REG                1,4      18333  2698117 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/ant-launcher-1.9.2.jar
+java      27043         jenkins  txt       REG                1,4    1941731  2073034 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/ant-1.8.4.jar
+java      27043         jenkins  txt       REG                1,4      66630  2073064 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/args4j-2.0.23.jar
+java      27043         jenkins  txt       REG                1,4      46022  2072947 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/asm-4.0.jar
+java      27043         jenkins  txt       REG                1,4      19614  2073049 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/asm-analysis-4.0.jar
+java      27043         jenkins  txt       REG                1,4      37776  2073047 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/asm-commons-4.0.jar
+java      27043         jenkins  txt       REG                1,4      21982  2072970 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/asm-tree-4.0.jar
+java      27043         jenkins  txt       REG                1,4      36995  2073042 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/asm-util-4.0.jar
+java      27043         jenkins  txt       REG                1,4     379343  2072957 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/asm5-5.0.1.jar
+java      27043         jenkins  txt       REG                1,4     515071  2072953 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/bcpkix-jdk15on-1.47.jar
+java      27043         jenkins  txt       REG                1,4       3161  2072956 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/bridge-method-annotation-1.13.jar
+java      27043         jenkins  txt       REG                1,4      25897  2072950 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/bytecode-compatibility-transformer-1.5.jar
+java      27043         jenkins  txt       REG                1,4      38546  2072986 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/cli-1.598.jar
+java      27043         jenkins  txt       REG                1,4     232019  2073013 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/commons-beanutils-1.8.3.jar
+java      27043         jenkins  txt       REG                1,4      76685  2072944 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/commons-discovery-0.4.jar
+java      27043         jenkins  txt       REG                1,4      10073  2698207 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/doxia-sink-api-1.0.jar
+java      27043         jenkins  txt       REG                1,4     263865  2072972 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/commons-codec-1.8.jar
+java      27043         jenkins  txt       REG                1,4     196768  2073006 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/commons-digester-2.1.jar
+java      27043         jenkins  txt       REG                1,4      68772  2072952 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/commons-fileupload-1.3.1-jenkins-1.jar
+java      27043         jenkins  txt       REG                1,4    3500524  1921178 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/resources.jar
+java      27043         jenkins  txt       REG                1,4     148624 25783046 /Users/Shared/Jenkins/tmp/jffi7886413108689720400.tmp
+java      27043         jenkins  txt       REG                1,4     260543  2735451 /Users/Shared/Jenkins/Home/plugins/matrix-project/WEB-INF/lib/matrix-project.jar
+java      27043         jenkins  txt       REG                1,4       2497  2698181 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/javax.inject-1.jar
+java      27043         jenkins  txt       REG                1,4      75124  1921080 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/fonts/LucidaBrightDemiItalic.ttf
+java      27043         jenkins  txt       REG                1,4     406478  2072931 /Users/Shared/Jenkins/Home/war/WEB-INF/plugins/credentials.hpi
+java      27043         jenkins  txt       REG                1,4       5848  2698183 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/jsr250-api-1.0.jar
+java      27043         jenkins  txt       REG                1,4     575389  2072962 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/commons-collections-3.2.1.jar
+java      27043         jenkins  txt       REG                1,4     305001  2073061 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/commons-httpclient-3.1.jar
+java      27043         jenkins  txt       REG                1,4     185140  2073052 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/commons-io-2.4.jar
+java      27043         jenkins  txt       REG                1,4     170642  2072959 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/commons-jelly-1.1-jenkins-20120928.jar
+java      27043         jenkins  txt       REG                1,4      22479  2073041 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/commons-jelly-tags-fmt-1.0.jar
+java      27043         jenkins  txt       REG                1,4      80856  1921081 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/fonts/LucidaBrightItalic.ttf
+java      27043         jenkins  txt       REG                1,4     385815  2074081 /Users/Shared/Jenkins/Home/plugins/windows-slaves/WEB-INF/lib/j-interop-2.0.6-kohsuke-1.jar
+java      27043         jenkins  txt       REG                1,4      22732  2072984 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/commons-jelly-tags-define-1.0.1-hudson-20071021.jar
+java      27043         jenkins  txt       REG                1,4      37430  2072978 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/commons-jelly-tags-xml-1.1.jar
+java      27043         jenkins  txt       REG                1,4     140940  2072983 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/commons-jexl-1.1-jenkins-20111212.jar
+java      27043         jenkins  txt       REG                1,4     284220  2073040 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/commons-lang-2.6.jar
+java      27043         jenkins  txt       REG                1,4      62050  2073048 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/commons-logging-1.1.3.jar
+java      27043         jenkins  txt       REG                1,4      14986  2073018 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/constant-pool-scanner-1.2.jar
+java      27043         jenkins  txt       REG                1,4       4810  2073002 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/crypto-util-1.1.jar
+java      27043         jenkins  txt       REG                1,4     254359  2073039 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/dom4j-1.6.1-jenkins-4.jar
+java      27043         jenkins  txt       REG                1,4       5298  2073056 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/embedded_su4j-1.1.jar
+java      27043         jenkins  txt       REG                1,4      86487  2073045 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/ezmorph-1.0.6.jar
+java      27043         jenkins  txt       REG                1,4     161704  1921161 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/libsunec.dylib
+java      27043         jenkins  txt       REG                1,4      90828  1921149 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/libnet.dylib
+java      27043         jenkins  txt       REG                1,4      61444  1921150 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/libnio.dylib
+java      27043         jenkins  txt       REG                1,4     403839  2698090 /Users/Shared/Jenkins/Home/plugins/junit/WEB-INF/lib/junit.jar
+java      27043         jenkins  txt       REG                1,4      14567  2698224 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/lib-jenkins-maven-artifact-manager-1.2.jar
+java      27043         jenkins  txt       REG                1,4     642741  2072968 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/guice-4.0-beta5.jar
+java      27043         jenkins  txt       REG                1,4      45024  2072963 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/hamcrest-core-1.3.jar
+java      27043         jenkins  txt       REG                1,4      17567  2072992 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/icon-set-1.0.5.jar
+java      27043         jenkins  txt       REG                1,4       7397  2072967 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/instance-identity-1.4.jar
+java      27043         jenkins  txt       REG                1,4     385815  2072961 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/j-interop-2.0.6-kohsuke-1.jar
+java      27043         jenkins  txt       REG                1,4     117686  2073036 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/j-interopdeps-2.0.6-kohsuke-1.jar
+java      27043         jenkins  txt       REG                1,4     113796  2073050 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jansi-1.9.jar
+java      27043         jenkins  txt       REG                1,4      26366  2072977 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/javax.annotation-api-1.2.jar
+java      27043         jenkins  txt       REG                1,4     622403  1921109 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/jsse.jar
+java      27043         jenkins  txt       REG                1,4   10805330  2072929 /Users/Shared/Jenkins/Home/war/WEB-INF/plugins/maven-plugin.hpi
+java      27043         jenkins  txt       REG                1,4     117686  2074085 /Users/Shared/Jenkins/Home/plugins/windows-slaves/WEB-INF/lib/j-interopdeps-2.0.6-kohsuke-1.jar
+java      27043         jenkins  txt       REG                1,4     398132  2074086 /Users/Shared/Jenkins/Home/plugins/windows-slaves/WEB-INF/lib/jcifs-1.3.17-kohsuke-1.jar
+java      27043         jenkins  txt       REG                1,4       8674  2074088 /Users/Shared/Jenkins/Home/plugins/windows-slaves/WEB-INF/lib/jinterop-wmi-1.1.jar
+java      27043         jenkins  txt       REG                1,4      23668  2698230 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/lib-jenkins-maven-embedder-3.11.jar
+java      27043         jenkins  txt       REG                1,4     576692 25783078 /Users/Shared/Jenkins/Home/tools/hudson.tasks.Maven_MavenInstallation/Maven322/lib/maven-core-3.2.2.jar
+java      27043         jenkins  txt       REG                1,4      17351  2074079 /Users/Shared/Jenkins/Home/plugins/windows-slaves/WEB-INF/lib/tiger-types-1.1.jar
+java      27043         jenkins  txt       REG                1,4      17893  2074087 /Users/Shared/Jenkins/Home/plugins/windows-slaves/WEB-INF/lib/windows-remote-command-1.4.jar
+java      27043         jenkins  txt       REG                1,4      73420  2074080 /Users/Shared/Jenkins/Home/plugins/windows-slaves/WEB-INF/lib/windows-slaves.jar
+java      27043         jenkins  txt       REG                1,4      72407  2073769 /Users/Shared/Jenkins/Home/plugins/matrix-auth/WEB-INF/lib/classes.jar
+java      27043         jenkins  txt       REG                1,4     119142  2073755 /Users/Shared/Jenkins/Home/plugins/mailer/WEB-INF/lib/classes.jar
+java      27043         jenkins  txt       REG                1,4      36353  2698077 /Users/Shared/Jenkins/Home/plugins/javadoc/WEB-INF/lib/javadoc.jar
+java      27043         jenkins  txt       REG                1,4     134900  2698130 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/aether-api-0.9.0.M3.jar
+java      27043         jenkins  txt       REG                1,4      34117  2698197 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/aether-connector-wagon-0.9.0.M2.jar
+java      27043         jenkins  txt       REG                1,4     163864  2698211 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/aether-impl-0.9.0.M3.jar
+java      27043         jenkins  txt       REG                1,4      30624  2698200 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/aether-spi-0.9.0.M3.jar
+java      27043         jenkins  txt       REG                1,4      25245  2698193 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/aether-transport-wagon-0.9.0.M3.jar
+java      27043         jenkins  txt       REG                1,4     142136  2698170 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/aether-util-0.9.0.M3.jar
+java      27043         jenkins  txt       REG                1,4       2497  2073043 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/javax.inject-1.jar
+java      27043         jenkins  txt       REG                1,4    1761676 25769432 /Users/Shared/Jenkins/tmp/winstone1229723184743590496.jar
+java      27043         jenkins  txt       REG                1,4    3860522  1921064 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/ext/cldrdata.jar
+java      27043         jenkins  txt       REG                1,4    1179653  1921067 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/ext/localedata.jar
+java      27043         jenkins  txt       REG                1,4   18182471  1921805 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/lib/tools.jar
+java      27043         jenkins  txt       REG                1,4    1649781  2072994 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/guava-11.0.1.jar
+java      27043         jenkins  txt       REG                1,4      17750  2073031 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jbcrypt-0.3m.jar
+java      27043         jenkins  txt       REG                1,4       4467  2698143 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/aopalliance-1.0.jar
+java      27043         jenkins  txt       REG                1,4      44908  2698256 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/cdi-api-1.0.jar
+java      27043         jenkins  txt       REG                1,4     694992  2698261 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/classes.jar
+java      27043         jenkins  txt       REG                1,4      41123  2698145 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/commons-cli-1.2.jar
+java      27043         jenkins  txt       REG                1,4     232771  2698122 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/commons-codec-1.6.jar
+java      27043         jenkins  txt       REG                1,4     419136  1921120 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/libfontmanager.dylib
+java      27043         jenkins  txt       REG                1,4     186456  1921116 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/libdcpr.dylib
+java      27043         jenkins  txt       REG                1,4     305001  2698108 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/commons-httpclient-3.1.jar
+java      27043         jenkins  txt       REG                1,4     173587  2698201 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/commons-io-2.2.jar
+java      27043         jenkins  txt       REG                1,4     284220  2698107 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/commons-lang-2.6.jar
+java      27043         jenkins  txt       REG                1,4      60686  2698180 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/commons-logging-1.1.1.jar
+java      27043         jenkins  txt       REG                1,4     213781  2698147 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/jsch-0.1.44-1.jar
+java      27043         jenkins  txt       REG                1,4     238637  2073015 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jaxen-1.1-beta-11.jar
+java      27043         jenkins  txt       REG                1,4     398132  2072995 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jcifs-1.3.17-kohsuke-1.jar
+java      27043         jenkins  txt       REG                1,4     309245  2073032 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jcommon-1.0.12.jar
+java      27043         jenkins  txt       REG                1,4      10238  2072975 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/version-number-1.1.jar
+java      27043         jenkins  txt       REG                1,4     123170  2073065 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jtidy-4aug2000r7-dev-hudson-1.jar
+java      27043         jenkins  txt       REG                1,4     562116  1921114 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/libawt.dylib
+java      27043         jenkins  txt       REG                1,4     273370  2698231 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/commons-net-3.1.jar
+java      27043         jenkins  txt       REG                1,4     433368  2698138 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/httpclient-4.2.5.jar
+java      27043         jenkins  txt       REG                1,4     227275  2698234 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/httpcore-4.2.4.jar
+java      27043         jenkins  txt       REG                1,4     278273  2698149 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/jsoup-1.7.1.jar
+java      27043         jenkins  txt       REG                1,4      60050  2698101 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven-aether-provider-3.1.0.jar
+java      27043         jenkins  txt       REG                1,4    1997327  2072942 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/bcprov-jdk15on-1.47.jar
+java      27043         jenkins  txt       REG                1,4     344908  1921082 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/fonts/LucidaBrightRegular.ttf
+java      27043         jenkins  txt       REG                1,4     317896  1921083 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/fonts/LucidaSansDemiBold.ttf
+java      27043         jenkins  txt       REG                1,4     326020  2698251 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/jackrabbit-webdav-2.5.2.jar
+java      27043         jenkins  txt       REG                1,4      33015  2698140 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/jsr305-1.3.9.jar
+java      27043         jenkins  txt       REG                1,4      10940  2698150 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven-reporting-api-3.0.jar
+java      27043         jenkins  txt       REG                1,4    6222383  2073051 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/groovy-all-1.8.9.jar
+java      27043         jenkins  txt       REG                1,4     439751  2072982 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/remoting-2.49.jar
+java      27043         jenkins  txt       REG                1,4      91455  2072964 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jna-posix-1.0.3-jenkins-1.jar
+java      27043         jenkins  txt       REG                1,4     156638  2072997 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jnr-posix-3.0.1.jar
+java      27043         jenkins  txt       REG                1,4     645516  2073029 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jnr-ffi-1.0.7.jar
+java      27043         jenkins  txt       REG                1,4     145708  2072990 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jffi-1.2.7.jar
+java      27043         jenkins  txt       REG                1,4     385729  2073028 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jffi-1.2.7-native.jar
+java      27043         jenkins  txt       REG                1,4     219943  2073009 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jnr-x86asm-1.0.2.jar
+java      27043         jenkins  txt       REG                1,4     312931  2073012 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jnr-constants-0.8.5.jar
+java      27043         jenkins  txt       REG                1,4       7946  2073054 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/trilead-putty-extension-1.2.jar
+java      27043         jenkins  txt       REG                1,4     262523  2072945 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/trilead-ssh2-build217-jenkins-8.jar
+java      27043         jenkins  txt       REG                1,4      32560  2073008 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/stapler-groovy-1.234.jar
+java      27043         jenkins  txt       REG                1,4      86115  2073000 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/stapler-jelly-1.234.jar
+java      27043         jenkins  txt       REG                1,4       6279  2072965 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/stapler-jrebel-1.234.jar
+java      27043         jenkins  txt       REG                1,4     343396  2072980 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/stapler-1.234.jar
+java      27043         jenkins  txt       REG                1,4      17522  2073005 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/tiger-types-1.3.jar
+java      27043         jenkins  txt       REG                1,4       4290  2073057 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/windows-package-checker-1.0.jar
+java      27043         jenkins  txt       REG                1,4      19162  2073038 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/stapler-adjunct-zeroclipboard-1.3.5-1.jar
+java      27043         jenkins  txt       REG                1,4     165394  2073017 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/stapler-adjunct-timeline-1.4.jar
+java      27043         jenkins  txt       REG                1,4     275643  2073063 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/stapler-adjunct-codemirror-1.3.jar
+java      27043         jenkins  txt       REG                1,4     141207  2072971 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/json-lib-2.4-jenkins-2.jar
+java      27043         jenkins  txt       REG                1,4      19852  2072969 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/task-reactor-1.4.jar
+java      27043         jenkins  txt       REG                1,4       6676  2072999 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/localizer-1.10.jar
+java      27043         jenkins  txt       REG                1,4     533110  2072998 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/xstream-1.4.7-jenkins-1.jar
+java      27043         jenkins  txt       REG                1,4    1291498  2073021 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jfreechart-1.0.9.jar
+java      27043         jenkins  txt       REG                1,4     494924  2072951 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/mail-1.4.4.jar
+java      27043         jenkins  txt       REG                1,4     187036  2072946 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/spring-jdbc-1.2.9.jar
+java      27043         jenkins  txt       REG                1,4      95425  2073046 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/spring-dao-1.2.9.jar
+java      27043         jenkins  txt       REG                1,4      65261  2073062 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/oro-2.0.8.jar
+java      27043         jenkins  txt       REG                1,4     352291  2072949 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/log4j-1.2.9.jar
+java      27043         jenkins  txt       REG                1,4      87325  2073003 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jline-0.9.94.jar
+java      27043         jenkins  txt       REG                1,4     402348  2072960 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/spring-webmvc-2.5.6.SEC03.jar
+java      27043         jenkins  txt       REG                1,4     488162  2072987 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/spring-beans-2.5.6.SEC03.jar
+java      27043         jenkins  txt       REG                1,4     476894  2073053 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/spring-context-2.5.6.SEC03.jar
+java      27043         jenkins  txt       REG                1,4      96868  2073027 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/spring-context-support-2.5.6.SEC03.jar
+java      27043         jenkins  txt       REG                1,4     194726  2073030 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/spring-web-2.5.6.SEC03.jar
+java      27043         jenkins  txt       REG                1,4     285605  2072996 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/spring-core-2.5.6.SEC03.jar
+java      27043         jenkins  txt       REG                1,4     325756  2072981 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/spring-aop-2.5.6.SEC03.jar
+java      27043         jenkins  txt       REG                1,4     120069  2073055 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/xpp3-1.1.4c.jar
+java      27043         jenkins  txt       REG                1,4      16923  2073014 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jstl-1.1.0.jar
+java      27043         jenkins  txt       REG                1,4      66688  2073024 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/txw2-20110809.jar
+java      27043         jenkins  txt       REG                1,4      23346  2073037 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/stax-api-1.0-2.jar
+java      27043         jenkins  txt       REG                1,4      19255  2072988 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/relaxngDatatype-20020414.jar
+java      27043         jenkins  txt       REG                1,4      21265  2072993 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/winp-1.22.jar
+java      27043         jenkins  txt       REG                1,4      17292  2073020 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/memory-monitor-1.9.jar
+java      27043         jenkins  txt       REG                1,4      19925  2073026 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/libpam4j-1.8.jar
+java      27043         jenkins  txt       REG                1,4    2000557  2698216 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/ant-1.9.2.jar
+java      27043         jenkins  txt       REG                1,4       9245  2698177 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven-agent-1.6.jar
+java      27043         jenkins  txt       REG                1,4       7749  2698164 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven3-agent-1.6.jar
+java      27043         jenkins  txt       REG                1,4    9403391  2073001 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jenkins-core-1.598.jar
+java      27043         jenkins  txt       REG                1,4     524224  2073022 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/wstx-asl-3.2.9.jar
+java      27043         jenkins  txt       REG                1,4      26514  2072976 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/stax-api-1.0.1.jar
+java      27043         jenkins  txt       REG                1,4     390437  2072991 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jmdns-3.4.0-jenkins-3.jar
+java      27043         jenkins  txt       REG                1,4     914597  2072979 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jna-4.1.0.jar
+java      27043         jenkins  txt       REG                1,4      62889  2073066 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/libzfs-0.5.jar
+java      27043         jenkins  txt       REG                1,4      29030  2072954 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/sezpoz-1.9.jar
+java      27043         jenkins  txt       REG                1,4       4414  2072974 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/robust-http-client-1.2.jar
+java      27043         jenkins  txt       REG                1,4      33015  2072989 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jsr305-1.3.9.jar
+java      27043         jenkins  txt       REG                1,4      71852  2073011 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jzlib-1.1.3-kohsuke-1.jar
+java      27043         jenkins  txt       REG                1,4     245039  2073044 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/junit-4.11.jar
+java      27043         jenkins  txt       REG                1,4      22663  2073007 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/launchd-slave-installer-1.2.jar
+java      27043         jenkins  txt       REG                1,4     646035  2073033 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/mina-core-2.0.5.jar
+java      27043         jenkins  txt       REG                1,4      26636  2072943 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/slave-installer-1.5.jar
+java      27043         jenkins  txt       REG                1,4      29257  2073035 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/slf4j-api-1.7.7.jar
+java      27043         jenkins  txt       REG                1,4       7901  2073023 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/slf4j-jdk14-1.7.7.jar
+java      27043         jenkins  txt       REG                1,4      10063  2073004 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/ssh-cli-auth-1.2.jar
+java      27043         jenkins  txt       REG                1,4      23410  2073010 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/sshd-1.6.jar
+java      27043         jenkins  txt       REG                1,4     376097  2072973 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/sshd-core-0.8.0.jar
+java      27043         jenkins  txt       REG                1,4      11541  2073058 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/systemd-slave-installer-1.1.jar
+java      27043         jenkins  txt       REG                1,4      10798  2073025 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/upstart-slave-installer-1.1.jar
+java      27043         jenkins  txt       REG                1,4      44776  2072955 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/windows-slave-installer-1.4.jar
+java      27043         jenkins  txt       REG                1,4    1649781  2698258 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/guava-11.0.1.jar
+java      27043         jenkins  txt       REG                1,4      52173  2698160 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven-artifact-3.1.0.jar
+java      27043         jenkins  txt       REG                1,4     283801  2698239 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven-compat-3.1.0.jar
+java      27043         jenkins  txt       REG                1,4      56907  2698252 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven-embedder-3.1.0.jar
+java      27043         jenkins  txt       REG                1,4      22292  2698131 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven-interceptor-1.6.jar
+java      27043         jenkins  txt       REG                1,4     163733  2698161 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven-model-3.1.0.jar
+java      27043         jenkins  txt       REG                1,4     834796  1921148 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/libmlib_image.dylib
+java      27043         jenkins  txt       REG                1,4     719692  1921115 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/libawt_lwawt.dylib
+java      27043         jenkins  txt       REG                1,4    5218304 25730639 /private/var/folders/zz/zyxvpxvq6csfxvn_n0000000000000/0/com.apple.LaunchServices-1340.csstore
+java      27043         jenkins  txt       REG                1,4     698236  1921084 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/fonts/LucidaSansRegular.ttf
+java      27043         jenkins  txt       REG                1,4     234068  1921085 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/fonts/LucidaTypewriterBold.ttf
+java      27043         jenkins  txt       REG                1,4     242700  1921086 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/fonts/LucidaTypewriterRegular.ttf
+java      27043         jenkins  txt       REG                1,4    1238788  2698175 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/guice-4.0-beta.jar
+java      27043         jenkins  txt       REG                1,4     562575  2698196 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven-core-3.1.0.jar
+java      27043         jenkins  txt       REG                1,4     159442  2698225 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven-model-builder-3.1.0.jar
+java      27043         jenkins  txt       REG                1,4      49820  2698137 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven-plugin-api-3.1.0.jar
+java      27043         jenkins  txt       REG                1,4      30094  2698186 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven-repository-metadata-3.1.0.jar
+java      27043         jenkins  txt       REG                1,4      46708  2698125 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven-settings-3.1.0.jar
+java      27043         jenkins  txt       REG                1,4      41427  2698243 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven-settings-builder-3.1.0.jar
+java      27043         jenkins  txt       REG                1,4       4587  2698194 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven2.1-interceptor-1.2.jar
+java      27043         jenkins  txt       REG                1,4      14520  2698105 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven3-interceptor-1.6.jar
+java      27043         jenkins  txt       REG                1,4       6758  2698134 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven3-interceptor-commons-1.6.jar
+java      27043         jenkins  txt       REG                1,4       7686  2698233 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven31-agent-1.6.jar
+java      27043         jenkins  txt       REG                1,4      19064  2698221 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven31-interceptor-1.6.jar
+java      27043         jenkins  txt       REG                1,4       7698  2698253 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven32-agent-1.6.jar
+java      27043         jenkins  txt       REG                1,4      19278  2698217 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven32-interceptor-1.6.jar
+java      27043         jenkins  txt       REG                1,4     291397  2698123 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/org.eclipse.sisu.inject-0.0.0.M5.jar
+java      27043         jenkins  txt       REG                1,4     196544  2698248 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/org.eclipse.sisu.plexus-0.0.0.M5.jar
+java      27043         jenkins  txt       REG                1,4      13350  2698198 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/plexus-cipher-1.7.jar
+java      27043         jenkins  txt       REG                1,4      49793  2698254 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/plexus-classworlds-2.5.1.jar
+java      27043         jenkins  txt       REG                1,4       4211  2698139 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/plexus-component-annotations-1.5.5.jar
+java      27043         jenkins  txt       REG                1,4      11791  2698144 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/plexus-interactivity-api-1.0-alpha-6.jar
+java      27043         jenkins  txt       REG                1,4      61308  2698113 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/plexus-interpolation-1.16.jar
+java      27043         jenkins  txt       REG                1,4      28555  2698155 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/plexus-sec-dispatcher-1.3.jar
+java      27043         jenkins  txt       REG                1,4     251792  2698151 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/plexus-utils-3.0.17.jar
+java      27043         jenkins  txt       REG                1,4       7629  2698222 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/SECURITY-144-compat-1.0.jar
+java      27043         jenkins  txt       REG                1,4      26083  2698148 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/slf4j-api-1.7.4.jar
+java      27043         jenkins  txt       REG                1,4      11185  2698212 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/wagon-file-2.4.jar
+java      27043         jenkins  txt       REG                1,4      16041  2698116 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/wagon-ftp-2.4.jar
+java      27043         jenkins  txt       REG                1,4      10479  2698195 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/wagon-http-2.4.jar
+java      27043         jenkins  txt       REG                1,4      26343  2698106 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/wagon-http-shared-2.4.jar
+java      27043         jenkins  txt       REG                1,4      32265  2698110 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/wagon-http-shared4-2.4.jar
+java      27043         jenkins  txt       REG                1,4      52437  2698204 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/wagon-provider-api-2.4.jar
+java      27043         jenkins  txt       REG                1,4      28972  2698238 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/wagon-ssh-2.4.jar
+java      27043         jenkins  txt       REG                1,4      25408  2698169 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/wagon-ssh-common-2.4.jar
+java      27043         jenkins  txt       REG                1,4      14868  2698240 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/wagon-ssh-external-2.4.jar
+java      27043         jenkins  txt       REG                1,4      18936  2698235 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/wagon-webdav-jackrabbit-2.4.jar
+java      27043         jenkins  txt       REG                1,4     306158  2735425 /Users/Shared/Jenkins/Home/plugins/credentials/WEB-INF/lib/classes.jar
+java      27043         jenkins  txt       REG                1,4      15322  2735383 /Users/Shared/Jenkins/Home/plugins/credentials/WEB-INF/lib/findbugs-annotations-1.3.9-1.jar
+java      27043         jenkins  txt       REG                1,4       2254  2735417 /Users/Shared/Jenkins/Home/plugins/credentials/WEB-INF/lib/jcip-annotations-1.0.jar
+java      27043         jenkins  txt       REG                1,4      33015  2735409 /Users/Shared/Jenkins/Home/plugins/credentials/WEB-INF/lib/jsr305-1.3.9.jar
+java      27043         jenkins  txt       REG                1,4      66528  2074007 /Users/Shared/Jenkins/Home/plugins/ssh-credentials/WEB-INF/lib/classes.jar
+java      27043         jenkins  txt       REG                1,4      70805  2074020 /Users/Shared/Jenkins/Home/plugins/ssh-slaves/WEB-INF/lib/ssh-slaves.jar
+java      27043         jenkins  txt       REG                1,4      49661  2073696 /Users/Shared/Jenkins/Home/plugins/external-monitor-job/WEB-INF/lib/classes.jar
+java      27043         jenkins  txt       REG                1,4      36612  2073741 /Users/Shared/Jenkins/Home/plugins/ldap/WEB-INF/lib/classes.jar
+java      27043         jenkins  txt       REG                1,4      18587  2073993 /Users/Shared/Jenkins/Home/plugins/pam-auth/WEB-INF/lib/classes.jar
+java      27043         jenkins  txt       REG                1,4    1008730  2073985 /Users/Shared/Jenkins/Home/plugins/pam-auth/WEB-INF/lib/jna-3.4.0.jar
+java      27043         jenkins  txt       REG                1,4      17228  2073990 /Users/Shared/Jenkins/Home/plugins/pam-auth/WEB-INF/lib/libpam4j-1.6.jar
+java      27043         jenkins  txt       REG                1,4      82551  2073545 /Users/Shared/Jenkins/Home/plugins/ant/WEB-INF/lib/classes.jar
+java      27043         jenkins  txt       REG                1,4     294986  2073646 /Users/Shared/Jenkins/Home/plugins/cvs/WEB-INF/lib/classes.jar
+java      27043         jenkins  txt       REG                1,4     411027  2073643 /Users/Shared/Jenkins/Home/plugins/cvs/WEB-INF/lib/cvsclient-71-jenkins-11.jar
+java      27043         jenkins  txt       REG                1,4     254408  2073645 /Users/Shared/Jenkins/Home/plugins/cvs/WEB-INF/lib/jsch-0.1.50.jar
+java      27043         jenkins  txt       REG                1,4      61829  2735245 /Users/Shared/Jenkins/Home/plugins/git-client/WEB-INF/lib/commons-logging-1.2.jar
+java      27043         jenkins  txt       REG                1,4      15322  2735239 /Users/Shared/Jenkins/Home/plugins/git-client/WEB-INF/lib/findbugs-annotations-1.3.9-1.jar
+java      27043         jenkins  txt       REG                1,4     166618  2735238 /Users/Shared/Jenkins/Home/plugins/git-client/WEB-INF/lib/git-client.jar
+java      27043         jenkins  txt       REG                1,4     719304  2735250 /Users/Shared/Jenkins/Home/plugins/git-client/WEB-INF/lib/httpclient-4.4.jar
+java      27043         jenkins  txt       REG                1,4     321639  2735251 /Users/Shared/Jenkins/Home/plugins/git-client/WEB-INF/lib/httpcore-4.4.jar
+java      27043         jenkins  txt       REG                1,4     125146  2735246 /Users/Shared/Jenkins/Home/plugins/git-client/WEB-INF/lib/JavaEWAH-0.7.9.jar
+java      27043         jenkins  txt       REG                1,4     254408  2735253 /Users/Shared/Jenkins/Home/plugins/git-client/WEB-INF/lib/jsch-0.1.50.jar
+java      27043         jenkins  txt       REG                1,4    1959346  2735252 /Users/Shared/Jenkins/Home/plugins/git-client/WEB-INF/lib/org.eclipse.jgit-3.6.2.201501210735-r.jar
+java      27043         jenkins  txt       REG                1,4      91191  2735249 /Users/Shared/Jenkins/Home/plugins/git-client/WEB-INF/lib/org.eclipse.jgit.http.server-3.6.2.201501210735-r.jar
+java      27043         jenkins  txt       REG                1,4      30717  2735272 /Users/Shared/Jenkins/Home/plugins/scm-api/WEB-INF/lib/classes.jar
+java      27043         jenkins  txt       REG                1,4      15322  2735266 /Users/Shared/Jenkins/Home/plugins/scm-api/WEB-INF/lib/findbugs-annotations-1.3.9-1.jar
+java      27043         jenkins  txt       REG                1,4       2254  2735271 /Users/Shared/Jenkins/Home/plugins/scm-api/WEB-INF/lib/jcip-annotations-1.0.jar
+java      27043         jenkins  txt       REG                1,4      33015  2735269 /Users/Shared/Jenkins/Home/plugins/scm-api/WEB-INF/lib/jsr305-1.3.9.jar
+java      27043         jenkins  txt       REG                1,4      16088  2735284 /Users/Shared/Jenkins/Home/plugins/git/WEB-INF/lib/annotation-indexer-1.4.jar
+java      27043         jenkins  txt       REG                1,4       3190  2735288 /Users/Shared/Jenkins/Home/plugins/git/WEB-INF/lib/bridge-method-annotation-1.14.jar
+java      27043         jenkins  txt       REG                1,4     263965  2735297 /Users/Shared/Jenkins/Home/plugins/git/WEB-INF/lib/commons-codec-1.9.jar
+java      27043         jenkins  txt       REG                1,4      61829  2735293 /Users/Shared/Jenkins/Home/plugins/git/WEB-INF/lib/commons-logging-1.2.jar
+java      27043         jenkins  txt       REG                1,4     355825  2735283 /Users/Shared/Jenkins/Home/plugins/git/WEB-INF/lib/git.jar
+java      27043         jenkins  txt       REG                1,4     321639  2735299 /Users/Shared/Jenkins/Home/plugins/git/WEB-INF/lib/httpcore-4.4.jar
+java      27043         jenkins  txt       REG                1,4     589289  2735301 /Users/Shared/Jenkins/Home/plugins/git/WEB-INF/lib/joda-time-2.7.jar
+java      27043         jenkins  txt       REG                1,4      16088  2735208 /Users/Shared/Jenkins/Home/plugins/github-api/WEB-INF/lib/annotation-indexer-1.4.jar
+java      27043         jenkins  txt       REG                1,4       3159  2735222 /Users/Shared/Jenkins/Home/plugins/github-api/WEB-INF/lib/bridge-method-annotation-1.12.jar
+java      27043         jenkins  txt       REG                1,4        221  2735224 /Users/Shared/Jenkins/Home/plugins/github-api/WEB-INF/lib/classes.jar
+java      27043         jenkins  txt       REG                1,4     259600  2735211 /Users/Shared/Jenkins/Home/plugins/github-api/WEB-INF/lib/commons-codec-1.7.jar
+java      27043         jenkins  txt       REG                1,4     109043  2735210 /Users/Shared/Jenkins/Home/plugins/github-api/WEB-INF/lib/commons-io-1.4.jar
+java      27043         jenkins  txt       REG                1,4     284220  2735209 /Users/Shared/Jenkins/Home/plugins/github-api/WEB-INF/lib/commons-lang-2.6.jar
+java      27043         jenkins  txt       REG                1,4     153482  2735213 /Users/Shared/Jenkins/Home/plugins/github-api/WEB-INF/lib/github-api-1.59-SNAPSHOT.jar
+java      27043         jenkins  txt       REG                1,4     154710  2735212 /Users/Shared/Jenkins/Home/plugins/github-api/WEB-INF/lib/github-api-1.59.jar
+java      27043         jenkins  txt       REG                1,4      33483  2735205 /Users/Shared/Jenkins/Home/plugins/github-api/WEB-INF/lib/jackson-annotations-2.2.3.jar
+java      27043         jenkins  txt       REG                1,4     192699  2735216 /Users/Shared/Jenkins/Home/plugins/github-api/WEB-INF/lib/jackson-core-2.2.3.jar
+java      27043         jenkins  txt       REG                1,4     865838  2735217 /Users/Shared/Jenkins/Home/plugins/github-api/WEB-INF/lib/jackson-databind-2.2.3.jar
+java      27043         jenkins  txt       REG                1,4    1581066  2735214 /Users/Shared/Jenkins/Home/plugins/github-api/WEB-INF/lib/mockito-all-1.9.5.jar
+java      27043         jenkins  txt       REG                1,4      58160  2735341 /Users/Shared/Jenkins/Home/plugins/github-oauth/WEB-INF/lib/commons-codec-1.4.jar
+java      27043         jenkins  txt       REG                1,4      60686  2735320 /Users/Shared/Jenkins/Home/plugins/github-oauth/WEB-INF/lib/commons-logging-1.1.1.jar
+java      27043         jenkins  txt       REG                1,4      15322  2735318 /Users/Shared/Jenkins/Home/plugins/github-oauth/WEB-INF/lib/findbugs-annotations-1.3.9-1.jar
+java      27043         jenkins  txt       REG                1,4      33974  2735347 /Users/Shared/Jenkins/Home/plugins/github-oauth/WEB-INF/lib/github-oauth.jar
+java      27043         jenkins  txt       REG                1,4     349959  2735338 /Users/Shared/Jenkins/Home/plugins/github-oauth/WEB-INF/lib/httpclient-4.1.jar
+java      27043         jenkins  txt       REG                1,4     181041  2735333 /Users/Shared/Jenkins/Home/plugins/github-oauth/WEB-INF/lib/httpcore-4.1.jar
+java      27043         jenkins  txt       REG                1,4      45944  2735327 /Users/Shared/Jenkins/Home/plugins/github-oauth/WEB-INF/lib/json-20090211.jar
+java      27043         jenkins  txt       REG                1,4    1419869  2735325 /Users/Shared/Jenkins/Home/plugins/github-oauth/WEB-INF/lib/mockito-all-1.8.5.jar
+java      27043         jenkins  txt       REG                1,4     164368  2074035 /Users/Shared/Jenkins/Home/plugins/subversion/WEB-INF/lib/antlr-runtime-3.4.jar
+java      27043         jenkins  txt       REG                1,4     400062  2074048 /Users/Shared/Jenkins/Home/plugins/subversion/WEB-INF/lib/classes.jar
+java      27043         jenkins  txt       REG                1,4      70637  2074040 /Users/Shared/Jenkins/Home/plugins/subversion/WEB-INF/lib/sequence-library-1.0.2.jar
+java      27043         jenkins  txt       REG                1,4     757082  2074038 /Users/Shared/Jenkins/Home/plugins/subversion/WEB-INF/lib/sqljet-1.1.7.jar
+java      27043         jenkins  txt       REG                1,4    3386734  2074036 /Users/Shared/Jenkins/Home/plugins/subversion/WEB-INF/lib/svnkit-1.7.10-jenkins-1.jar
+java      27043         jenkins  txt       REG                1,4     258310  2074041 /Users/Shared/Jenkins/Home/plugins/subversion/WEB-INF/lib/trilead-ssh2-build217-jenkins-3.jar
+java      27043         jenkins  txt       REG                1,4      42624  2074067 /Users/Shared/Jenkins/Home/plugins/translation/WEB-INF/lib/classes.jar
+java      27043         jenkins  txt       REG                1,4    3181856  8400097 /System/Library/Fonts/LucidaGrande.ttc
+java      27043         jenkins  txt       REG                1,4     639664 23915847 /usr/lib/dyld
+java      27043         jenkins  txt       REG                1,4  558337982 25465811 /private/var/db/dyld/dyld_shared_cache_x86_64h
+java      27043         jenkins    0r      CHR                3,2        0t0      302 /dev/null
+java      27043         jenkins    1u      REG                1,4       5447 25769428 /private/var/log/jenkins/jenkins.log
+java      27043         jenkins    2u      REG                1,4       5447 25769428 /private/var/log/jenkins/jenkins.log
+java      27043         jenkins    3r      REG                1,4   66118059  1921179 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/rt.jar
+java      27043         jenkins    4u   KQUEUE                                        count=2, state=0x12
+java      27043         jenkins    5r      REG                1,4      12849  8480290 /System/Library/Java/Extensions/MRJToolkit.jar
+java      27043         jenkins    6r      REG                1,4   67619385  2072206 /Applications/Jenkins/jenkins.war
+java      27043         jenkins    7r      REG                1,4     622403  1921109 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/jsse.jar
+java      27043         jenkins    8r      CHR               11,0        0t8      575 /dev/random
+java      27043         jenkins    9r      CHR               11,1     0t4756      576 /dev/urandom
+java      27043         jenkins   10r      CHR               11,0        0t0      575 /dev/random
+java      27043         jenkins   11r      CHR               11,0        0t0      575 /dev/random
+java      27043         jenkins   12r      CHR               11,1        0t0      576 /dev/urandom
+java      27043         jenkins   13r      CHR               11,1        0t0      576 /dev/urandom
+java      27043         jenkins   14r      REG                1,4     113593  1921100 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/jce.jar
+java      27043         jenkins   15r      REG                1,4    1761676 25769432 /Users/Shared/Jenkins/tmp/winstone1229723184743590496.jar
+java      27043         jenkins   16r      REG                1,4    3860522  1921064 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/ext/cldrdata.jar
+java      27043         jenkins   17r      REG                1,4    1179653  1921067 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/ext/localedata.jar
+java      27043         jenkins   18r      REG                1,4   18182471  1921805 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/lib/tools.jar
+java      27043         jenkins   19r      REG                1,4       6928  2073019 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/access-modifier-annotation-1.4.jar
+java      27043         jenkins   20r      REG                1,4     548722  2072948 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/acegi-security-1.0.7.jar
+java      27043         jenkins   21r      REG                1,4      70869  2072966 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/activation-1.1.1-hudson-1.jar
+java      27043         jenkins   22r      REG                1,4      19294  2073016 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/akuma-1.9.jar
+java      27043         jenkins   23r      REG                1,4      15622  2072958 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/annotation-indexer-1.7.jar
+java      27043         jenkins   24r      REG                1,4    1941731  2073034 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/ant-1.8.4.jar
+java      27043         jenkins   25r      REG                1,4      18429  2072985 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/ant-launcher-1.8.4.jar
+java      27043         jenkins   26r      REG                1,4     443432  2073060 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/antlr-2.7.6.jar
+java      27043         jenkins   27r      REG                1,4       4467  2073059 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/aopalliance-1.0.jar
+java      27043         jenkins   28r      REG                1,4      66630  2073064 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/args4j-2.0.23.jar
+java      27043         jenkins   29r      REG                1,4      46022  2072947 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/asm-4.0.jar
+java      27043         jenkins   30r      REG                1,4      19614  2073049 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/asm-analysis-4.0.jar
+java      27043         jenkins   31r      REG                1,4      37776  2073047 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/asm-commons-4.0.jar
+java      27043         jenkins   32r      REG                1,4      21982  2072970 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/asm-tree-4.0.jar
+java      27043         jenkins   33r      REG                1,4      36995  2073042 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/asm-util-4.0.jar
+java      27043         jenkins   34r      REG                1,4     379343  2072957 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/asm5-5.0.1.jar
+java      27043         jenkins   35r      REG                1,4     515071  2072953 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/bcpkix-jdk15on-1.47.jar
+java      27043         jenkins   36r      REG                1,4    1997327  2072942 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/bcprov-jdk15on-1.47.jar
+java      27043         jenkins   37r      REG                1,4       3161  2072956 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/bridge-method-annotation-1.13.jar
+java      27043         jenkins   38r      REG                1,4      25897  2072950 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/bytecode-compatibility-transformer-1.5.jar
+java      27043         jenkins   39r      REG                1,4      38546  2072986 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/cli-1.598.jar
+java      27043         jenkins   40r      REG                1,4     232019  2073013 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/commons-beanutils-1.8.3.jar
+java      27043         jenkins   41r      REG                1,4     263865  2072972 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/commons-codec-1.8.jar
+java      27043         jenkins   42r      REG                1,4     575389  2072962 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/commons-collections-3.2.1.jar
+java      27043         jenkins   43r      REG                1,4     196768  2073006 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/commons-digester-2.1.jar
+java      27043         jenkins   44r      REG                1,4      76685  2072944 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/commons-discovery-0.4.jar
+java      27043         jenkins   45r      REG                1,4      68772  2072952 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/commons-fileupload-1.3.1-jenkins-1.jar
+java      27043         jenkins   46r      REG                1,4     305001  2073061 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/commons-httpclient-3.1.jar
+java      27043         jenkins   47r      REG                1,4     185140  2073052 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/commons-io-2.4.jar
+java      27043         jenkins   48r      REG                1,4     170642  2072959 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/commons-jelly-1.1-jenkins-20120928.jar
+java      27043         jenkins   49r      REG                1,4      22732  2072984 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/commons-jelly-tags-define-1.0.1-hudson-20071021.jar
+java      27043         jenkins   50r      REG                1,4      22479  2073041 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/commons-jelly-tags-fmt-1.0.jar
+java      27043         jenkins   51r      REG                1,4      37430  2072978 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/commons-jelly-tags-xml-1.1.jar
+java      27043         jenkins   52r      REG                1,4     140940  2072983 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/commons-jexl-1.1-jenkins-20111212.jar
+java      27043         jenkins   53r      REG                1,4     284220  2073040 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/commons-lang-2.6.jar
+java      27043         jenkins   54r      REG                1,4      62050  2073048 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/commons-logging-1.1.3.jar
+java      27043         jenkins   55r      REG                1,4      14986  2073018 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/constant-pool-scanner-1.2.jar
+java      27043         jenkins   56r      REG                1,4       4810  2073002 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/crypto-util-1.1.jar
+java      27043         jenkins   57r      REG                1,4     254359  2073039 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/dom4j-1.6.1-jenkins-4.jar
+java      27043         jenkins   58r      REG                1,4       5298  2073056 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/embedded_su4j-1.1.jar
+java      27043         jenkins   59r      REG                1,4      86487  2073045 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/ezmorph-1.0.6.jar
+java      27043         jenkins   60r      REG                1,4    6222383  2073051 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/groovy-all-1.8.9.jar
+java      27043         jenkins   61r      REG                1,4    1649781  2072994 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/guava-11.0.1.jar
+java      27043         jenkins   62r      REG                1,4     642741  2072968 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/guice-4.0-beta5.jar
+java      27043         jenkins   63r      REG                1,4      45024  2072963 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/hamcrest-core-1.3.jar
+java      27043         jenkins   64r      REG                1,4      17567  2072992 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/icon-set-1.0.5.jar
+java      27043         jenkins   65r      REG                1,4       7397  2072967 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/instance-identity-1.4.jar
+java      27043         jenkins   66r      REG                1,4     385815  2072961 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/j-interop-2.0.6-kohsuke-1.jar
+java      27043         jenkins   67r      REG                1,4     117686  2073036 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/j-interopdeps-2.0.6-kohsuke-1.jar
+java      27043         jenkins   68r      REG                1,4     113796  2073050 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jansi-1.9.jar
+java      27043         jenkins   69r      REG                1,4      26366  2072977 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/javax.annotation-api-1.2.jar
+java      27043         jenkins   70r      REG                1,4       2497  2073043 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/javax.inject-1.jar
+java      27043         jenkins   71r      REG                1,4     238637  2073015 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jaxen-1.1-beta-11.jar
+java      27043         jenkins   72r      REG                1,4      17750  2073031 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jbcrypt-0.3m.jar
+java      27043         jenkins   73r      REG                1,4     398132  2072995 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jcifs-1.3.17-kohsuke-1.jar
+java      27043         jenkins   74r      REG                1,4     309245  2073032 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jcommon-1.0.12.jar
+java      27043         jenkins   75r      REG                1,4    9403391  2073001 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jenkins-core-1.598.jar
+java      27043         jenkins   76r      REG                1,4     439751  2072982 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/remoting-2.49.jar
+java      27043         jenkins   77r      REG                1,4      10238  2072975 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/version-number-1.1.jar
+java      27043         jenkins   78r      REG                1,4     123170  2073065 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jtidy-4aug2000r7-dev-hudson-1.jar
+java      27043         jenkins   79r      REG                1,4      91455  2072964 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jna-posix-1.0.3-jenkins-1.jar
+java      27043         jenkins   80r      REG                1,4     156638  2072997 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jnr-posix-3.0.1.jar
+java      27043         jenkins   81r      REG                1,4     645516  2073029 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jnr-ffi-1.0.7.jar
+java      27043         jenkins   82r      REG                1,4     145708  2072990 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jffi-1.2.7.jar
+java      27043         jenkins   83r      REG                1,4     385729  2073028 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jffi-1.2.7-native.jar
+java      27043         jenkins   84r      REG                1,4     219943  2073009 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jnr-x86asm-1.0.2.jar
+java      27043         jenkins   85r      REG                1,4     312931  2073012 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jnr-constants-0.8.5.jar
+java      27043         jenkins   86r      REG                1,4       7946  2073054 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/trilead-putty-extension-1.2.jar
+java      27043         jenkins   87r      REG                1,4     262523  2072945 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/trilead-ssh2-build217-jenkins-8.jar
+java      27043         jenkins   88r      REG                1,4      32560  2073008 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/stapler-groovy-1.234.jar
+java      27043         jenkins   89r      REG                1,4      86115  2073000 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/stapler-jelly-1.234.jar
+java      27043         jenkins   90r      REG                1,4       6279  2072965 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/stapler-jrebel-1.234.jar
+java      27043         jenkins   91r      REG                1,4     343396  2072980 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/stapler-1.234.jar
+java      27043         jenkins   92r      REG                1,4      17522  2073005 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/tiger-types-1.3.jar
+java      27043         jenkins   93r      REG                1,4       4290  2073057 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/windows-package-checker-1.0.jar
+java      27043         jenkins   94r      REG                1,4      19162  2073038 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/stapler-adjunct-zeroclipboard-1.3.5-1.jar
+java      27043         jenkins   95r      REG                1,4     165394  2073017 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/stapler-adjunct-timeline-1.4.jar
+java      27043         jenkins   96r      REG                1,4     275643  2073063 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/stapler-adjunct-codemirror-1.3.jar
+java      27043         jenkins   97r      REG                1,4     141207  2072971 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/json-lib-2.4-jenkins-2.jar
+java      27043         jenkins   98r      REG                1,4      19852  2072969 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/task-reactor-1.4.jar
+java      27043         jenkins   99r      REG                1,4       6676  2072999 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/localizer-1.10.jar
+java      27043         jenkins  100r      REG                1,4     533110  2072998 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/xstream-1.4.7-jenkins-1.jar
+java      27043         jenkins  101r      REG                1,4    1291498  2073021 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jfreechart-1.0.9.jar
+java      27043         jenkins  102r      REG                1,4     494924  2072951 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/mail-1.4.4.jar
+java      27043         jenkins  103r      REG                1,4     187036  2072946 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/spring-jdbc-1.2.9.jar
+java      27043         jenkins  104r      REG                1,4      95425  2073046 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/spring-dao-1.2.9.jar
+java      27043         jenkins  105r      REG                1,4      65261  2073062 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/oro-2.0.8.jar
+java      27043         jenkins  106r      REG                1,4     352291  2072949 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/log4j-1.2.9.jar
+java      27043         jenkins  107r      REG                1,4      87325  2073003 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jline-0.9.94.jar
+java      27043         jenkins  108r      REG                1,4     402348  2072960 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/spring-webmvc-2.5.6.SEC03.jar
+java      27043         jenkins  109r      REG                1,4     488162  2072987 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/spring-beans-2.5.6.SEC03.jar
+java      27043         jenkins  110r      REG                1,4     476894  2073053 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/spring-context-2.5.6.SEC03.jar
+java      27043         jenkins  111r      REG                1,4      96868  2073027 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/spring-context-support-2.5.6.SEC03.jar
+java      27043         jenkins  112r      REG                1,4     194726  2073030 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/spring-web-2.5.6.SEC03.jar
+java      27043         jenkins  113r      REG                1,4     285605  2072996 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/spring-core-2.5.6.SEC03.jar
+java      27043         jenkins  114r      REG                1,4     325756  2072981 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/spring-aop-2.5.6.SEC03.jar
+java      27043         jenkins  115r      REG                1,4     120069  2073055 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/xpp3-1.1.4c.jar
+java      27043         jenkins  116r      REG                1,4      16923  2073014 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jstl-1.1.0.jar
+java      27043         jenkins  117r      REG                1,4      66688  2073024 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/txw2-20110809.jar
+java      27043         jenkins  118r      REG                1,4      23346  2073037 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/stax-api-1.0-2.jar
+java      27043         jenkins  119r      REG                1,4      19255  2072988 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/relaxngDatatype-20020414.jar
+java      27043         jenkins  120r      REG                1,4      21265  2072993 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/winp-1.22.jar
+java      27043         jenkins  121r      REG                1,4      17292  2073020 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/memory-monitor-1.9.jar
+java      27043         jenkins  122r      REG                1,4     524224  2073022 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/wstx-asl-3.2.9.jar
+java      27043         jenkins  123r      REG                1,4      26514  2072976 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/stax-api-1.0.1.jar
+java      27043         jenkins  124r      REG                1,4     390437  2072991 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jmdns-3.4.0-jenkins-3.jar
+java      27043         jenkins  125r      REG                1,4     914597  2072979 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jna-4.1.0.jar
+java      27043         jenkins  126r      REG                1,4      19925  2073026 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/libpam4j-1.8.jar
+java      27043         jenkins  127r      REG                1,4      62889  2073066 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/libzfs-0.5.jar
+java      27043         jenkins  128r      REG                1,4      29030  2072954 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/sezpoz-1.9.jar
+java      27043         jenkins  129r      REG                1,4       4414  2072974 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/robust-http-client-1.2.jar
+java      27043         jenkins  130r      REG                1,4      33015  2072989 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jsr305-1.3.9.jar
+java      27043         jenkins  131r      REG                1,4      71852  2073011 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/jzlib-1.1.3-kohsuke-1.jar
+java      27043         jenkins  132r      REG                1,4     245039  2073044 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/junit-4.11.jar
+java      27043         jenkins  133r      REG                1,4      22663  2073007 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/launchd-slave-installer-1.2.jar
+java      27043         jenkins  134r      REG                1,4     646035  2073033 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/mina-core-2.0.5.jar
+java      27043         jenkins  135r      REG                1,4      26636  2072943 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/slave-installer-1.5.jar
+java      27043         jenkins  136r      REG                1,4      29257  2073035 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/slf4j-api-1.7.7.jar
+java      27043         jenkins  137r      REG                1,4       7901  2073023 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/slf4j-jdk14-1.7.7.jar
+java      27043         jenkins  138r      REG                1,4      10063  2073004 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/ssh-cli-auth-1.2.jar
+java      27043         jenkins  139r      REG                1,4      23410  2073010 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/sshd-1.6.jar
+java      27043         jenkins  140r      REG                1,4     376097  2072973 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/sshd-core-0.8.0.jar
+java      27043         jenkins  141r      REG                1,4      11541  2073058 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/systemd-slave-installer-1.1.jar
+java      27043         jenkins  142r      REG                1,4      10798  2073025 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/upstart-slave-installer-1.1.jar
+java      27043         jenkins  143r      REG                1,4      44776  2072955 /Users/Shared/Jenkins/Home/war/WEB-INF/lib/windows-slave-installer-1.4.jar
+java      27043         jenkins  144r      REG                1,4      39773  1921070 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/ext/sunec.jar
+java      27043         jenkins  145r      REG                1,4     278033  1921071 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/ext/sunjce_provider.jar
+java      27043         jenkins  146r      REG                1,4     344908  1921082 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/fonts/LucidaBrightRegular.ttf
+java      27043         jenkins  147u     unix 0xdd418e8923c22493        0t0          ->(none)
+java      27043         jenkins  148r      REG                1,4     317896  1921083 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/fonts/LucidaSansDemiBold.ttf
+java      27043         jenkins  149r      REG                1,4     234068  1921085 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/fonts/LucidaTypewriterBold.ttf
+java      27043         jenkins  150r      REG                1,4      75124  1921080 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/fonts/LucidaBrightDemiItalic.ttf
+java      27043         jenkins  151r      REG                1,4     242700  1921086 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/fonts/LucidaTypewriterRegular.ttf
+java      27043         jenkins  152r      REG                1,4      80856  1921081 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/fonts/LucidaBrightItalic.ttf
+java      27043         jenkins  153r      REG                1,4      75144  1921079 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/fonts/LucidaBrightDemiBold.ttf
+java      27043         jenkins  154r      REG                1,4     698236  1921084 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/fonts/LucidaSansRegular.ttf
+java      27043         jenkins  155u     IPv6 0xdd418e892c86e5b3        0t0      TCP *:websm (LISTEN)
+java      27043         jenkins  156u     unix 0xdd418e892d1119a3        0t0          ->(none)
+java      27043         jenkins  157      PIPE 0xdd418e891f046bb3      16384          ->0xdd418e892d0e6e73
+java      27043         jenkins  158      PIPE 0xdd418e892d0e6e73      16384          ->0xdd418e891f046bb3
+java      27043         jenkins  159u   KQUEUE                                        count=0, state=0xa
+java      27043         jenkins  160r      REG                1,4     403839  2698090 /Users/Shared/Jenkins/Home/plugins/junit/WEB-INF/lib/junit.jar
+java      27043         jenkins  161r      REG                1,4   10805330  2072929 /Users/Shared/Jenkins/Home/war/WEB-INF/plugins/maven-plugin.hpi
+java      27043         jenkins  162r      REG                1,4     260543  2735451 /Users/Shared/Jenkins/Home/plugins/matrix-project/WEB-INF/lib/matrix-project.jar
+java      27043         jenkins  163r      REG                1,4      34685  2073565 /Users/Shared/Jenkins/Home/plugins/antisamy-markup-formatter/WEB-INF/lib/antisamy-markup-formatter.jar
+java      27043         jenkins  164r      REG                1,4      89974  2073572 /Users/Shared/Jenkins/Home/plugins/antisamy-markup-formatter/WEB-INF/lib/owasp-html-sanitizer-r88.jar
+java      27043         jenkins  165r      REG                1,4     406478  2072931 /Users/Shared/Jenkins/Home/war/WEB-INF/plugins/credentials.hpi
+java      27043         jenkins  166r      REG                1,4     385815  2074081 /Users/Shared/Jenkins/Home/plugins/windows-slaves/WEB-INF/lib/j-interop-2.0.6-kohsuke-1.jar
+java      27043         jenkins  167r      REG                1,4     117686  2074085 /Users/Shared/Jenkins/Home/plugins/windows-slaves/WEB-INF/lib/j-interopdeps-2.0.6-kohsuke-1.jar
+java      27043         jenkins  168r      REG                1,4     398132  2074086 /Users/Shared/Jenkins/Home/plugins/windows-slaves/WEB-INF/lib/jcifs-1.3.17-kohsuke-1.jar
+java      27043         jenkins  169r      REG                1,4     331127  2072927 /Users/Shared/Jenkins/Home/war/WEB-INF/plugins/junit.hpi
+java      27043         jenkins  170r      REG                1,4       7579  2074084 /Users/Shared/Jenkins/Home/plugins/windows-slaves/WEB-INF/lib/jinterop-proxy-1.1.jar
+java      27043         jenkins  171r      REG                1,4       8674  2074088 /Users/Shared/Jenkins/Home/plugins/windows-slaves/WEB-INF/lib/jinterop-wmi-1.1.jar
+java      27043         jenkins  172r      REG                1,4      17351  2074079 /Users/Shared/Jenkins/Home/plugins/windows-slaves/WEB-INF/lib/tiger-types-1.1.jar
+java      27043         jenkins  173r      REG                1,4     237973  2072928 /Users/Shared/Jenkins/Home/war/WEB-INF/plugins/matrix-project.hpi
+java      27043         jenkins  174r      REG                1,4      17893  2074087 /Users/Shared/Jenkins/Home/plugins/windows-slaves/WEB-INF/lib/windows-remote-command-1.4.jar
+java      27043         jenkins  175r      REG                1,4      73420  2074080 /Users/Shared/Jenkins/Home/plugins/windows-slaves/WEB-INF/lib/windows-slaves.jar
+java      27043         jenkins  176r      REG                1,4      72407  2073769 /Users/Shared/Jenkins/Home/plugins/matrix-auth/WEB-INF/lib/classes.jar
+java      27043         jenkins  177r      REG                1,4     119142  2073755 /Users/Shared/Jenkins/Home/plugins/mailer/WEB-INF/lib/classes.jar
+java      27043         jenkins  178r      REG                1,4      36353  2698077 /Users/Shared/Jenkins/Home/plugins/javadoc/WEB-INF/lib/javadoc.jar
+java      27043         jenkins  179r      REG                1,4     134900  2698130 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/aether-api-0.9.0.M3.jar
+java      27043         jenkins  180r      REG                1,4      34117  2698197 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/aether-connector-wagon-0.9.0.M2.jar
+java      27043         jenkins  181r      REG                1,4      38073  2072919 /Users/Shared/Jenkins/Home/war/WEB-INF/plugins/javadoc.hpi
+java      27043         jenkins  182r      REG                1,4     163864  2698211 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/aether-impl-0.9.0.M3.jar
+java      27043         jenkins  183r      REG                1,4      30624  2698200 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/aether-spi-0.9.0.M3.jar
+java      27043         jenkins  184r      REG                1,4      25245  2698193 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/aether-transport-wagon-0.9.0.M3.jar
+java      27043         jenkins  185r      REG                1,4     142136  2698170 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/aether-util-0.9.0.M3.jar
+java      27043         jenkins  186r      REG                1,4    2000557  2698216 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/ant-1.9.2.jar
+java      27043         jenkins  187r      REG                1,4      18333  2698117 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/ant-launcher-1.9.2.jar
+java      27043         jenkins  188r      REG                1,4       4467  2698143 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/aopalliance-1.0.jar
+java      27043         jenkins  189r      REG                1,4      44908  2698256 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/cdi-api-1.0.jar
+java      27043         jenkins  190r      REG                1,4     694992  2698261 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/classes.jar
+java      27043         jenkins  191r      REG                1,4      41123  2698145 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/commons-cli-1.2.jar
+java      27043         jenkins  192r      REG                1,4     232771  2698122 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/commons-codec-1.6.jar
+java      27043         jenkins  193r      REG                1,4     305001  2698108 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/commons-httpclient-3.1.jar
+java      27043         jenkins  194r      REG                1,4     173587  2698201 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/commons-io-2.2.jar
+java      27043         jenkins  195r      REG                1,4     284220  2698107 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/commons-lang-2.6.jar
+java      27043         jenkins  196r      REG                1,4      60686  2698180 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/commons-logging-1.1.1.jar
+java      27043         jenkins  197r      REG                1,4     273370  2698231 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/commons-net-3.1.jar
+java      27043         jenkins  198r      REG                1,4      10073  2698207 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/doxia-sink-api-1.0.jar
+java      27043         jenkins  199r      REG                1,4    1649781  2698258 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/guava-11.0.1.jar
+java      27043         jenkins  200r      REG                1,4    1238788  2698175 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/guice-4.0-beta.jar
+java      27043         jenkins  201r      REG                1,4     433368  2698138 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/httpclient-4.2.5.jar
+java      27043         jenkins  202r      REG                1,4     227275  2698234 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/httpcore-4.2.4.jar
+java      27043         jenkins  203r      REG                1,4     326020  2698251 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/jackrabbit-webdav-2.5.2.jar
+java      27043         jenkins  204r      REG                1,4       2497  2698181 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/javax.inject-1.jar
+java      27043         jenkins  205r      REG                1,4     213781  2698147 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/jsch-0.1.44-1.jar
+java      27043         jenkins  206r      REG                1,4     278273  2698149 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/jsoup-1.7.1.jar
+java      27043         jenkins  207r      REG                1,4       5848  2698183 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/jsr250-api-1.0.jar
+java      27043         jenkins  208r      REG                1,4      33015  2698140 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/jsr305-1.3.9.jar
+java      27043         jenkins  209r      REG                1,4      14567  2698224 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/lib-jenkins-maven-artifact-manager-1.2.jar
+java      27043         jenkins  210r      REG                1,4      23668  2698230 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/lib-jenkins-maven-embedder-3.11.jar
+java      27043         jenkins  211r      REG                1,4      60050  2698101 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven-aether-provider-3.1.0.jar
+java      27043         jenkins  212r      REG                1,4       9245  2698177 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven-agent-1.6.jar
+java      27043         jenkins  213r      REG                1,4      52173  2698160 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven-artifact-3.1.0.jar
+java      27043         jenkins  214r      REG                1,4     283801  2698239 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven-compat-3.1.0.jar
+java      27043         jenkins  215r      REG                1,4     562575  2698196 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven-core-3.1.0.jar
+java      27043         jenkins  216r      REG                1,4      56907  2698252 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven-embedder-3.1.0.jar
+java      27043         jenkins  217r      REG                1,4      22292  2698131 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven-interceptor-1.6.jar
+java      27043         jenkins  218r      REG                1,4     163733  2698161 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven-model-3.1.0.jar
+java      27043         jenkins  219r      REG                1,4     159442  2698225 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven-model-builder-3.1.0.jar
+java      27043         jenkins  220r      REG                1,4      49820  2698137 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven-plugin-api-3.1.0.jar
+java      27043         jenkins  221r      REG                1,4      10940  2698150 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven-reporting-api-3.0.jar
+java      27043         jenkins  222r      REG                1,4      30094  2698186 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven-repository-metadata-3.1.0.jar
+java      27043         jenkins  223r      REG                1,4      46708  2698125 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven-settings-3.1.0.jar
+java      27043         jenkins  224r      REG                1,4      41427  2698243 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven-settings-builder-3.1.0.jar
+java      27043         jenkins  225r      REG                1,4       4587  2698194 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven2.1-interceptor-1.2.jar
+java      27043         jenkins  226r      REG                1,4       7749  2698164 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven3-agent-1.6.jar
+java      27043         jenkins  227r      REG                1,4      14520  2698105 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven3-interceptor-1.6.jar
+java      27043         jenkins  228r      REG                1,4       6758  2698134 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven3-interceptor-commons-1.6.jar
+java      27043         jenkins  229r      REG                1,4       7686  2698233 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven31-agent-1.6.jar
+java      27043         jenkins  230r      REG                1,4      19064  2698221 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven31-interceptor-1.6.jar
+java      27043         jenkins  231r      REG                1,4       7698  2698253 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven32-agent-1.6.jar
+java      27043         jenkins  232r      REG                1,4      19278  2698217 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/maven32-interceptor-1.6.jar
+java      27043         jenkins  233r      REG                1,4     291397  2698123 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/org.eclipse.sisu.inject-0.0.0.M5.jar
+java      27043         jenkins  234r      REG                1,4     196544  2698248 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/org.eclipse.sisu.plexus-0.0.0.M5.jar
+java      27043         jenkins  235r      REG                1,4      13350  2698198 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/plexus-cipher-1.7.jar
+java      27043         jenkins  236r      REG                1,4      49793  2698254 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/plexus-classworlds-2.5.1.jar
+java      27043         jenkins  237r      REG                1,4       4211  2698139 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/plexus-component-annotations-1.5.5.jar
+java      27043         jenkins  238r      REG                1,4      11791  2698144 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/plexus-interactivity-api-1.0-alpha-6.jar
+java      27043         jenkins  239r      REG                1,4      61308  2698113 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/plexus-interpolation-1.16.jar
+java      27043         jenkins  240r      REG                1,4      28555  2698155 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/plexus-sec-dispatcher-1.3.jar
+java      27043         jenkins  241r      REG                1,4     251792  2698151 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/plexus-utils-3.0.17.jar
+java      27043         jenkins  242r      REG                1,4       7629  2698222 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/SECURITY-144-compat-1.0.jar
+java      27043         jenkins  243r      REG                1,4      26083  2698148 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/slf4j-api-1.7.4.jar
+java      27043         jenkins  244r      REG                1,4      11185  2698212 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/wagon-file-2.4.jar
+java      27043         jenkins  245r      REG                1,4      16041  2698116 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/wagon-ftp-2.4.jar
+java      27043         jenkins  246r      REG                1,4      10479  2698195 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/wagon-http-2.4.jar
+java      27043         jenkins  247r      REG                1,4      26343  2698106 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/wagon-http-shared-2.4.jar
+java      27043         jenkins  248r      REG                1,4      32265  2698110 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/wagon-http-shared4-2.4.jar
+java      27043         jenkins  249r      REG                1,4      52437  2698204 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/wagon-provider-api-2.4.jar
+java      27043         jenkins  250r      REG                1,4      28972  2698238 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/wagon-ssh-2.4.jar
+java      27043         jenkins  251r      REG                1,4      25408  2698169 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/wagon-ssh-common-2.4.jar
+java      27043         jenkins  252r      REG                1,4      14868  2698240 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/wagon-ssh-external-2.4.jar
+java      27043         jenkins  253r      REG                1,4      18936  2698235 /Users/Shared/Jenkins/Home/plugins/maven-plugin/WEB-INF/lib/wagon-webdav-jackrabbit-2.4.jar
+java      27043         jenkins  254r      REG                1,4     306158  2735425 /Users/Shared/Jenkins/Home/plugins/credentials/WEB-INF/lib/classes.jar
+java      27043         jenkins  255r      REG                1,4      15322  2735383 /Users/Shared/Jenkins/Home/plugins/credentials/WEB-INF/lib/findbugs-annotations-1.3.9-1.jar
+java      27043         jenkins  256r      REG                1,4       2254  2735417 /Users/Shared/Jenkins/Home/plugins/credentials/WEB-INF/lib/jcip-annotations-1.0.jar
+java      27043         jenkins  257r      REG                1,4      33015  2735409 /Users/Shared/Jenkins/Home/plugins/credentials/WEB-INF/lib/jsr305-1.3.9.jar
+java      27043         jenkins  258r      REG                1,4      66528  2074007 /Users/Shared/Jenkins/Home/plugins/ssh-credentials/WEB-INF/lib/classes.jar
+java      27043         jenkins  259r      REG                1,4      70805  2074020 /Users/Shared/Jenkins/Home/plugins/ssh-slaves/WEB-INF/lib/ssh-slaves.jar
+java      27043         jenkins  260r      REG                1,4      49661  2073696 /Users/Shared/Jenkins/Home/plugins/external-monitor-job/WEB-INF/lib/classes.jar
+java      27043         jenkins  261r      REG                1,4      36612  2073741 /Users/Shared/Jenkins/Home/plugins/ldap/WEB-INF/lib/classes.jar
+java      27043         jenkins  262r      REG                1,4      18587  2073993 /Users/Shared/Jenkins/Home/plugins/pam-auth/WEB-INF/lib/classes.jar
+java      27043         jenkins  263r      REG                1,4    1008730  2073985 /Users/Shared/Jenkins/Home/plugins/pam-auth/WEB-INF/lib/jna-3.4.0.jar
+java      27043         jenkins  264r      REG                1,4      17228  2073990 /Users/Shared/Jenkins/Home/plugins/pam-auth/WEB-INF/lib/libpam4j-1.6.jar
+java      27043         jenkins  265r      REG                1,4      82551  2073545 /Users/Shared/Jenkins/Home/plugins/ant/WEB-INF/lib/classes.jar
+java      27043         jenkins  266r      REG                1,4     294986  2073646 /Users/Shared/Jenkins/Home/plugins/cvs/WEB-INF/lib/classes.jar
+java      27043         jenkins  267r      REG                1,4     411027  2073643 /Users/Shared/Jenkins/Home/plugins/cvs/WEB-INF/lib/cvsclient-71-jenkins-11.jar
+java      27043         jenkins  268r      REG                1,4     254408  2073645 /Users/Shared/Jenkins/Home/plugins/cvs/WEB-INF/lib/jsch-0.1.50.jar
+java      27043         jenkins  269r      REG                1,4      61829  2735245 /Users/Shared/Jenkins/Home/plugins/git-client/WEB-INF/lib/commons-logging-1.2.jar
+java      27043         jenkins  270r      REG                1,4      15322  2735239 /Users/Shared/Jenkins/Home/plugins/git-client/WEB-INF/lib/findbugs-annotations-1.3.9-1.jar
+java      27043         jenkins  271r      REG                1,4     166618  2735238 /Users/Shared/Jenkins/Home/plugins/git-client/WEB-INF/lib/git-client.jar
+java      27043         jenkins  272r      REG                1,4     719304  2735250 /Users/Shared/Jenkins/Home/plugins/git-client/WEB-INF/lib/httpclient-4.4.jar
+java      27043         jenkins  273r      REG                1,4     321639  2735251 /Users/Shared/Jenkins/Home/plugins/git-client/WEB-INF/lib/httpcore-4.4.jar
+java      27043         jenkins  274r      REG                1,4     125146  2735246 /Users/Shared/Jenkins/Home/plugins/git-client/WEB-INF/lib/JavaEWAH-0.7.9.jar
+java      27043         jenkins  275r      REG                1,4     254408  2735253 /Users/Shared/Jenkins/Home/plugins/git-client/WEB-INF/lib/jsch-0.1.50.jar
+java      27043         jenkins  276r      REG                1,4    1959346  2735252 /Users/Shared/Jenkins/Home/plugins/git-client/WEB-INF/lib/org.eclipse.jgit-3.6.2.201501210735-r.jar
+java      27043         jenkins  277r      REG                1,4      91191  2735249 /Users/Shared/Jenkins/Home/plugins/git-client/WEB-INF/lib/org.eclipse.jgit.http.server-3.6.2.201501210735-r.jar
+java      27043         jenkins  278r      REG                1,4      30717  2735272 /Users/Shared/Jenkins/Home/plugins/scm-api/WEB-INF/lib/classes.jar
+java      27043         jenkins  279r      REG                1,4      15322  2735266 /Users/Shared/Jenkins/Home/plugins/scm-api/WEB-INF/lib/findbugs-annotations-1.3.9-1.jar
+java      27043         jenkins  280r      REG                1,4       2254  2735271 /Users/Shared/Jenkins/Home/plugins/scm-api/WEB-INF/lib/jcip-annotations-1.0.jar
+java      27043         jenkins  281r      REG                1,4      33015  2735269 /Users/Shared/Jenkins/Home/plugins/scm-api/WEB-INF/lib/jsr305-1.3.9.jar
+java      27043         jenkins  282r      REG                1,4      16088  2735284 /Users/Shared/Jenkins/Home/plugins/git/WEB-INF/lib/annotation-indexer-1.4.jar
+java      27043         jenkins  283r      REG                1,4       3190  2735288 /Users/Shared/Jenkins/Home/plugins/git/WEB-INF/lib/bridge-method-annotation-1.14.jar
+java      27043         jenkins  284r      REG                1,4     263965  2735297 /Users/Shared/Jenkins/Home/plugins/git/WEB-INF/lib/commons-codec-1.9.jar
+java      27043         jenkins  285r      REG                1,4      61829  2735293 /Users/Shared/Jenkins/Home/plugins/git/WEB-INF/lib/commons-logging-1.2.jar
+java      27043         jenkins  286r      REG                1,4     355825  2735283 /Users/Shared/Jenkins/Home/plugins/git/WEB-INF/lib/git.jar
+java      27043         jenkins  287r      REG                1,4     321639  2735299 /Users/Shared/Jenkins/Home/plugins/git/WEB-INF/lib/httpcore-4.4.jar
+java      27043         jenkins  288r      REG                1,4     589289  2735301 /Users/Shared/Jenkins/Home/plugins/git/WEB-INF/lib/joda-time-2.7.jar
+java      27043         jenkins  289r      REG                1,4      16088  2735208 /Users/Shared/Jenkins/Home/plugins/github-api/WEB-INF/lib/annotation-indexer-1.4.jar
+java      27043         jenkins  290r      REG                1,4       3159  2735222 /Users/Shared/Jenkins/Home/plugins/github-api/WEB-INF/lib/bridge-method-annotation-1.12.jar
+java      27043         jenkins  291r      REG                1,4        221  2735224 /Users/Shared/Jenkins/Home/plugins/github-api/WEB-INF/lib/classes.jar
+java      27043         jenkins  292r      REG                1,4     259600  2735211 /Users/Shared/Jenkins/Home/plugins/github-api/WEB-INF/lib/commons-codec-1.7.jar
+java      27043         jenkins  293r      REG                1,4     109043  2735210 /Users/Shared/Jenkins/Home/plugins/github-api/WEB-INF/lib/commons-io-1.4.jar
+java      27043         jenkins  294r      REG                1,4     284220  2735209 /Users/Shared/Jenkins/Home/plugins/github-api/WEB-INF/lib/commons-lang-2.6.jar
+java      27043         jenkins  295r      REG                1,4     153482  2735213 /Users/Shared/Jenkins/Home/plugins/github-api/WEB-INF/lib/github-api-1.59-SNAPSHOT.jar
+java      27043         jenkins  296r      REG                1,4     154710  2735212 /Users/Shared/Jenkins/Home/plugins/github-api/WEB-INF/lib/github-api-1.59.jar
+java      27043         jenkins  297r      REG                1,4      33483  2735205 /Users/Shared/Jenkins/Home/plugins/github-api/WEB-INF/lib/jackson-annotations-2.2.3.jar
+java      27043         jenkins  298r      REG                1,4     192699  2735216 /Users/Shared/Jenkins/Home/plugins/github-api/WEB-INF/lib/jackson-core-2.2.3.jar
+java      27043         jenkins  299r      REG                1,4     865838  2735217 /Users/Shared/Jenkins/Home/plugins/github-api/WEB-INF/lib/jackson-databind-2.2.3.jar
+java      27043         jenkins  300r      REG                1,4    1581066  2735214 /Users/Shared/Jenkins/Home/plugins/github-api/WEB-INF/lib/mockito-all-1.9.5.jar
+java      27043         jenkins  301r      REG                1,4      58160  2735341 /Users/Shared/Jenkins/Home/plugins/github-oauth/WEB-INF/lib/commons-codec-1.4.jar
+java      27043         jenkins  302r      REG                1,4      60686  2735320 /Users/Shared/Jenkins/Home/plugins/github-oauth/WEB-INF/lib/commons-logging-1.1.1.jar
+java      27043         jenkins  303r      REG                1,4      15322  2735318 /Users/Shared/Jenkins/Home/plugins/github-oauth/WEB-INF/lib/findbugs-annotations-1.3.9-1.jar
+java      27043         jenkins  304r      REG                1,4      33974  2735347 /Users/Shared/Jenkins/Home/plugins/github-oauth/WEB-INF/lib/github-oauth.jar
+java      27043         jenkins  305r      REG                1,4     349959  2735338 /Users/Shared/Jenkins/Home/plugins/github-oauth/WEB-INF/lib/httpclient-4.1.jar
+java      27043         jenkins  306r      REG                1,4     181041  2735333 /Users/Shared/Jenkins/Home/plugins/github-oauth/WEB-INF/lib/httpcore-4.1.jar
+java      27043         jenkins  307r      REG                1,4      45944  2735327 /Users/Shared/Jenkins/Home/plugins/github-oauth/WEB-INF/lib/json-20090211.jar
+java      27043         jenkins  308r      REG                1,4    1419869  2735325 /Users/Shared/Jenkins/Home/plugins/github-oauth/WEB-INF/lib/mockito-all-1.8.5.jar
+java      27043         jenkins  309r      REG                1,4     164368  2074035 /Users/Shared/Jenkins/Home/plugins/subversion/WEB-INF/lib/antlr-runtime-3.4.jar
+java      27043         jenkins  310r      REG                1,4     400062  2074048 /Users/Shared/Jenkins/Home/plugins/subversion/WEB-INF/lib/classes.jar
+java      27043         jenkins  311r      REG                1,4      70637  2074040 /Users/Shared/Jenkins/Home/plugins/subversion/WEB-INF/lib/sequence-library-1.0.2.jar
+java      27043         jenkins  312r      REG                1,4     757082  2074038 /Users/Shared/Jenkins/Home/plugins/subversion/WEB-INF/lib/sqljet-1.1.7.jar
+java      27043         jenkins  313r      REG                1,4    3386734  2074036 /Users/Shared/Jenkins/Home/plugins/subversion/WEB-INF/lib/svnkit-1.7.10-jenkins-1.jar
+java      27043         jenkins  314r      REG                1,4     258310  2074041 /Users/Shared/Jenkins/Home/plugins/subversion/WEB-INF/lib/trilead-ssh2-build217-jenkins-3.jar
+java      27043         jenkins  315r      REG                1,4      42624  2074067 /Users/Shared/Jenkins/Home/plugins/translation/WEB-INF/lib/classes.jar
+java      27043         jenkins  316      PIPE 0xdd418e891f0476f3      16384          ->0xdd418e89303bdbf3
+java      27043         jenkins  317      PIPE 0xdd418e89303bdbf3      16384          ->0xdd418e891f0476f3
+java      27043         jenkins  318u   KQUEUE                                        count=0, state=0x8
+java      27043         jenkins  319      PIPE 0xdd418e891cad9033      16384          ->0xdd418e891da09bf3
+java      27043         jenkins  320      PIPE 0xdd418e891da09bf3      16384          ->0xdd418e891cad9033
+java      27043         jenkins  321u   KQUEUE                                        count=0, state=0x8
+java      27043         jenkins  322      PIPE 0xdd418e89303be673      16384          ->0xdd418e89301d7ab3
+java      27043         jenkins  323      PIPE 0xdd418e89301d7ab3      16384          ->0xdd418e89303be673
+java      27043         jenkins  324u   KQUEUE                                        count=0, state=0x8
+java      27043         jenkins  325      PIPE 0xdd418e892d0e8373      16384          ->0xdd418e891da098f3
+java      27043         jenkins  326      PIPE 0xdd418e891da098f3      16384          ->0xdd418e892d0e8373
+java      27043         jenkins  327u   KQUEUE                                        count=0, state=0x8
+java      27043         jenkins  328      PIPE 0xdd418e89301d8533      16384          ->0xdd418e892d0e90f3
+java      27043         jenkins  329      PIPE 0xdd418e892d0e90f3      16384          ->0xdd418e89301d8533
+java      27043         jenkins  330u   KQUEUE                                        count=0, state=0x8
+java      27043         jenkins  331      PIPE 0xdd418e891f0b2073      16384          ->0xdd418e893379c733
+java      27043         jenkins  332      PIPE 0xdd418e893379c733      16384          ->0xdd418e891f0b2073
+java      27043         jenkins  333u   KQUEUE                                        count=0, state=0xa
+java      27043         jenkins  334u     IPv6 0xdd418e892c8720d3        0t0      TCP *:65437 (LISTEN)
+java      27043         jenkins  335u     IPv6 0xdd418e892c871b73        0t0      TCP *:65438 (LISTEN)
+java      27043         jenkins  336u     IPv6 0xdd418e891dc1715b        0t0      UDP *:33848
+java      27043         jenkins  337u     IPv6 0xdd418e891b53ec8b        0t0      UDP *:mdns
+java      27043         jenkins  340u    systm                           0t0          
+java      27043         jenkins  341u     unix 0xdd418e8923c219a3        0t0          ->0xdd418e892040d753
+java      27043         jenkins  344r      REG                1,4    3500524  1921178 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/resources.jar
+java      27043         jenkins  346r      REG                1,4       8286  1921065 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/ext/dnsns.jar
+java      27043         jenkins  363r      REG                1,4     576692 25783078 /Users/Shared/Jenkins/Home/tools/hudson.tasks.Maven_MavenInstallation/Maven322/lib/maven-core-3.2.2.jar
+OSXAir:Current_Notes rduvalwa2$ 
+
+
+********************************************************
+***** Configuration Notes ********************************************************
+********************************************************
+
+
+**Plugins ****
+https://wiki.jenkins-ci.org/display/JENKINS/Plugins
+
+
+

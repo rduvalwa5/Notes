@@ -1,0 +1,122 @@
+1) known_hosts search on this from browser
+http://amath.colorado.edu/computing/unix/
+http://amath.colorado.edu/computing/unix/sshknownhosts.html
+The .ssh/known_hosts file
+In order to use public-key secure connection with other hosts (ssh, scp, sftp) there is a 
+special directory, ~/.ssh/, where passphrases and public keys are stored. Normally you wouldn't 
+need to know the gory details, but from time to time a host will change its public key and then 
+you have difficulty using ssh or scp with that host, and have to edit a file named known_hosts. 
+If you try to ssh to another computer, but get an error message that warns about a changed or 
+incorrect public key, then it is probably just a case of that host changing its public key. (It 
+is possible, though usually not the case, that malicious hacking is involved.) Unless you 
+actually suspect hacker involvement, you can edit the file ~/.ssh/known_hosts using your usual 
+text editor (vi, emacs, nedit, or pico) and delete any line with the name of that host. 
+Then when you try to ssh that host again, it will be like the first time ever; ssh will ask you 
+if you want to accept a new public key, you type the whole word yes, and everything will proceed 
+normally from there. 
+Here is what a typical ~/.ssh/known_hosts file might contain. Note that newton is represented on 
+two different lines: 
+newton 1024 35 
+153438062610297067329638677441205712613292203533062535600064224677647442245028855505387934431717
+435134842994423656065076260604296084868001730665553662299156116414854701274715680961503198280525
+759778667306417179500370189017139564144825610347509023078143132936185076849630461827976942220442
+313116255293297021841
+ucsub 1024 37 
+132170811640421742212085598383135714069016332111955003414250071326834884018721183646445780180633
+494496866895830879394309011412231102757022090299732775466435482517698989962531081214859205054227
+533597152962802400251809883548442498002326460312850336779152617243800769119880843882425555806081
+435017335194477605333
+simpson 1024 41 
+840896920592494584403453622735282634536002054701576247765078766974814128393752943151071629834843
+909016027026612791643752972116459602750267266908365259665072736159491719667576217171370458928680
+504368847255632477925660234893185547218857655484574619075125368470792976275806263534208879722192
+77539015703446529603
+newton,128.138.249.8 ssh-rsa 
+AAAAB3NzaC1yc2EAAAABIwAAAIEA0d7Aoure0toNJ+YMYi61QP2ka8m5x5ZQlT7obP8CK3eropfqsMPPY6uiyIh9vpiFX2r1
+LHcbx139+vG6HOtVvuS8+IfMDtawm3WQvRuOopz3vVy5GtMwtaOgehsXoT930Ryev1bH5myPtWKlipITsOd2sX9k3tvjrmme
+4KCGGss=
+SSH and SFTP (and SCP)
+Trouble
+with
+hostkeys? 
+Telnet, rlogin, and ftp are old programs used to access other computers on the network, but they 
+are now considered very insecure. Hackers can read the information passed between computers when 
+these programs are used. In particular, they can read a user's password when she logs on to a 
+remote computer. Hackers steal such password information to log on to a computer, then to break 
+into its operating system, then launch further attacks on the Internet under a false identity. 
+Therefore, telnet and rlogin and ftp are not available on C.U. Boulder computers; instead, we 
+use the secure versions named SSH and SFTP (or SCP). These programs use public-key encryption to 
+encrypt all traffic between the computers, so that the hacker listening in will intercept only 
+unbreakably-encrypted gibberish! 
+Ssh (``secure shell'') is used to log on a remote computer, and sftp (``secure ftp'') or scp 
+(``secure copy'') is used to transfer files between two computers. On Unix computers one types 
+the commands ssh or sftp or scp, respectively. Scp is for Unix systems only, not Macs or PCs. It 
+is a a non-interactive command-line executable which performs a single file transfer. You can 
+use scp commands in scripts and aliases. (See Unix manual pages for ssh and scp and sftp.) 
+simplified
+manual
+page for
+Unix
+ssh,
+scp,
+sftp 
+For Macintosh and for Windows/Intel PCs, you can download free and high-quality ssh software 
+from an ITS web page, while for Unix 
+----------------------------------------
+$ ssh-keygen -t dsa -f rduvalXP.key
+Generating public/private dsa key pair.
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in rduvalXP.key.
+Your public key has been saved in rduvalXP.key.pub.
+The key fingerprint is:
+c3:1a:75:60:93:39:81:bd:30:35:cd:65:15:e0:df:04 rduval@rduvalxp
+rduval@rduvalxp ~/batch
+$ ls
+da.bat daTest.sh goQA2.bat logsQA2.bat qa2.sh rduvalXP.key.pub sglog01.sh 
+sglogTest.sh
+da.sh goQA1.bat logsQA1.bat qa1.sh rduvalXP.key sg01.bat sglog01X.sh
+rduval@rduvalxp ~/batch
+$ ls ../.ssh
+authorized_keys known_hosts rduvalxp_id_dsa rduvalxp_id_dsa.pub sglog01_key
+1000 ls -la .ssh
+1001 ssh-keygen
+1002 ls -la .ssh -t dsa
+1003 ssh-keygen -d dsa
+1004 ssh-keygen -d rsa
+1005 ssh-keygen -t dsa
+1006 scp .ssh/id_dsa.pub rduval@davinci.corp.cmates.com:~/sglog01_key
+1007 scp .ssh/id_dsa.pub rduval@davinci.corp.cmates.com:~/sglog01_key
+1008 scp .ssh/id_dsa.pub rduval@davinci.corp.cmates.com:~/sglog01_key
+1009 ls
+1010 crontab -l
+1011 cd
+1012 ls
+1013 cd sandbox/
+1014 ls
+1015 cd log_audit/
+1016 ls
+1017 cvs up
+1018 less Send_Archive.sh
+1019 vi Send_Archive.sh
+1020 ./Send_Archive.sh
+1021 mv Send_Archive.sh Send_Archive.ssh
+1022 cvs up
+1023 cvs login
+1024 ls
+1025 cvs up
+1026 ssh davinci.corp.cmates.com hostname
+1027 history
+1009 cat sglog01_key >> .ssh/authorized_keys
+1010 chmod 600 .ssh/authorized_keys
+1011 ls -latr
+1012 cd .ssh
+1013 ls
+1014 ls -latr
+1015 cp authorized_keys authorized_keys2
+1016 ls
+1017 cd
+1018 ls
+1019 cd /home/qa/public_html/
+1020 ls
+1021 cd tools

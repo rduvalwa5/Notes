@@ -1,0 +1,178 @@
+SVN Notes
+
+Document objective:
+
+Simplify my imformation about Subversion
+
+A.  svn commands
+	1.  svnadmin
+			-  duvalwa2$ svnadmin help
+			general usage: svnadmin SUBCOMMAND REPOS_PATH  [ARGS & OPTIONS ...]
+			Type 'svnadmin help <subcommand>' for help on a specific subcommand.
+			Type 'svnadmin --version' to see the program version and FS modules.
+
+			Available subcommands:
+			crashtest
+ 			create
+			deltify
+			dump
+			help (?, h)
+			hotcopy
+			list-dblogs
+			list-unused-dblogs
+			load
+			lslocks
+			lstxns
+			pack
+			recover
+			rmlocks
+			rmtxns
+			setlog
+			setrevprop
+			setuuid
+			upgrade
+			verify
+
+	2.	svn 
+			rduvalwa2$ svn help
+			usage: svn <subcommand> [options] [args]
+			Subversion command-line client, version 1.6.5.
+			Type 'svn help <subcommand>' for help on a specific subcommand.
+			Type 'svn --version' to see the program version and RA modules
+			or 'svn --version --quiet' to see just the version number.
+
+			Most subcommands take file and/or directory arguments, recursing
+			on the directories.  If no arguments are supplied to such a
+			command, it recurses on the current directory (inclusive) by default.
+
+			Available subcommands:
+   				add
+   				blame (praise, annotate, ann)
+   				cat
+   				changelist (cl)
+   				checkout (co)
+   				cleanup
+   				commit (ci)
+   				copy (cp)
+   				delete (del, remove, rm)
+   				diff (di)
+   				export
+   				help (?, h)
+   				import
+   				info
+   				list (ls)
+   				lock
+   				log
+   				merge
+   				mergeinfo
+   				mkdir
+   				move (mv, rename, ren)
+   				propdel (pdel, pd)
+   				propedit (pedit, pe)
+			   	propget (pget, pg)
+			   	proplist (plist, pl)
+				propset (pset, ps)   resolve
+				resolved
+				revert
+				status (stat, st)
+				switch (sw)
+				unlock
+				update (up)
+			 
+
+B.  Create a repository
+	1.  Repository
+		a.  To Create a repository \repositories\javarepos
+			1.  create the top level directory using mkdir \repositories
+			2.  svnadmin create \repositories\java\javarepos
+		b.  Import existing documents into Subversion
+			1. C:\>svn import -m -F C:\Code\Code\Java\src\Projects\HTTP\HttpSender\URLReader.java file:///repositories/javarepos/urlsender
+					Adding         C:\Code\Code\Java\src\Projects\HTTP\HttpSender\URLReader.java
+
+					Committed revision 1.	
+
+----------------------			
+C:\>svn import C:\Code\Code\Java\src\Projects\HTTP\HttpSender\URLReader.java file:///repositories/javarepos/urlsender
+svn: Could not use external editor to fetch log message; consider setting the $SVN_EDITOR environment variable or using the --message (-m) or --file (-F) options
+svn: None of the environment variables SVN_EDITOR, VISUAL or EDITOR are set, and no 'editor-cmd' run-time configuration option was found
+
+C:\>svn import =m C:\Code\Code\Java\src\Projects\HTTP\HttpSender\URLReader.java file:///repositories/javarepos/urlsender
+svn: Try 'svn help' for more info
+svn: Too many arguments to import command
+
+C:\>svn import -m C:\Code\Code\Java\src\Projects\HTTP\HttpSender\URLReader.java file:///repositories/javarepos/urlsender
+svn: The log message is a pathname (was -F intended?); use '--force-log' to override
+
+C:\>svn import -m -F C:\Code\Code\Java\src\Projects\HTTP\HttpSender\URLReader.java file:///repositories/javarepos/urlsender
+Adding         C:\Code\Code\Java\src\Projects\HTTP\HttpSender\URLReader.java
+
+Committed revision 1.
+--------------------------			
+		
+C.  Listing files in a project
+		C:\>svn list file:///repositories/javarepos/urlsender
+		urlsender
+
+____________________________________________________________	
+7/31/2010
+------------------------------------------------------------
+
+1) Install SlikSvn (in place of Collabnet on C1246894-J
+	D:\SlikSvn\bin
+
+2) Set up mysql to accept connections from C1246895-J.home
+
+	1) You do NOT need to add the server that the "mysql.host" table
+	2) You do need to add the user that will access the data base "mysql.user" and set the user priviledges
+	3) These instructions exlain how access and modify mysql data tables
+	  - MySql Work Bench
+		a) Home > Edit Data Table
+		b) Advanced > continue > enter root password
+		c) select schema > "mysql" > enter root password
+		d) select table "user" > finish > enter root password 
+			- administrative roles
+			- account limits 
+			- apply
+			- set schema privaleges for user
+		
+	 - Home
+	 	a) Server Administartion (mysql@localhost)
+	 	   a) Add Account
+	 		1) Under "Server Access Management provide root password
+	 			a) Select "Accounts"
+	 			b) Select "Add Account"
+	 				- Provide "Login Name"
+	 				- Provide "Password"
+	 				- Provide "Confirm Password"
+	 				- leave "Limit Connectivity to Host Matching"  "%" this is a wild card to allow any host
+	 			c) Select "Administrative Roles"
+	 				- check roles
+	 				- select "Apply"
+	 		2) Select Schema Privileges 
+	 			a) select user
+	 			b) "Add Entry"
+	 				- Choose "Host" entry
+	 				- Choose "Schema"   ("%") any
+	 			
+	 			
+	 		
+	 	
+	 	"manage security" > select "mysql" > enter root password
+	 	b) add account
+	 	   - login name = rduval
+	 	   - password = mux
+	 	   - limit connective server = use wild card "%"
+	4)  
+	   - select * from mysql.user where user.user like "rduval%";
+
+
+
+
+
+
+
+
+
+____________________________________________________________	
+8/1/2010
+------------------------------------------------------------

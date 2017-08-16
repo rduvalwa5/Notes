@@ -1,0 +1,2 @@
+So if you were trying to connect to a Windows computer named MYDELL, and the shared folder on MYDELL had the name PICTURES, you'd type the following: 
+   SMB://MYDELL/PICTURES 

@@ -1,0 +1,188 @@
+http://www.amath.unc.edu/sysadmin/HOWTO/ssh.html
+
+ 
+
+http://www.tartarus.org/~simon/puttydoc/Chapter8.html
+
+ 
+
+ 
+
+ssh-keygen -t rsa -f rduvalXP
+
+ 
+
+ftp sglog01.corp.cmates.com
+
+ 
+
+cat rduvalXP.pub >> authorized_keys
+
+ 
+
+ssh rduval@sglog01.corp.cmates.com -i rduvalXP.key  ls
+
+ 
+
+$ sglogTest.sh
+
+Enter passphrase for key 'rduvalXP.key':
+
+ 
+
+/usr/local/bin:/bin:/usr/bin:.:/nethome/rduval/bin:/nethome/rduval/sandbox/log_audit:/nethome/rduval/.ssh
+
+ARCHIVE
+
+BugReader.pl
+
+BugReader03222005.pl
+
+BugReader5.pl
+
+Bug_Status.pl
+
+Bugs.csv
+
+Bugs0322.csv
+
+CRONTAB_TEST
+
+DelSurveyTest
+
+DeleteSurvey
+
+DeleteSurvey1
+
+DeleteSurveyQA1
+
+DeleteSurveyQA2
+
+DeleteSurveyTest2
+
+EXPORT_FILES
+
+GSA_ERROR
+
+Get_Bug_Status.sh
+
+InviteeTestQA1_A
+
+InviteeTestQA1_B
+
+InviteeTestQA2_A
+
+InviteeTestQA2_B
+
+LogPath.sh
+
+ 
+
+Secure Shell Setup
+
+The following set of instructions is intended to get a new user setup with authentication keys under ssh. These instructions were written with ssh v1 in mind but should apply to ssh v2 as well.
+
+
+
+Creating Authentication Keys 
+
+First you must create your authentication key. This is done with ssh-keygen.
+
+mauzy@olympus_mauzy_1: ssh-keygen
+Initializing random number generator...
+Generating p:  ...........................++ (distance 444)
+Generating q:  ...++ (distance 54)
+Computing the keys...
+Testing the keys...
+Key generation complete.
+Enter file in which to save the key (/home/mauzy/.ssh/identity): 
+Enter passphrase: 
+Enter the same passphrase again: 
+Your identification has been saved in /home/mauzy/.ssh/identity.
+Your public key is:
+1024 33 {....... lots of numbers .......} mauzy@olympus
+Your public key has been saved in /home/mauzy/.ssh/identity.pub
+NOTE: Your passphrases will not be echoed when you type them.
+
+
+
+Changing Passphrases 
+
+You can change your passphrase with the sssh-keygen command and the -p flag.
+
+mauzy@olympus_mauzy_2: ssh-keygen -p
+Enter file key is in (/home/mauzy/.ssh/identity): 
+Enter old passphrase: 
+Key has comment 'mauzy@olympus'
+Enter new passphrase: 
+Enter the same passphrase again: 
+Your identification has been saved with the new passphrase.
+NOTE: Your passphrases will not be echoed when you type them.
+
+
+
+Allowing Access 
+
+To allow access to a system via the authentication key handshaking, you need to add your public key to the ~/.ssh/authorized_keys file on the system you want access to. To grant access to all the machines in the local UNIX system (ie. the machines that you have a common home dir on) copy the public key into the ssh/authorized_keys file.
+
+mauzy@olympus_mauzy_3: cd ~/.ssh/
+mauzy@olympus_.ssh_4 : cp identity.pub authorized_keys
+NOTE: If you use a text editor to cut-n-paste keys in, be sure that each key is a single line.
+
+
+
+Logging into Systems 
+
+To establish an interactive, encrypted session with another machine, use the ssh or slogin commands.
+
+mauzy@olympus_.ssh_5 : ssh kirkwood
+Last login: Mon Oct 12 16:29:42 1998 from olympus
+Sun Microsystems Inc.   SunOS 5.5.1     Generic May 1996
+You have mail.
+Display set to kirkwood:11.0
+mauzy@kirkwood_mauzy_1:
+NOTE: Your passphrases will not be echoed when you type them.
+
+
+To execute a command on a remote system, use ssh.
+
+mauzy@olympus_mauzy_15: ssh mailhost uptime
+  5:38pm  up 28 day(s), 16:29,  0 users,  load average: 0.03, 0.02, 0.02
+
+
+Automating the Login Process 
+
+By using the ssh-agent and ssh-add commands, you can load keys into memory, thereby not be required to type the keys when connecting to other machines that allow your public identity key.
+
+The most effective use of ssh-agent is to start it when you start your x session. In order to do this you need to edit you .xinitrc or .xsession file. The following is an example of a .xinitrc file.
+
+#! /bin/sh 
+ 
+/opt_software/bin/ssh-agent -c /opt_software/bin/fvwm
+NOTE: The -c flag is used if your default shell is in the csh family. /opt_software/bin/fvwm is the command for your X windows manager. 
+
+
+
+Once the X window manager is running, you need to load your key into memory. This is done with the ssh-add command.
+
+To get the X interface to ssh-add, use: 
+
+mauzy@olympus_mauzy_10 : ssh-add < /dev/null
+
+
+For the standard text interface use: 
+
+mauzy@olympus_mauzy_11 : ssh-add
+Need passphrase for /home/mauzy/.ssh/identity (Applied Math Account).
+Enter passphrase: 
+Identity added: /home/mauzy/.ssh/identity (Applied Math Account)
+ 
+
+You should now be able to ssh to other hosts without having to type in your password each time. If you have any questions or comments, please feel free to contact me. 
+--Matthew
+
+
+Other Sources of Information on SSH 
+
+The SSH Home Page.
+The SSH FAQ.

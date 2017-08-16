@@ -1,0 +1,426 @@
+0.  GIT Repository locations:
+	a)  Workspace name:  Math_Examples
+		Repository c1246895-xps:/home/rduvalwa2/workspace/MathExamples.git
+			- Eclipse	 /Users/rduvalwa2/git/MathExamples 
+			- Eclipse	
+			- Eclipse	
+			- Eclipse	
+			- Eclipse	
+
+	b)  Workspace name:  Servers
+		Repository /Users/rduvalwa2/Workspace/GitRepos/Py_Servers.git
+			- Eclipse	/Users/rduvalwa2/Workspace/Py_Servers/BinaryConversions  
+			- Eclipse	/Users/rduvalwa2/Workspace/Py_Servers/Port_Scanner
+			- Eclipse	/Users/rduvalwa2/Workspace/Py_Servers/Py_Bytes
+			- Eclipse	/Users/rduvalwa2/Workspace/Py_Servers/Python_Server_Notes
+			- Eclipse	/Users/rduvalwa2/Workspace/Py_Servers/sockets
+			
+	c)  Workspace name: 
+		Repository /Users/rduvalwa2/Workspace/GitRepos/Basic_Python.git
+			- Eclipse   /Users/rduvalwa2/Workspace/Basic_Python
+	
+	d)  Workspace name:  OReilly_Python_New
+		Repository	rduvalwa2@c1246895-xps:/home/rduvalwa2/workspace/OReilly_Python.git
+		Working
+		OSXAir:OReilly_Python rduvalwa2$ hostname
+		OSXAir.home.home
+		OSXAir:OReilly_Python rduvalwa2$ pwd
+		/Users/rduvalwa2/Workspace/OReilly_Python
+		OSXAir:OReilly_Python rduvalwa2$ ls
+		DB_Connector		InterviewQuestions		OReilly_Python_Next.txt		PythonListExamples	Unit_Test_Example
+		DataBase			List_Examplse			Os_level_examples			PythonMusic			python_crypto
+		File_Proessing		NetworkPrograming		Py_C_functions				Python_Text_Encoding
+		Git Server Setup	NetworkRestProgramming	PythonListExampes			RobotFrameWork	
+
+	e)	Workspace name:  Python
+		Repository	Repository /Users/rduvalwa2/Workspace/GitRepos/OReilly_Python_New.git
+		Working		/Users/rduvalwa2/git/OReilly_Python_New
+		
+
+1.  ***** GIT Help:
+
+OSXAir:Current_Notes rduvalwa2$ git help
+usage: git [--version] [--help] [-C <path>] [-c name=value]
+           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]
+           [-p | --paginate | --no-pager] [--no-replace-objects] [--bare]
+           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]
+           <command> [<args>]
+
+These are common Git commands used in various situations:
+
+start a working area (see also: git help tutorial)
+   clone      Clone a repository into a new directory
+   init       Create an empty Git repository or reinitialize an existing one
+
+work on the current change (see also: git help everyday)
+   add        Add file contents to the index
+   mv         Move or rename a file, a directory, or a symlink
+   reset      Reset current HEAD to the specified state
+   rm         Remove files from the working tree and from the index
+
+examine the history and state (see also: git help revisions)
+   bisect     Use binary search to find the commit that introduced a bug
+   grep       Print lines matching a pattern
+   log        Show commit logs
+   show       Show various types of objects
+   status     Show the working tree status
+
+grow, mark and tweak your common history
+   branch     List, create, or delete branches
+   checkout   Switch branches or restore working tree files
+   commit     Record changes to the repository
+   diff       Show changes between commits, commit and working tree, etc
+   merge      Join two or more development histories together
+   rebase     Forward-port local commits to the updated upstream head
+   tag        Create, list, delete or verify a tag object signed with GPG
+
+collaborate (see also: git help workflows)
+   fetch      Download objects and refs from another repository
+   pull       Fetch from and integrate with another repository or a local branch
+   push       Update remote refs along with associated objects
+
+'git help -a' and 'git help -g' list available subcommands and some
+concept guides. See 'git help <command>' or 'git help <concept>'
+to read about a specific subcommand or concept.
+
+****************************************************************************************************
+****************************************************************************************************
+
+
+2.  *****  How to set up a GIT server:
+__________________________________________________________________________________________________________________
+__________________________________________________________________________________________________________________
+March 18 2016
+__________________________________________________________________________________________________________________
+
+Setting up GIT repository for use by server:
+
+1) Create a GIT project:
+	example:  /Users/rduvalwa2/Workspace/PyBasics_Math/Basic_Python
+
+2) Create repository bare clone:
+	Git clone --bare /Users/rduvalwa2/Workspace/PyBasics_Math/Basic_Python Basic_Python.git
+	Result:
+	C1246895-Air:GitRepos rduvalwa2$ cd Basic_Python.git
+	C1246895-Air:Basic_Python.git rduvalwa2$ ls
+	HEAD		branches	config		description	hooks		info		objects		packed-refs	refs
+	C1246895-Air:Basic_Python.git rduvalwa2$ pwd
+	/Users/rduvalwa2/Workspace/GitRepos/Basic_Python.git
+	
+3) For use in Eclipse Project:
+	git clone /Users/rduvalwa2/Workspace/GitRepos/Basic_Python.git
+	Result:
+	C1246895-Air:Basic_Python rduvalwa2$ pwd
+	/Users/rduvalwa2/Workspace/PyBasics_Math/Basic_Python
+	C1246895-Air:Basic_Python rduvalwa2$ ls -la
+	total 48
+	drwxr-xr-x  19 rduvalwa2  staff   646 Mar 18 20:53 .
+	drwxr-xr-x   5 rduvalwa2  staff   170 Mar 17 16:51 ..
+	drwxr-xr-x  13 rduvalwa2  staff   442 Mar 18 22:05 .git
+	-rw-r--r--   1 rduvalwa2  staff   366 Mar 17 16:35 .project
+	-rw-r--r--   1 rduvalwa2  staff   765 Mar 17 16:35 .pydevproject
+	drwxr-xr-x   3 rduvalwa2  staff   102 Mar 18 20:53 .settings
+	drwxr-xr-x  10 rduvalwa2  staff   340 Mar 17 20:40 Collections_List_src
+	drwxr-xr-x   7 rduvalwa2  staff   238 Mar 17 16:33 Dictionary_src
+	-rw-r--r--   1 rduvalwa2  staff   458 Mar 17 16:33 Project_Documentation.txt
+	drwxr-xr-x   3 rduvalwa2  staff   102 Mar 17 16:33 PyGen_src
+	drwxr-xr-x   3 rduvalwa2  staff   102 Mar 17 16:33 PythonCodeTypes
+	drwxr-xr-x   9 rduvalwa2  staff   306 Mar 17 16:33 Python_Built_In_Functions
+	-rw-r--r--   1 rduvalwa2  staff  5973 Mar 17 16:33 Python_Test_Notes
+	drwxr-xr-x   3 rduvalwa2  staff   102 Mar 17 16:33 Tupe_Src
+	drwxr-xr-x   3 rduvalwa2  staff   102 Mar 17 16:33 command_line
+	drwxr-xr-x   8 rduvalwa2  staff   272 Mar 17 16:33 string_src
+	-rw-r--r--   1 rduvalwa2  staff   114 Mar 18 20:57 test.txt
+	drwxr-xr-x   3 rduvalwa2  staff   102 Mar 17 16:33 underStandingIterators
+	drwxr-xr-x   8 rduvalwa2  staff   272 Mar 17 16:33 zip_src
+
+4) Remote servers clone the repository:
+	/Users/rduvalwa2/C1246895-Air_Repos
+	c1246895-osx:Basic_Python rduvalwa2$ git clone rduvalwa2@c1246895-air:/Users/rduvalwa2/Workspace/GitRepos/Basic_Python.git
+	Result:
+	C1246895-osx:Basic_Python rduvalwa2$ ls
+	Collections_List_src		PyGen_src			Python_Test_Notes		command_line			underStandingIterators
+	Dictionary_src			PythonCodeTypes			Repository_locations.txt	string_src			zip_src
+	Project_Documentation.txt	Python_Built_In_Functions	Tupe_Src			test.txt
+	C1246895-osx:Basic_Python rduvalwa2$ pwd
+	/Users/rduvalwa2/C1246895-Air_Repos/Basic_Python
+	
+	
+
+__________________________________________________________________________________________________________________
+__________________________________________________________________________________________________________________
+
+
+1)  Users accessing this server need to be able to access the server using ssh.
+
+A)  Set Up on Ubuntu 12.4
+  1.  Create project directory
+            mkdir  TestProject
+  2.  GIT initialize project directory
+            cd TestProject/
+            git init
+  3.  change directory to where you want the GIT repository
+            cd ..
+  4.  clone bare project
+            git clone --bare TestProject  TestProject.git
+  5.  Test GIT project by adding a file
+            cd TestProject
+            git status
+            vi AddedTestFile.txt
+            ls
+            git status
+            git add AddedTestFile.txt
+            git status
+            git commit -m "Add file"
+            git status
+            cd ..
+            ls
+            cd TestProject.git
+            ls
+            git status
+
+  6.  To remotely access Repository from another server:
+	a.  git clone rduvalwa2@c1246895-xps:/home/rduvalwa2/TestProject.git
+	b.  pwd
+		/Users/rduvalwa2/TestProject
+
+  10.   Create next project work space
+            mkdir workspace
+
+  11.	Create project
+	a. mkdir workspace/PythonExamples
+
+  12.	GIT initialize project directory
+        a. cd workspace/PythonExamples
+           git init
+
+  13.	Create bare repository in ~/workspace from /workspace
+	git clone --bare /workspace/PythonExamples  PythonExamples.git
+
+  14.	To get local repository copy of the project you need to remove the original project
+	rm -rf /workspace/PythonExamples
+	git clone ~/workspace/PythonExamples.git
+
+  15.	add file to test process
+	cd PythonExamples
+	vi About_Repo.txt 
+	git status
+	git commit -a
+	git status
+	git push
+
+  16.	to get copy a repository onto a remote server
+	on C1246895-air
+	cd /Users/rduvalwa2/Workspace
+	C1246895-Air:Workspace rduvalwa2$ git clone rduvalwa2@c1246895-xps:/home/rduvalwa2/workspace/PythonExamples.git
+	Cloning into 'PythonExamples'...
+	rduvalwa2@c1246895-xps's password: 
+	remote: Counting objects: 6, done.
+	remote: Compressing objects: 100% (4/4), done.
+	remote: Total 6 (delta 1), reused 0 (delta 0)
+	Receiving objects: 100% (6/6), done.
+	Resolving deltas: 100% (1/1), done.
+	Checking connectivity... done.
+
+  17.  verify clone
+	C1246895-Air:Workspace rduvalwa2$ ls
+	PythonExamples
+	C1246895-Air:Workspace rduvalwa2$ cd PythonExamples/
+	C1246895-Air:PythonExamples rduvalwa2$ ls
+	About_Repo.txt
+
+  18.	Add line to file
+	C1246895-Air:PythonExamples rduvalwa2$ vi About_Repo.txt 
+	C1246895-Air:PythonExamples rduvalwa2$ git status
+	On branch master
+	Your branch is up-to-date with 'origin/master'.
+	Changes not staged for commit:
+  	(use "git add <file>..." to update what will be committed)
+  	(use "git checkout -- <file>..." to discard changes in working directory)
+	modified:   About_Repo.txt
+	no changes added to commit (use "git add" and/or "git commit -a")
+	C1246895-Air:PythonExamples rduvalwa2$ git commit -a
+	[master b3198b0] Add line 1
+ 	1 file changed, 2 insertions(+)
+	C1246895-Air:PythonExamples rduvalwa2$ git status
+	On branch master
+	Your branch is ahead of 'origin/master' by 1 commit.
+  	(use "git push" to publish your local commits)
+	nothing to commit, working directory clean
+
+  19.	Push to repository on c1246895-xps
+	C1246895-Air:PythonExamples rduvalwa2$ git push
+	warning: push.default is unset; its implicit value has changed in
+	Git 2.0 from 'matching' to 'simple'. To squelch this message
+	and maintain the traditional behavior, use:
+
+  	git config --global push.default matching
+
+	To squelch this message and adopt the new behavior now, use:
+
+  	git config --global push.default simple
+
+	When push.default is set to 'matching', git will push local branches
+	to the remote branches that already exist with the same name.
+
+	Since Git 2.0, Git defaults to the more conservative 'simple'
+	behavior, which only pushes the current branch to the corresponding
+	remote branch that 'git pull' uses to update the current branch.
+
+	See 'git help config' and search for 'push.default' for further information.
+	(the 'simple' mode was introduced in Git 1.7.11. Use the similar mode
+	'current' instead of 'simple' if you sometimes use older versions of Git)
+
+	rduvalwa2@c1246895-xps's password: 
+	Counting objects: 3, done.
+	Delta compression using up to 4 threads.
+	Compressing objects: 100% (2/2), done.
+	Writing objects: 100% (3/3), 290 bytes | 0 bytes/s, done.
+	Total 3 (delta 1), reused 0 (delta 0)
+	To rduvalwa2@c1246895-xps:/home/rduvalwa2/workspace/PythonExamples.git
+	   755acdd..b3198b0  master -> master
+
+ 20.	verify push with pull
+	C1246895-Air:PythonExamples rduvalwa2$ git pull
+	rduvalwa2@c1246895-xps's password: 
+	Already up-to-date.
+
+ 21.	GIT pull to update repository
+	C1246895-Air:PythonExamples rduvalwa2$ git pull
+	rduvalwa2@c1246895-xps's password: 
+	remote: Counting objects: 5, done.
+	remote: Compressing objects: 100% (2/2), done.
+	remote: Total 3 (delta 1), reused 0 (delta 0)
+	Unpacking objects: 100% (3/3), done.
+	From c1246895-xps:/home/rduvalwa2/workspace/PythonExamples
+	   b3198b0..ab9d57e  master     -> origin/master
+	Updating b3198b0..ab9d57e
+	Fast-forward
+ 	About_Repo.txt | 2 ++
+ 	1 file changed, 2 insertions(+)
+
+ 22.   Verify another update from local server
+	C1246895-Air:PythonExamples rduvalwa2$ vi About_Repo.txt 
+
+
+
+
+git config with name:
+no changes added to commit (use "git add" and/or "git commit -a")
+rduvalwa2@C1246895-XPS:~/WorkGode/Basic_Python$ git commit -a -m "add comment to documentation"
+[master 1ebd4b6] add comment to documentation
+ Committer: RDuval <rduvalwa2@C1246895-XPS.(none)>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 4 insertions(+)
+rduvalwa2@C1246895-XPS:~/WorkGode/Basic_Python$ git config --global user.name "rduvalwa2_xps"
+rduvalwa2@C1246895-XPS:~/WorkGode/Basic_Python$ git commit --amend --reset-author
+[master 1c0d969] add comment to documentation
+ Committer: rduvalwa2_xps <rduvalwa2@C1246895-XPS.(none)>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 4 insertions(+)
+
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------
+
+204  git clone  --bare  Python_Examples Python_Examples.git
+  214  git clone --bare TestProject  TestProject.git
+  296  git clone --bare /home/rduvalwa2/workspace/SqlConnectors  SqlConnectorsJava.git
+  304  git clone --bare /home/rduvalwa2/workspace/OReilly_Python  OReilly_Python.git
+  335  git clone --bare /home/rduvalwa2/workspace/RobotDemo  RobotDemo.git
+  351  git clone --bare /home/rduvalwa2/workspace/RobotDemo  RobotDemo.git
+  482  git clone --bare ~/workspace/PythonExamples PythonExamples.git
+  530  git clone --bare ~/workspace/PythonExamples PythonExamples.git
+  550  git clone ~/workspace/PythonExamples.git
+  562  git clone ~/workspace/PythonExamples.git
+  603  git clone --bare  OReilly_Python  OReilly_Python.git
+  607  git clone workspace/OReilly_Python.git
+  625  git clone --bare  /home/rduvalwa2/workspace/OReilly_Python  OReilly_Python.git
+  632  git clone --bare  /home/rduvalwa2/workspace/OReilly_Python  OReilly_Python.git
+  635  git clone workspace/OReilly_Python.git
+  738  git clone --bare /home/rduvalwa2/workspace/MathExamples  MathExamples.git
+  741  history | grep clone
+  742  history | grep clone  > ~/NewwNotes.txt
+
+--------------------------------
+
+
+git clone rduvalwa2@c1246895-xps:/home/rduvalwa2/workspace/PythonExamples.git
+git clone rduvalwa2@c1246895-air:/Users/rduvalwa2/ShareRepositories/Basic_Python.git
+
+--------------------------------
+03-13-2016
+--------------------------------
+
+git clone --bare /Users/rduvalwa2/Workspace/OReilly_Python  ORielly_Python_Air.git
+
+On Air:
+
+1) To create a repository that can be cloned:
+	git clone /Users/rduvalwa2/Workspace/OReilly_Python OReilly_Python_New.git
+		- This is different than git clone --bare that start an empty git repository.
+2) Clone the repository for local work:
+	cd /Users/rduvalwa2/Workspace
+	git clone /Users/rduvalwa2/Workspace/GitRepos/OReilly_Python_New.git
+3) Check it out
+								cd /Users/rduvalwa2/Workspace/OReilly_Python_New
+ OReilly_Python_New rduvalwa2$ ls
+DB_Connector		InterviewQuestions	Os_level_examples	PythonMusic		python_crypto
+DataBase		List_Examplse		Py_C_functions		Python_Text_Encoding
+File_Proessing		NetworkPrograming	PythonListExampes	RobotFrameWork
+Git Server Setup	NetworkRestProgramming	PythonListExamples	Unit_Test_Example
+
+ OReilly_Python_New rduvalwa2$ git status
+	On branch master
+	Your branch is up-to-date with 'origin/master'.
+	nothing to commit, working directory clean
+
+git clone /Users/rduvalwa2/Workspace/GitRepos/OReilly_Python_New.git
+
+
+On Centos/VMWare
+git clone rduvalwa2@c1246895-air:/Users/rduvalwa2/Workspace/GitRepos/OReilly_Python_New.git
+
+          rduvalwa2@c1246895-air:/Users/rduvalwa2/Workspace/GitRepos/Basic_Python.git
+
+
+--------------------------------
+04-24-2016
+--------------------------------
+
+git clone --bare  /Users/rduvalwa2/Workspace/GitRepos/Py_Servers    Py_Servers.git
+
+May 24
+Fuck the cloud concept, another bunch of dumb shits not good at what they do.
+
+****************************************************************************************************
+****************************************************************************************************

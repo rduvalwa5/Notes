@@ -1,0 +1,140 @@
+CVS Notes
+http://www.cvshome.org/docs/manual/cvs_3.html#SEC43
+3.1.3 Creating a directory tree from scratch
+For a new project, the easiest thing to do is probably to create an empty directory structure, like this:
+ 
+	$ mkdir tc
+$ mkdir tc/man
+$ mkdir tc/testing	 
+After that, you use the import command to create the corresponding (empty) directory structure inside the repository:
+ 
+	$ cd tc
+$ cvs import -m "Created directory structure" yoyodyne/dir yoyo start	 
+Then, use add to add files (and new directories) as they appear.
+Check that the permissions CVS sets on the directories inside $CVSROOT are reasonable
+
+
+Step one initial cvs
+C:\cvs init
+
+Import directory
+C:\cd Hello
+C:\Hello>cvs import -m "Fuskk you" C1246895-A/Hello fuck start
+N C1246895-A/Hello/Hello.idl
+N C1246895-A/Hello/Hello.zip
+N C1246895-A/Hello/HelloClient.class
+N C1246895-A/Hello/HelloClient.java
+N C1246895-A/Hello/HelloServant.class
+N C1246895-A/Hello/HelloServer.class
+N C1246895-A/Hello/HelloServer.java
+cvs import: Importing \CVSROOT/C1246895-A/Hello/HelloApp
+N C1246895-A/Hello/HelloApp/Hello.class
+N C1246895-A/Hello/HelloApp/Hello.java
+N C1246895-A/Hello/HelloApp/HelloHelper.class
+N C1246895-A/Hello/HelloApp/HelloHelper.java
+N C1246895-A/Hello/HelloApp/HelloHolder.class
+N C1246895-A/Hello/HelloApp/HelloHolder.java
+N C1246895-A/Hello/HelloApp/HelloOperations.class
+N C1246895-A/Hello/HelloApp/HelloOperations.java
+N C1246895-A/Hello/HelloApp/_HelloImplBase.class
+N C1246895-A/Hello/HelloApp/_HelloImplBase.java
+N C1246895-A/Hello/HelloApp/_HelloStub.class
+N C1246895-A/Hello/HelloApp/_HelloStub.java
+cvs import: Importing \CVSROOT/C1246895-A/Hello/JavaFiles
+N C1246895-A/Hello/JavaFiles/Hello.java
+N C1246895-A/Hello/JavaFiles/HelloHelper.java
+N C1246895-A/Hello/JavaFiles/HelloHolder.java
+N C1246895-A/Hello/JavaFiles/HelloOperations.java
+N C1246895-A/Hello/JavaFiles/_HelloImplBase.java
+N C1246895-A/Hello/JavaFiles/_HelloStub.java
+
+No conflicts created by this import
+
+
+C:\Hello>
+
+3.2 Defining the module
+The next step is to define the module in the `modules' file. This is not strictly necessary, but modules can be convenient in grouping together related files and directories.
+In simple cases these steps are sufficient to define a module.
+Get a working copy of the modules file. 
+ 
+	$ cvs checkout CVSROOT/modules
+$ cd CVSROOT	 
+Edit the file and insert a line that defines the module. See section 2.4 The administrative files, for an introduction. See section C.1 The modules file, for a full description of the modules file. You can use the following line to define the module `tc': 
+ 
+	tc   yoyodyne/tc	 
+Commit your changes to the modules file. 
+ 
+	$ cvs commit -m "Added the tc module." modules	 
+Release the modules module. 
+ 
+	$ cd ..
+$ cvs release -d CVSROOT	 
+C:\Hello>cvs checkout CVSROOT/modules
+U CVSROOT/modules
+C:\Hello>cd CVSROOT
+C:\Hello\CVSROOT>ls
+CVS      modules
+C:\Hello\CVSROOT>cvs commit -m "Fuck this" modules
+Checking in modules;
+\CVSROOT/CVSROOT/modules,v  <--  modules
+new revision: 1.2; previous revision: 1.1
+done
+cvs commit: Rebuilding administrative file database
+C:\Hello\CVSROOT>cd ..
+C:\Hello>cvs release -d CVSROOT
+You have [0] altered files in this repository.
+Are you sure you want to release (and delete) directory `CVSROOT': y
+C:\Hello>ls
+Hello.idl           HelloApp            HelloClient.java    HelloServer.class   JavaFiles
+Hello.zip           HelloClient.class   HelloServant.class  HelloServer.java
+C:\Hello>
+___________________________________
+C:\Hello>cd ..
+C:\>mkdir Hell
+C:\>cd Hell
+C:\Hell>ls
+C:\Hell>cvs checkout module Hello
+_____________________________________
+C:\Hell\Hello>cd ..
+C:\Hell>ls
+Hello
+C:\Hell>cvs update Hello
+cvs update: Updating Hello
+M Hello/HelloClient.java
+cvs update: Updating Hello/HelloApp
+cvs update: Updating Hello/JavaFiles
+_____________________________________
+C:\Hell>cvs release Hello
+M HelloClient.java
+You have [1] altered files in this repository.
+Are you sure you want to release directory `Hello': n
+** `release' aborted by user choice.
+___________________________________
+C:\Hell>cvs commit Hello
+cvs commit: Examining Hello
+cvs commit: Examining Hello/HelloApp
+cvs commit: Examining Hello/JavaFiles
+Log message unchanged or not specified
+a)bort, c)ontinue, e)dit, !)reuse this message unchanged for remaining dirs
+Action: (continue) e
+Checking in Hello/HelloClient.java;
+\CVSROOT/C1246895-A/Hello/HelloClient.java,v  <--  HelloClient.java
+new revision: 1.2; previous revision: 1.1
+done___________________________________________________
+PopUp
+CVS: ----------------------------------------------------------------------
+CVS: Enter Log.  Lines beginning with `CVS:' are removed automatically
+CVS: 
+CVS: Committing in Hello
+CVS: 
+CVS: Modified Files:
+CVS: 	HelloClient.java 
+CVS: 
+---------------------------------------------------------------------
+C:\Hell>cvs release Hello
+You have [0] altered files in this repository.
+Are you sure you want to release directory `Hello': y
+__________________________________________________
+
+

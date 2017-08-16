@@ -1,0 +1,51 @@
+Verify PyCrypto Installation
+
+
+> python
+Python 2.7.9 (v2.7.9:648dcafa7e5f, Dec 10 2014, 10:10:46) 
+[GCC 4.2.1 (Apple Inc. build 5666) (dot 3)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>> # keys and text must be in muliples of 16 characters
+... 
+>>> from Crypto.Cipher  import AES
+>>> # Encription
+... 
+>>> key = 'onetwothreefour '
+>>> len(key)
+16
+>>> key2 = 'This is IV456'
+>>> len(key2)
+13
+>>> key = 'This is a key123'
+>>> len(key)
+16
+>>> encryption_suite = AES.new(key,AES.MODE_CBC,key2)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/Crypto/Cipher/AES.py", line 95, in new
+    return AESCipher(key, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/Crypto/Cipher/AES.py", line 59, in __init__
+    blockalgo.BlockAlgo.__init__(self, _AES, key, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/Crypto/Cipher/blockalgo.py", line 141, in __init__
+    self._cipher = factory.new(key, *args, **kwargs)
+ValueError: IV must be 16 bytes long
+>>> key2 = 'This is IV123456'
+>>> len(key2)
+16
+>>> encryption_suite = AES.new(key,AES.MODE_CBC,key2)
+>>> text = 'A really secret message. Not for prying eyes.'
+>>> len(text)
+45
+>>> text = 'A really secret message. Not for prying eyes123.'
+>>> len(text)
+48
+>>> cipher_text = encryption_suite.encrypt(text)
+>>> cipher_text
+"SK,H\xff\xb0\xaa^V\xf1\xfd\xbe'\x9d\x1b\x17z\\\x80(f\xb8\xa1\xedkh!\xcf\xea\xef\xbb\x8e\x8b\x11#\xf0\xf5%\x19\x18b>*\xad\xa9m&\x80"
+>>> # Decryption
+... 
+>>> decryption_suite = AES.new(key, AES.MODE_CBC, key2)
+>>> plain_text = decryption_suite.decrypt(cipher_text)
+>>> plain_text
+'A really secret message. Not for prying eyes123.'
+>>> 

@@ -1,0 +1,66 @@
+Set Up JUnit environment:  http://www.tutorialspoint.com/junit/junit_environment_setup.htm
+
+1) Step 1 - verify Java installation in your machine
+	a) Mac 
+	c1246895-osx2:DbConnectors rduvalwa2$ java -version
+	java version "1.8.0_05"
+	Java(TM) SE Runtime Environment (build 1.8.0_05-b13)
+	Java HotSpot(TM) 64-Bit Server VM (build 25.5-b02, mixed mode)
+	c1246895-osx2:DbConnectors rduvalwa2$ which java
+	/usr/bin/java
+	c1246895-osx2:DbConnectors rduvalwa2$ which javac
+	/usr/bin/javac
+	c1246895-osx2:DbConnectors rduvalwa2$ 
+	
+	b) Windows
+	C:\Users\Randall Duval>java -version
+	java version "1.7.0_67"
+	Java(TM) SE Runtime Environment (build 1.7.0_67-b01)
+	Java HotSpot(TM) Client VM (build 24.65-b04, mixed mode, sharing)
+	C:\Users\Randall Duval>which java
+	/cygdrive/c/Program Files (x86)/Java/jdk1.7.0_67/bin/java
+
+2) Step 2: Set JAVA environment
+	a)  Mac
+	c1246895-osx2:DbConnectors rduvalwa2$ which java
+	/usr/bin/java
+	c1246895-osx2:DbConnectors rduvalwa2$ which javac
+	/usr/bin/javac
+	c1246895-osx2:DbConnectors rduvalwa2$ echo $JAVA_HOME
+
+	c1246895-osx2:DbConnectors rduvalwa2$ 
+	c1246895-osx2:DbConnectors rduvalwa2$ export JAVA_HOME=/Library/Java/Home
+	c1246895-osx2:DbConnectors rduvalwa2$ echo $JAVA_HOME
+	/Library/Java/Home
+	c1246895-osx2:DbConnectors rduvalwa2$ java -version
+	java version "1.6.0_65"
+	Java(TM) SE Runtime Environment (build 1.6.0_65-b14-466.1-11M4716)
+	Java HotSpot(TM) 64-Bit Server VM (build 20.65-b04-466.1, mixed mode)
+	c1246895-osx2:DbConnectors rduvalwa2$ export JAVA_HOME=/usr/bin <--- don't do this
+	c1246895-osx2:DbConnectors rduvalwa2$ java -version
+	Unable to locate an executable at "/usr/bin/bin/java" (-1)
+	c1246895-osx2:DbConnectors rduvalwa2$ export JAVA_HOME=/usr
+	c1246895-osx2:DbConnectors rduvalwa2$ java -version
+	Unable to find a $JAVA_HOME at "/usr", continuing with system-provided Java...
+		java version "1.8.0_05"
+		Java(TM) SE Runtime Environment (build 1.8.0_05-b13)
+		Java HotSpot(TM) 64-Bit Server VM (build 25.5-b02, mixed mode)
+	c1246895-osx2:DbConnectors rduvalwa2$ export JAVA_HOME=/Library/Java/Home
+	c1246895-osx2:DbConnectors rduvalwa2$ ls $JAVA_HOME
+	bin	bundle	lib	man
+	c1246895-osx2:DbConnectors rduvalwa2$ ls $JAVA_HOME/bin
+	appletviewer	jar		javadoc		jconsole	jmap		jstack		native2ascii	rmic		serialver	wsgen
+	apt		jarsigner	javah		jdb		jps		jstat		orbd		rmid		servertool	wsimport
+	extcheck	java		javap		jhat		jrunscript	jstatd		pack200		rmiregistry	tnameserv	xjc
+	idlj		javac		javaws		jinfo		jsadebugd	keytool		policytool	schemagen	unpack200
+	c1246895-osx2:DbConnectors rduvalwa2$ 
+
+
+	
+	
+	b) Windows
+	C:\Users\Randall Duval>which java
+	/cygdrive/c/Program Files (x86)/Java/jdk1.7.0_67/bin/java
+	C:\Users\Randall Duval>echo %JAVA_HOME%
+		C:\Program Files (x86)\Java\jdk1.7.0_67
+	Set the environment variable JAVA_HOME to C:\Program Files\Java\jdk1.6.0_21
