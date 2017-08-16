@@ -1,0 +1,22 @@
+Home Apache Installation Nov 29 2009
+
+1) Down Load  http://httpd.apache.org
+	- Microsoft installed this version is without SSL
+	- C:\Program Files\Apache Software Foundation\Apache2.2
+	
+2) Configuration
+	- C:\Program Files\Apache Software Foundation\Apache2.2\conf\httpd.conf
+	ServerRoot "C:/Program Files/Apache Software Foundation/Apache2.2"
+	Listen 8080
+	# LoadModule foo_module modules/mod_foo.so
+	User daemon
+	Group daemon
+	ServerAdmin rduvalwa2@comcast.net
+	ServerName C1246895-J:8080
+	DocumentRoot "C:/Program Files/Apache Software Foundation/Apache2.2/htdocs"
+	<Directory "C:/Program Files/Apache Software Foundation/Apache2.2/htdocs">
+	ErrorLog "logs/error.log"
+	LogLevel warn
+	<Directory "C:/Program Files/Apache Software Foundation/Apache2.2/cgi-bin">
+	DefaultType text/plain
+	

@@ -1,0 +1,97 @@
+About Current Notes:
+Server:							OSXAir
+Working Repository Location:	/Users/rduvalwa2/Workspace/Current_Notes
+Cloning Repository:				/Users/rduvalwa2/Workspace/GitRepos
+
+OSXAir:GitRepos rduvalwa2$ ls
+Basic_Python.git		MathExamples.git		OReilly_Python_Air.git.old	Py_Servers.git
+Current_Notes.git		OReilly_Python_Air.git		OReilly_Python_New.git 
+
+
+Actions:
+
+1)  OSXAir:Current_Notes rduvalwa2$ git status
+		On branch master
+		Your branch is up-to-date with 'origin/master'.
+		Untracked files:
+  		(use "git add <file>..." to include in what will be committed)
+
+			About_Current_Notes.txt
+
+		nothing added to commit but untracked files present (use "git add" to track)
+
+2)	OSXAir:Current_Notes rduvalwa2$ git add *
+		OSXAir:Current_Notes rduvalwa2$ git status
+		On branch master
+		Your branch is up-to-date with 'origin/master'.
+		Changes to be committed:
+  		(use "git reset HEAD <file>..." to unstage)
+
+			new file:   About_Current_Notes.txt
+
+3)  OSXAir:Current_Notes rduvalwa2$ git commit -m "add About_Current_Notes.txt"
+		[master 168b6a4] add About_Current_Notes.txt
+		 1 file changed, 12 insertions(+)
+		 create mode 100644 About_Current_Notes.txt
+
+4)  OSXAir:Current_Notes rduvalwa2$ git push
+		warning: push.default is unset; its implicit value has changed in
+		Git 2.0 from 'matching' to 'simple'. To squelch this message
+		and maintain the traditional behavior, use:
+
+  		git config --global push.default matching
+
+		To squelch this message and adopt the new behavior now, use:
+
+  		git config --global push.default simple
+
+		When push.default is set to 'matching', git will push local branches
+		to the remote branches that already exist with the same name.
+
+		Since Git 2.0, Git defaults to the more conservative 'simple'
+		behavior, which only pushes the current branch to the corresponding
+		remote branch that 'git pull' uses to update the current branch.
+
+		See 'git help config' and search for 'push.default' for further information.
+		(the 'simple' mode was introduced in Git 1.7.11. Use the similar mode
+		'current' instead of 'simple' if you sometimes use older versions of Git)
+
+		Counting objects: 3, done.
+		Delta compression using up to 4 threads.
+		Compressing objects: 100% (3/3), done.
+		Writing objects: 100% (3/3), 489 bytes | 0 bytes/s, done.
+		Total 3 (delta 1), reused 0 (delta 0)
+		To /Users/rduvalwa2/Workspace/GitRepos/Current_Notes.git
+   		b79963d..168b6a4  master -> master
+
+5)  OSXAir:Current_Notes rduvalwa2$ git log
+commit 499021a76bd992f7ee62aaa25bdf27ae6dda69db
+Author: rduvalwa5 <rduvalwa5@hotmail.com>
+Date:   Wed Jun 29 23:16:18 2016 -0700
+
+    add changes to about
+
+commit 168b6a48441e3221e326d981d3a8ddbf54b213a1
+Author: rduvalwa5 <rduvalwa5@hotmail.com>
+Date:   Wed Jun 29 23:07:30 2016 -0700
+
+    add About_Current_Notes.txt
+
+commit b79963dc93c15a3d65e74cb904bba5d57a3a7f19
+Author: rduvalwa5 <rduvalwa5@hotmail.com>
+Date:   Wed Jun 29 22:13:17 2016 -0700
+
+    add and change
+
+commit 416f2d06e95aabc6cd239b4a6ce496e1a009256d
+Author: rduvalwa5 <rduvalwa5@hotmail.com>
+Date:   Wed Jun 29 01:37:52 2016 -0700
+
+    tools notes
+
+commit 81cff7d052788531d1adaefb89065e08823310c8
+Author: rduvalwa5 <rduvalwa5@hotmail.com>
+Date:   Wed Jun 29 00:49:16 2016 -0700
+
+    initial committ
+OSXAir:Current_Notes rduvalwa2$ 

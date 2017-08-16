@@ -1,0 +1,49 @@
+Apache Notes Mac OSX
+
+Links:
+http://directory.apache.org/studio/download/download-macosx.html
+http://damianoferrari.com/set-up-apache-and-php-on-os-x-10-8-mountain-lion/
+
+1)	In OS X 10.8 Mountain Lion, Apple made several changes to the built-in Apache server: 
+	the Web Sharing option was eliminated from the Sharing panel in System Preferences and PHP is now disabled by default. 
+	Thankfully, it is quite easy to undo the changes and get Apache to run with support for PHP.
+
+	a. Enable Apache
+		OS X 10.8 Mountain Lion ships with Apache 2.2.22. With the Web Sharing option eliminated, Apache can still be managed 
+		from the Terminal.
+		To start it:
+			sudo apachectl start
+		To stop it:
+			sudo apachectl stop
+		To restart it:
+			sudo apachectl restart
+	b. Once Apache is running, http://localhost should display the default �It works!� page. 
+	   The document root of the default site is found in /Library/WebServer/Documents/.
+
+02/07/15
+
+1) Locaitions
+Duval-Osx2:usr rduvalwa2$ which apachectl 
+/usr/sbin/apachectl
+
+Duval-Osx2:etc rduvalwa2$ cd apache2
+Duval-Osx2:apache2 rduvalwa2$ ls
+extra				httpd.conf.mediaWiki		magic				other
+httpd.conf			httpd.conf.pre-update		mime.types			users
+httpd.conf.MaverickInstall	httpd.conf~previous		original
+Duval-Osx2:apache2 rduvalwa2$ pwd
+/etc/apache2
+Duval-Osx2:apache2 rduvalwa2$ 
+
+Duval-Osx2:apache2 rduvalwa2$ ps -ef | grep apach
+    0    68     1   0 Fri10AM ??         0:01.01 /Library/PostgreSQL/EnterpriseDB-ApachePhp/apache/bin/httpd -D FOREGROUND -f /Library/PostgreSQL/EnterpriseDB-ApachePhp/apache/conf/httpd.conf
+    1   160    68   0 Fri10AM ??         0:00.00 /Library/PostgreSQL/EnterpriseDB-ApachePhp/apache/bin/httpd -D FOREGROUND -f /Library/PostgreSQL/EnterpriseDB-ApachePhp/apache/conf/httpd.conf
+    1   161    68   0 Fri10AM ??         0:00.00 /Library/PostgreSQL/EnterpriseDB-ApachePhp/apache/bin/httpd -D FOREGROUND -f /Library/PostgreSQL/EnterpriseDB-ApachePhp/apache/conf/httpd.conf
+    1   163    68   0 Fri10AM ??         0:00.00 /Library/PostgreSQL/EnterpriseDB-ApachePhp/apache/bin/httpd -D FOREGROUND -f /Library/PostgreSQL/EnterpriseDB-ApachePhp/apache/conf/httpd.conf
+    1   164    68   0 Fri10AM ??         0:00.00 /Library/PostgreSQL/EnterpriseDB-ApachePhp/apache/bin/httpd -D FOREGROUND -f /Library/PostgreSQL/EnterpriseDB-ApachePhp/apache/conf/httpd.conf
+    1  2147    68   0  6:17PM ??         0:00.00 /Library/PostgreSQL/EnterpriseDB-ApachePhp/apache/bin/httpd -D FOREGROUND -f /Library/PostgreSQL/EnterpriseDB-ApachePhp/apache/conf/httpd.conf
+    
+    
+---- Reinstalling apache new ---------
+http://httpd.apache.org/download.cgi
+

@@ -1,0 +1,90 @@
+Apache Notes:
+
+A.  Apache Installation Nov 29 2009
+      1) Down Load  http://httpd.apache.org
+		- Microsoft installed this version is without SSL
+		- C:\Program Files\Apache Software Foundation\Apache2.2
+      2) Configuration
+		- C:\Program Files\Apache Software Foundation\Apache2.2\conf\httpd.conf
+		ServerRoot "C:/Program Files/Apache Software Foundation/Apache2.2"
+		Listen 8080  -- Default is 80
+		# LoadModule foo_module modules/mod_foo.so
+		User daemon
+		Group daemon
+		ServerAdmin rduvalwa2@comcast.net
+		ServerName C1246895-J:8080
+		DocumentRoot "C:/Program Files/Apache Software Foundation/Apache2.2/htdocs"
+		<Directory "C:/Program Files/Apache Software Foundation/Apache2.2/htdocs">
+		ErrorLog "logs/error.log"
+		LogLevel warn
+		<Directory "C:/Program Files/Apache Software Foundation/Apache2.2/cgi-bin">
+		DefaultType text/plain
+
+B.   Mac Notes
+      Links:
+      http://directory.apache.org/studio/download/download-macosx.html
+      http://damianoferrari.com/set-up-apache-and-php-on-os-x-10-8-mountain-lion/
+      1)	In OS X 10.8 Mountain Lion, Apple made several changes to the built-in Apache server: 
+the Web Sharing option was eliminated from the Sharing panel in System Preferences and PHP is now disabled by default. 
+		Thankfully, it is quite easy to undo the changes and get Apache to run with support for PHP.
+      a. Enable Apache
+      OS X 10.8 Mountain Lion ships with Apache 2.2.22. With the Web Sharing option eliminated, Apache can still be managed from the Terminal.
+		To start it:
+			sudo apachectl start
+		To stop it:
+			sudo apachectl stop
+		To restart it:
+			sudo apachectl restart
+		b. Once Apache is running, http://localhost should display the default ÒIt works!Ó page. 
+	   	The document root of the default site is found in /Library/WebServer/Documents/.
+
+      2) 	02/07/15
+      a.  Locaitions
+      Duval-Osx2:usr rduvalwa2$ which apachectl 
+      /usr/sbin/apachectl
+      Duval-Osx2:etc rduvalwa2$ cd apache2
+      Duval-Osx2:apache2 rduvalwa2$ ls
+      extra		httpd.conf.mediaWiki	magic		other
+      httpd.conf	httpd.conf.pre-update	mime.types	users
+      httpd.conf.MaverickInstall	httpd.conf~previous		original
+      Duval-Osx2:apache2 rduvalwa2$ pwd
+      /etc/apache2
+      Duval-Osx2:apache2 rduvalwa2$ 
+	-------------------------------------
+      Duval-Osx2:apache2 rduvalwa2$ ps -ef | grep apach
+0    68     1   0 Fri10AM ??         0:01.01 /Library/PostgreSQL/EnterpriseDB-ApachePhp/apache/bin/httpd  -D FOREGROUND -f /Library/PostgreSQL/EnterpriseDB-ApachePhp/apache/conf/httpd.conf
+    	1   160    68   0 Fri10AM ??         0:00.00 /Library/PostgreSQL/EnterpriseDB-ApachePhp/apache/bin/httpd -D FOREGROUND -f /Library/PostgreSQL/EnterpriseDB-ApachePhp/apache/conf/httpd.conf
+    	1   161    68   0 Fri10AM ??         0:00.00 /Library/PostgreSQL/EnterpriseDB-ApachePhp/apache/bin/httpd -D FOREGROUND -f /Library/PostgreSQL/EnterpriseDB-ApachePhp/apache/conf/httpd.conf
+   	1   163    68   0 Fri10AM ??         0:00.00 /Library/PostgreSQL/EnterpriseDB-ApachePhp/apache/bin/httpd -D FOREGROUND -f /Library/PostgreSQL/EnterpriseDB-ApachePhp/apache/conf/httpd.conf
+    	1   164    68   0 Fri10AM ??         0:00.00 /Library/PostgreSQL/EnterpriseDB-ApachePhp/apache/bin/httpd -D FOREGROUND -f /Library/PostgreSQL/EnterpriseDB-ApachePhp/apache/conf/httpd.conf
+    	1  2147    68   0  6:17PM ??         0:00.00 /Library/PostgreSQL/EnterpriseDB-ApachePhp/apache/bin/httpd -D FOREGROUND -f /Library/PostgreSQL/EnterpriseDB-ApachePhp/apache/conf/httpd.conf
+    
+      ---- Reinstalling apache new ---------
+      sudo apachectl start
+      sudo apachectl stop
+      http://localhost:80
+	
+
+C. Windows 7 Notes
+1) God how I hate Windows
+2) Problem you want to transfer a license to another computer
+	a. Deactviate the original license on the computer that has it.
+	1) Start Command Prompt: 
+        Click the Start Menu Button Orb (On Lower left), In the Start Search Box, key in: 
+        cmd And RIGHT CLICK IT, and Run as Administrator.
+	You can also Manually open CMD, by going to: START> ALL PROGRAMS> ACCESSORIES> Command Prompt			And Run as Admin
+        2) Key in the following CAREFULLY:	slmgr.vbs -ipk 3YFJ7-3486F-7488V-3VDMF-2PJMW
+		Hit Enter  This key is a deactivated key from Microsoft, and does NOT work for activating
+        3) wait a few seconds to a minute to deactivate Windows 7.
+	4) Once you see a pop up related to deactivation, check and see if Windows is deactivated. Go to:
+        Start> Right Click Computer> Click Properties, on fdiskthe bottom it should tell you a time Limit				
+3) Added drive using unused disk space:  "Disk Management" tool, simple disk		
+4) II7S uses the same port as Apache and blocks the Apache Installation
+       ******* IIS7 server internet information services 
+	Turn off or Disable
+		Click Start, type: turn windows features on or off
+		Hit Enter on your keyboard
+		From there you can uncheck Internet Information Services
+		Click OK
+		Restart if prompted.
+
