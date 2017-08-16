@@ -1,0 +1,25 @@
+Verizon Online EMail Address: rduvalwa2@verizon.net
+Verizon Online User Name: rduvalwa2
+Verizon Online Password: blu4jazz
+Alternate EMail Address: None
+
+Service Plan: up to 15Mbps/5Mbps
+
+Online Experience: None selected yet
+Help & Support: www.verizon.net/help
+
+Desktop Shortcuts: None
+
+
+
+--------------------------------------
+verizon
+
+11ECAA74C2
+MUZ56
+
+192.168.1.1
+admin
+password1
+
+C:\Documents and Settings\RDuval\Application Data\TechWizard\info.html

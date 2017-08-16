@@ -1,0 +1,39 @@
+Unix Command reference:
+http://linux.about.com/od/commands/l/blcmdl1_ps.htm
+http://stackoverflow.com/questions/1506521/select-row-and-element-in-awk
+
+
+
+Sofware port assignments:
+
+Associate PID to Port:
+grep `sudo lsof -i :4848 | awk 'FNR == 2 {print $2;}'` | ps -ef 
+
+C1246895-Air:Home rduvalwa2$   sudo lsof -i :4848 | awk 'FNR == 2 {print "PID  " $2;}' 
+PID  32619
+
+Associate PID to Application:
+C1246895-Air:Home rduvalwa2$ ps -p `sudo lsof -i :4848 | awk 'FNR == 2 {print $2;}'`
+  PID TTY           TIME CMD
+32619 ttys005    1:27.92 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/bin/java -cp /usr/local/glassfish4-3/glassfish/modules/glassfish.jar -XX:+UnlockDiagnosticVMOptions -XX:NewRatio=2
+
+C1246895-Air:Home rduvalwa2$ ps -ef | grep glassfish
+  503 33118 26031   0  2:32PM ttys000    0:00.00 grep glassfish
+    0 32619 32617   0  1:56PM ttys005    1:29.14 /Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/bin/java -cp /usr/local/glassfish4-3/glassfish/modules/glassfish.jar -XX:+UnlockDiagnosticVMOptions -XX:NewRatio=2 -XX:MaxPermSize=192m -Xmx512m -javaagent:/usr/local/glassfish4-3/glassfish/lib/monitor/flashlight-agent.jar -client -Djavax.net.ssl.trustStore=/usr/local/glassfish4-3/glassfish/domains/domain1/config/cacerts.jks -Dfelix.fileinstall.dir=/usr/local/glassfish4-3/glassfish/modules/autostart/ -Dorg.glassfish.additionalOSGiBundlesToStart=org.apache.felix.shell,org.apache.felix.gogo.runtime,org.apache.felix.gogo.shell,org.apache.felix.gogo.command,org.apache.felix.shell.remote,org.apache.felix.fileinstall -Dcom.sun.aas.installRoot=/usr/local/glassfish4-3/glassfish -Dfelix.fileinstall.poll=5000 -Djava.endorsed.dirs=/usr/local/glassfish4-3/glassfish/modules/endorsed:/usr/local/glassfish4-3/glassfish/lib/endorsed -Djava.security.policy=/usr/local/glassfish4-3/glassfish/domains/domain1/config/server.policy -Dosgi.shell.telnet.maxconn=1 -Dfelix.fileinstall.bundles.startTransient=true -Dcom.sun.enterprise.config.config_environment_factory_class=com.sun.enterprise.config.serverbeans.AppserverConfigEnvironmentFactory -Dfelix.fileinstall.log.level=2 -Djavax.net.ssl.keyStore=/usr/local/glassfish4-3/glassfish/domains/domain1/config/keystore.jks -Djava.security.auth.login.config=/usr/local/glassfish4-3/glassfish/domains/domain1/config/login.conf -Dfelix.fileinstall.disableConfigSave=false -Dfelix.fileinstall.bundles.new.start=true -Dcom.sun.aas.instanceRoot=/usr/local/glassfish4-3/glassfish/domains/domain1 -Dosgi.shell.telnet.port=6666 -Dgosh.args=--nointeractive -Dcom.sun.enterprise.security.httpsOutboundKeyAlias=s1as -Dosgi.shell.telnet.ip=127.0.0.1 -DANTLR_USE_DIRECT_CLASS_LOADING=true -Djava.awt.headless=true -Djava.ext.dirs=/Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/lib/ext:/Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre/lib/ext:/usr/local/glassfish4-3/glassfish/domains/domain1/lib/ext -Djdbc.drivers=org.apache.derby.jdbc.ClientDriver -Djava.library.path=/usr/local/glassfish4-3/glassfish/lib:/Users/rduvalwa2/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:/usr/local/glassfish4-3/glassfish/bin com.sun.enterprise.glassfish.bootstrap.ASMain -upgrade false -domaindir /usr/local/glassfish4-3/glassfish/domains/domain1 -read-stdin true -asadmin-args --host,,,localhost,,,--port,,,4848,,,--secure=false,,,--terse=false,,,--echo=false,,,--interactive=true,,,start-domain,,,--verbose=true,,,--watchdog=false,,,--debug=false,,,--domaindir,,,/usr/local/glassfish4-3/glassfish/domains,,,domain1 -domainname domain1 -instancename server -type DAS -verbose true -asadmin-classpath /usr/local/glassfish4-3/glassfish/modules/admin-cli.jar -debug false -asadmin-classname com.sun.enterprise.admin.cli.AdminMain
+
+
+C1246895-Air:Home rduvalwa2$ sudo lsof -i :8686
+COMMAND   PID USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+java    32619 root  389u  IPv6 0x788ba1344a2ba5af      0t0  TCP *:sun-as-jmxrmi (LISTEN)
+
+
+C1246895-Air:Home rduvalwa2$   sudo lsof -i :8080 | awk 'FNR == 2 {print $2;}' 
+32619
+
+
+--------------------------------------------------------------------------------------------
+Server:         Port            Application
+--------------------------------------------------------------------------------------------
+C1246895-AIR    4848            Glassfish Admin
+C1246895-AIR    8080            Glassfish
+C1246895-AIR    8686            Glassfish

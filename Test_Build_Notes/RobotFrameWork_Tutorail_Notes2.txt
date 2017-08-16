@@ -1,0 +1,338 @@
+Robot Framework User Guide  Version 2.8.7
+http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html
+
+
+
+1.1.1   Why Robot Framework? Review These First
+
+1a.	Test Case Syntax
+		http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#creating-test-data
+
+1b.    Enables easy-to-use tabular syntax for creating test cases in a uniform way.  
+    	http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#creating-test-cases
+    	
+1c.    Provides ability to create reusable higher-level keywords from the existing keywords.
+    	http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#creating-user-keywords
+    	
+1d.    Provides easy-to-read result reports and logs in HTML format.
+    	http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#report-file
+    	http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#log-file
+    	
+1e.    Is platform and application independent.
+    
+1f.    Provides a simple library API for creating customized test libraries which can be implemented natively with either Python or Java.
+    	http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#creating-test-libraries
+    
+1g.    Provides a command line interface and XML based output files for integration into existing build infrastructure (continuous integration systems).
+    	http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#creating-test-libraries
+    	http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#output-file
+    	
+1h.    Provides support for Selenium for web testing, Java GUI testing, running processes, Telnet, SSH, and so on.
+    
+1i.    Supports creating data-driven test cases.
+    	http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#data-driven-style
+    	
+1j.    Has built-in support for variables, practical particularly for testing in different environments.
+    	http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#variables
+    	
+1k.    Provides tagging to categorize and select test cases to be executed.
+    	http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#tagging-test-cases
+    	http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#selecting-test-cases
+    	
+1l.    Enables easy integration with source control: test suites are just files and directories that can be versioned with the production code.
+    	http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#creating-test-suites
+    	
+1m.    Provides test-case and test-suite -level setup and teardown.
+    	http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#test-setup-and-teardown
+    	http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#suite-setup-and-teardown
+    	
+1n.   The modular architecture supports creating tests even for applications with several diverse interfaces.
+
+_________________________________________________________________________________________________________________
+1a  Test Case Syntax
+_________________________________________________________________________________________________________________
+2.2.1   Test case syntax
+	Basic syntax
+	Test case construct test case tables from the available keywords
+	Keywords imported from:
+	 2.4	test libraries		http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#using-test-libraries
+	 2.7.1	resource files		http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#resource-files
+	 2.6	created in the keyword table of the test case file itself
+	 					http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#creating-user-keywords
+	 2.6.5  Key word return values User keyword return values	http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#user-keyword-return-values 				
+	 					
+
+	TEST CASE TABLE
+	- first column in the test case table contains test case names
+		- test case starts from the row with something in this column 
+		      continues to the next test case name 
+	    	  or to the end of the table
+		It is an error to have something between the table headers and the first test
+
+	- second column has keyword names
+	    - exception to this rule is setting variables from keyword return values
+	      when the second and possibly also the subsequent columns contain variable names and a keyword name is located after them
+	      In either case, columns after the keyword name contain possible arguments to the specified keyword.
+
+Example test cases 
+_________________________________________________________________________________________________________________
+	
+	Test Case 			Action 	                      Argument 			Argument
+	|------------------|------------==-------------|---------------|------------------------|
+	   Valid Login 		 Open Login Page 	  	 
+	|------------------|---------------------------|---------------|------------------------|
+	|				   |  Input Name 		       |  demo 	       |------------------------|
+	|                  |  Input Password 	       |  mode 	       |------------------------|
+	|                  | Submit Credentials        | 	     	   |------------------------|	 
+	|                  |Welcome Page Should Be Open|               |                        |   
+	|------------------|---------------------------|---------------|------------------------|
+	|Setting Variables | Do Something 	           |first argument |  second argument       |
+	|                  |${value} = 	               |Get Some Value |                        |	
+	|                  |Should Be Equal            | ${value}      |  Expected value        |
+	|------------------|---------------------------|---------------|------------------------|
+
+
+Settings in the Test Case table
+_________________________________________________________________________________________________________________
+  Test cases can have their own settings
+	 - Setting names always in the second column, where keywords normally are
+	   their values are in the subsequent columns
+	 
+	 - Setting names have square [brackets around them] to distinguish them from keywords
+		available settings are listed below and explained later in this section.
+
+		[Documentation]    	Used for specifying a test case documentation.
+		[Tags]				Used for tagging test cases.
+		[Setup], [Teardown] Specify test setup and teardown. Have also synonyms [Precondition] and [Postcondition], respectively.
+		[Template]			Specifies the template keyword to use. The test itself will contain only data to use as arguments to that keyword.
+		[Timeout]			Used for setting a test case timeout. Timeouts are discussed in their own section.
+
+	Example test case with settings 
+	------------------------------------------------------------------------
+	|  Test Case 	    |   Action 	     |Argument          |	Argument   |
+	------------------------------------------------------------------------
+    |Test With Settings |[Documentation] |Another dummy test|              |
+    ------------------------------------------------------------------------
+	|                   | [Tags] 	     | dummy 	        |owner-johndoe |
+	------------------------------------------------------------------------
+	|                   | Log 	         |Hello, world!     |              |
+	------------------------------------------------------------------------	
+	
+	
+Test case related settings in the Setting table
+_________________________________________________________________________________________________________________
+
+	Setting table can have the following test case related settings
+		These settings are mainly default values for the test case specific settings listed earlier
+
+	- Force Tags, Default Tags		The forced and default values for tags.
+									http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#tagging-test-cases
+	- Test Setup, Test Teardown		The default values for test setup and teardown. Have also synonyms Test Precondition and Test Postcondition, respectively.
+									http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#test-setup-and-teardown
+	- Test Template					The default template keyword to use.
+									http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#test-templates
+	- Test Timeout					The default value for test case timeout. Timeouts are discussed in their own section.
+									http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#test-case-timeout
+									http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#timeouts
+
+
+
+
+
+
+
+
+ 
+2.2.2   Using arguments
+_________________________________________________________________________________________________________________
+
+
+
+2.4   Using test libraries
+
+
+2.6   Creating user keywords
+
+2.6.5   User keyword return values
+
+2.7.1   Resource files
+
+
+1b Creating Test Cases
+_________________________________________________________________________________________________________________
+
+
+
+
+
+
+1.1.2   High-level architecture
+Robot Framework is a generic, application and technology independent framework. It has a highly modular architecture 
+illustrated in the diagram below.
+
+Robot Framework architecture
+
+	-------------------------
+	|		Test Data		|
+	-------------------------
+	...........................Test Data Syntax
+	-------------------------
+	|    Robot Framework	|
+	-------------------------
+	...........................Test Library API
+	-------------------------
+	|     Test Libraries    |
+	-------------------------
+	-------------------
+	|    Test Tools   |
+	-------------------
+	...........................Application Interfaces
+	-------------------------
+	|       System Under    |
+	-------------------------
+	
+	test data
+	- simple, easy-to-edit tabular format
+	
+	When Robot Framework is started
+		- it processes the test data
+		- executes test cases 
+		- generates logs and reports
+		
+	core framework does not know anything about the target under test
+		- interaction with it is handled by test libraries
+		
+	Libraries
+		- either use application interfaces directly 
+		- or use lower level test tools as drivers
+		
+1.1.3   Screenshots
+		-	Test Data http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#creating-test-data
+		-	Reports	http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#report-file
+		-	Logs	http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#log-file
+	
+1.1.4   Getting more information  http://www.catb.org/~esr/faqs/smart-questions.html
+		- http://groups.google.com/group/robotframework-users
+		- http://groups.google.com/group/robotframework-announce
+		- http://groups.google.com/group/robotframework-devel
+
+
+
+
+
+Robot Framework Tutorial – A complete example
+https://blog.codecentric.de/en/2012/04/robot-framework-tutorial-a-complete-example/
+
+I.  Robot Framework Tutorial – Overview
+ a. What means keyword-driven testing?
+	Whenever I try to explain what a keyword is, I refer to it as a function or method that can be used to test (or help test) 
+	one (smaller or bigger) aspect of the SuT (“System under Test”, that is how we call the tested system to be a bit more cool ;-)).
+
+	The really cool – and really powerful – thing about this now is that one keyword can be defined from other keywords and so on. 
+	That is why we are often talking of:
+
+	Higher-level keywords: 
+	Those are really testing a concrete aspect of the business logic of the system under test.
+
+	Lower-level keywords: 
+	To keep the implementation of the higher-level keywords at a decent size one is often breaking down the required 
+	functionality to several lower-level keywords.
+
+	Technical keywords: 
+	Those provide the technical implementation to access and thus test the system.
+	
+	Keyword,,Test Function 1''
+	|   Input: A,B,C
+	|   Expected Result: X
+	|
+	|--> Keyword,,Update Input Table''
+	|		Input: A,B,C
+	|		Expected Result: ok/nok
+	|               |		
+	|               |--> Keyword..Connect To DB''
+	|               |       Input: Connection-String
+	|               |       Expected Result: ok/nok
+	|               |
+	|               |-->  Keyword,,Insert To Table''
+	|               |       Input: Table-Name,x
+	|               |       Expected Result: ok/nok
+	|               |
+	|               |--> ...
+	|
+	|--> Keyword,,Execute Batch''
+	|      Input:Process-Name
+	|      Expected Result: ok/nok
+	|
+	|--> Keyword,,Check Result''
+	       Input: x
+	       Expected Result: ok/nok
+	       
+	technical keywords are written in any programming language (ok, not really any)
+	other keywords are then written as a combination of already existing keywords	
+	look at a concrete definition of some keyword:
+	       __________________________________________________________________________________
+	       | Google Search    | [Arguments]        | ${SEARCH_ARG}        | ${RESULT_ARG}    |
+	       |__________________|____________________|______________________|__________________|
+	       |                  | Input Text         | q                    |  ${SEARCH_ARG}   |
+	       |__________________|____________________|______________________|__________________|
+	       |                  | Sleep              | 2s                   |                  |
+	       |__________________|____________________|______________________|__________________|
+	       |                  | Click Button       | btnG                 |  don't wait      |
+	       |__________________|____________________|______________________|__________________|	       
+	       |                  |Page should contain | ${RESULT_ARG}        |                  |
+	       |__________________|____________________|______________________|__________________|
+	       |                  |Capture Screenshot  |                      |                  |
+	       |__________________|____________________|______________________|__________________|	 	       
+
+	This shows:
+		- definition of a keyword for a Google Search 
+		- using keywords from the Selenium Library
+	This leads us to the fact that there are already a lot of predefined keywords defined in so called Test Libraries.
+
+ b.	Installation of Robot Framework 
+ 	- get the core framework and a set of Standard Test Libraries, bundled with the core installation
+    - Standard Test Libraries and a lot of additional external Test Libraries
+      contributed by the Robot Framework community and serve different purposes
+    - good thing on all this libraries 
+       you can mix all the keywords from all the different libraries together in defining your own keywords
+       you can for example easily write tests for a web application using keywords from the Selenium Library 
+       to remote control the web frontend and use at the same time the Database Library to check results of certain 
+       operations from the database
+    - ideal case all this can be done without a need to do any “real coding”, but by combining existing keywords from 
+      existing libraries to high-level keywords
+
+II.  Robot Framework Tutorial – A complete example
+	
+################################################################################################################################
+Z.  Python Robot Framework Tutorial (This is primarily a Python Tutorial)
+
+1) Introduction	
+	- This is self learning material to learn how to program using Python language.http://python.org/
+	  The target is to learn enough Python to be able to start creating test libraries for Robot Framework.http://robotframework.org/
+
+	- Earlier programming experience is expected but not absolutely necessary.http://diveintopython.net/
+
+	- The main study material for this training is the excellent Dive Into Python book which is freely available for on-line reading, 
+	  downloading or printing from http://diveintopython.net. It is targeted for people who already know how to program but do not know
+	  Python before.
+
+	- If you are a novice programmer, it might better to start with Think Python book. 
+	  http://www.greenteapress.com/thinkpython/thinkpython.html
+	  It is also available for free and its target audience is people without any earlier programming knowledge.
+
+	- Python Tutorial, available at http://python.org and included in the standard Python installation at least on Windows, 
+	  is also very good. Some of the sections in this training refer to it instead of or in addition to Dive Into Python.
+
+	- Python coding style guidelines are specified in PEP-8. Notice that the Dive Into Python book uses camelCaseStyle instead of 
+	  the recommended underline_style.
+
+	- Another highly recommended style guide, covering many essential Python idioms and techniques, is Code Like a Pythonista: Idiomatic Python available at http://python.net/~goodger/projects/pycon/2007/idiomatic/handout.html
+
+	- The official Python website at http://python.org is a good place to find more documentation and Python related information 
+	  in general.
+
+	- If you need information about Jython, the Java implementation of Python, you can start from http://jython.org.
+	
+	- The Definitive Guide to Jython covers Jython in detail and is useful especially if you are interested about Jython-Java integration. 
+	  It is freely available at http://jythonbook.com.
+	  

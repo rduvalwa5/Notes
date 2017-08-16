@@ -1,0 +1,324 @@
+Rest Api Tutorial
+********************************************************************************************************
+
+********************************************************************************************************
+********************************************************************************************************
+Java REST:
+********************************************************************************************************
+
+https://www.drupal.org/project/rest_server
+http://crunchify.com/how-to-build-restful-service-with-java-using-jax-rs-and-jersey/
+
+http://docs.oracle.com/javase/tutorial/networking/sockets/clientServer.html
+
+** This uses Glass Fish and Netbeans from Oracle/Java
+https://jersey.java.net
+https://jax-rs-spec.java.net
+http://docs.oracle.com/javaee/6/tutorial/doc/bnaaw.html
+
+
+** Eclipse
+
+Prerequisites:
+   1) GlassFish
+	- Down Load(version 4-3)	http://www.macupdate.com/app/mac/19680/glassfish-server/download
+	- Install	
+		C1246895-Air:~ rduvalwa2$ vi .bash_profile
+		C1246895-Air:~ rduvalwa2$ source .bash_profile
+		C1246895-Air:~ rduvalwa2$ echo $GLASSFISH_HOME
+		/usr/local/glassfish4-3/bin
+	- Start
+		glassfish4/bin/asadmin start-domain
+
+	- Load Console
+		http://localhost:4848
+	- Check the documentation
+		Quick Start 
+		GuideInstallation 
+		GuideRelease 
+		NotesAll-in-one 
+		Documentation Bundle
+		documentation page https://glassfish.java.net/documentation.html
+
+https://wiki.eclipse.org/Main_Page
+https://wiki.eclipse.org/EclipseLink/Examples/REST/GettingStarted
+https://wiki.eclipse.org/EclipseLink/Examples/REST/GettingStarted/RestService
+********************************************************************************************************
+******* The Tutorial *************************************************************************************************
+********************************************************************************************************
+
+EclipseLink/Examples/REST/GettingStarted
+
+Contents
+********************************************************************************************************
+**RESTful Service Example
+	In this example we will create a bare bones standards based RESTful service using EclipseLink JPA & JAXB.
+
+	Database Model 		https://wiki.eclipse.org/EclipseLink/Examples/REST/GettingStarted/DatabaseModel
+	- This is the database model that we will expose as a REST service.
+	Entity Model 		https://wiki.eclipse.org/EclipseLink/Examples/REST/GettingStarted/EntityModel
+	- We will interact with our database using JPA entities.
+	XML Binding 		https://wiki.eclipse.org/EclipseLink/Examples/REST/GettingStarted/XmlBinding
+	- JAXB/MOXy will be used to apply an XML representation to our JPA entities.
+	RESTful Service 	https://wiki.eclipse.org/EclipseLink/Examples/REST/GettingStarted/RestService
+	- An EJB session bean will be used to implment the JAX-RS service.
+	RESTful Client 		https://wiki.eclipse.org/EclipseLink/Examples/REST/GettingStarted/RestClient
+	- We will create a client to interact with our RESTful service.
+
+
+Java API for RESTful Web Services (JAX-RS) is the Java EE standard for creating RESTful Web Services. 
+In this post we will create a RESTful service from an EJB session bean using JAX-RS.
+Customer Service
+	- use the @PersistenceContext annotation to inject an EntityManager <-*  onto our EJB session bean
+	- use this EntityManager <-* to perform all of our persistence operations
+ Back in part 2 we configured our persistence unit to use the Java Transaction API (JTA), so we will not need to do any of our own transaction handling.
+
+You can see below how little JPA code is required to implement our RESTful service. Of course to make this production quality service we will need to include response objects and exception handling. In future posts I'll cover these topics in detail. For the purpose of this example the following is all the code you need to run your service.
+
+**Database Model
+********************************************************************************************************
+03-13-2015
+********************************************************************************************************
+
+https://wiki.eclipse.org/EclipseLink/Examples/REST/GettingStarted/DatabaseModel
+
+	Overview
+	The following database model will be used for this example. This particular database stores customer related 		information. 
+	I am using Oracle Database XE, but you could use almost any database with a JDBC driver.
+
+  *Note: I will be using MySql data base.
+
+ ** JDBC Resource & Connection Pool **
+	To configure a connection pool on our application server
+		- using GlassFish Server Open Source Edition version 3.0.1. 
+		- steps will vary depending on the application server you are using
+  (Research for Tomcat)
+  **** Steps ****
+	1. Copy the JDBC driver (ojdbc14.jar) to <glassfish_home>/glashfish/lib
+	2. Launch the Administration Console
+	3. Create a Connection Pool:
+		Name = CustomerService
+		Resource Type = 'javax.sql.ConnectionPoolDataSource'
+		Database Vendor = Oracle (or whatever database vendor is appropriate to your database)
+	4. Click Next and fill in the following "Additional Properties":
+		User (e.g. CustomerService)
+		Password (e.g. password)
+		URL (e.g. jdbc:oracle:thin:@localhost:1521:XE)
+		Use the "Ping" button to test your database connection
+	5. Create a JDBC Resource called "CustomerService"
+		JNDI Name = CustomerService
+		Pool Name = CustomerService (name of the connection pool you created in the previous step)
+
+
+####### END ############################################################################################
+
+
+
+
+
+********************************************************************************************************
+********************************************************************************************************
+Python REST:
+********************************************************************************************************
+http://www.dreamsyssoft.com/python-scripting-tutorial/create-simple-rest-web-service-with-python.php
+http://webpy.org
+	web.py is a web framework for Python that is as simple as it is powerful. web.py is in the public domain; 
+	you can use it for whatever purpose with absolutely no restrictions.
+	web.py 0.37 is the latest released version of web.py. You can install it by running:
+		sudo easy_install web.py
+    C1246895-Air:Collections2 rduvalwa2$ sudo easy_install web.py
+    Password:
+    Searching for web.py
+    Reading https://pypi.python.org/simple/web.py/
+    Best match: web.py 0.37
+    Downloading https://pypi.python.org/packages/source/w/web.py/web.py-0.37.tar.gz#md5=93375e3f03e74d6bf5c5096a4962a8db
+    Processing web.py-0.37.tar.gz
+    Writing /tmp/easy_install-w0pRCt/web.py-0.37/setup.cfg
+    Running web.py-0.37/setup.py -q bdist_egg --dist-dir /tmp/easy_install-w0pRCt/web.py-0.37/egg-dist-tmp-J0iUkm
+    zip_safe flag not set; analyzing archive contents...
+    web.application: module references __file__
+    web.debugerror: module references __file__
+    Adding web.py 0.37 to easy-install.pth file
+
+    Installed /Library/Python/2.7/site-packages/web.py-0.37-py2.7.egg
+    Processing dependencies for web.py
+    Finished processing dependencies for web.py
+    C1246895-Air:Collections2 rduvalwa2$ 
+
+	Or to get the latest development version from git:
+		git clone git://github.com/webpy/webpy.git
+		ln -s `pwd`/webpy/web .
+	
+1) Create a simple REST web service with Python
+	- quick tutorial how to create a simple RESTful web service using python
+   a) rest service uses web.py to create a server
+	- it will have two URLs
+		one for accessing all users
+		one for accessing individual users:
+			http://localhost:8080/users
+			http://localhost:8080/users/{id}
+2) Issue   see https://docs.python.org/2/library/socket.html
+application start
+http://0.0.0.0:8080/
+Traceback (most recent call last):
+  File "/Users/rduvalwa2/DevTools/eclipse-luna/workspace/OReilly_Python/PyRest/src/rest.py", line 38, in <module>
+    app.run()
+  File "/Library/Python/2.7/site-packages/web.py-0.37-py2.7.egg/web/application.py", line 313, in run
+    return wsgi.runwsgi(self.wsgifunc(*middleware))
+  File "/Library/Python/2.7/site-packages/web.py-0.37-py2.7.egg/web/wsgi.py", line 54, in runwsgi
+    return httpserver.runsimple(func, validip(listget(sys.argv, 1, '')))
+  File "/Library/Python/2.7/site-packages/web.py-0.37-py2.7.egg/web/httpserver.py", line 157, in runsimple
+    server.start()
+  File "/Library/Python/2.7/site-packages/web.py-0.37-py2.7.egg/web/wsgiserver/__init__.py", line 1753, in start
+    raise socket.error(msg)
+socket.error: No socket could be created
+
+** April 26 2015 **
+http://rest.elkstein.org/2008/02/using-rest-in-python.html
+
+
+
+####### END ############################################################################################
+
+********************************************************************************************************
+********************************************************************************************************
+REST Tutorial
+********************************************************************************************************
+
+http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm
+* http://rest.elkstein.org/2008/02/using-rest-in-python.html
+
+
+REST code examples
+http://code.tutsplus.com/tutorials/a-beginners-guide-to-http-and-rest--net-163
+* http://rest.elkstein.org/2008/02/using-rest-in-python.html
+
+http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm
+http://www.restapitutorial.com/
+noun based versus verb based
+http verbs
+
+http://en.wikipedia.org/wiki/Representational_state_transfer
+
+A. The six constraints are: (click the constraint to read more)
+    - Uniform Interface
+    - Stateless
+    - Cacheable
+    - Client-Server
+    - Layered System
+    - Code on Demand (optional)
+    
+B. REST architectural style describes six constraints
+    communicated by Roy Fielding in his doctoral dissertation (http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm)
+    defines the basis of RESTful-style
+
+C. Uniform Interface ************************
+    -uniform interface constraint defines the interface between clients and servers
+    -It simplifies and decouples the architecture, which enables each part to evolve independently
+    -four guiding principles of the uniform interface are:
+        * Resource-Based        
+            Individual resources are identified in requests using URIs as resource identifiers
+            resources themselves are conceptually separate from the representations that are returned to the client
+        * example the server does not send its database, but rather, some HTML, XML or JSON that represents some database records expressed
+        for instance, in Finnish and encoded in UTF-8, depending on the details of the request and the server implementation.
+
+   Manipulation of Resources Through Representations
+    -client holds a representation of a resource
+    -including any metadata attached
+        it has enough information to modify or delete the resource on the server
+        provided it has permission to do so.
+
+  Self-descriptive Messages
+    - message includes enough information to describe how to process the message
+    - example
+        which parser to invoke may be specified by an Internet media type (previously known as a MIME type)
+        Responses also explicitly indicate their cache-ability
+
+  Hypermedia as the Engine of Application State (HATEOAS)
+    -Clients deliver state via body contents
+        query-string parameters
+        request headers and the requested URI (the resource name)
+    -Services deliver state to clients via 
+        body content
+        response codes
+        and response headers
+  This is technically referred-to as hypermedia (or hyperlinks within hypertext).
+  HATEOS also means that links are contained in the returned body (or headers) to supply the URI for retrieval of the object itself or related objects
+  The uniform interface that any REST services must provide is fundamental to its design.
+  
+D. Stateless ************************
+    REST acronym for REpresentational State Transfer
+        statelessness is key
+        means is that necessary state to handle the request is contained within the request itself
+        whether as part of the URI, query-string parameters, body, or headers
+    
+    URI uniquely identifies the resource and the body contains the state (or state change) of that resource
+        -after the server does it's processing
+            the appropriate state, or the piece(s) of state that matter, are communicated back to the client via headers, status and response body
+        -traditional programming within a container which provides us with the concept of “session” 
+        maintains state across multiple HTTP requests
+    
+    In REST, 
+        client must include all information for the server to fulfill the request
+        resending state as necessary if that state must span multiple requests
+    
+    Statelessness enables greater scalability
+        -the server does not have to maintain, update or communicate that session state
+        -load balancers don't have to worry about session affinity for stateless systems
+
+    Difference between state and a resource? 
+        -State, or application state, is that which the server cares about to fulfill a request—data necessary for the current session or request
+        -resource, or resource state, is the data that defines the resource representation—the data stored in the database
+            for instance consider 
+                application state to be data that could vary by client, and per request
+                Resource state, on the other hand, is constant across every client who requests it
+    Ever had back-button issues with a web application where it went AWOL at a certain point because it expected you to do things in a certain order? 
+        That's because it violated the statelessness principle. 
+        There are cases that don't honor the statelessness principle
+            such as three-legged OAuth, API call rate limiting, etc
+    However, make every effort to ensure that application state doesn't span multiple requests of your service(s)
+    
+E. Cacheable ************************
+    World Wide Web clients can cache responses
+        -Responses implicitly or explicitly cacheable to prevent clients
+            reusing stale or inappropriate data in response to further requests
+    Well-managed caching partially or completely eliminates some client–server interactions, further improving scalability and performance
+    
+F. Client-Server ************************
+    uniform interface separates clients from servers
+        - separation of concerns means that clients are not concerned with data storage
+        - which remains internal to each server
+        - portability of client code is improved
+    Servers are not concerned with the user interface or user state,
+        - servers can be simpler and more scalabl
+    Servers and clients may also be replaced and developed independently, as long as the interface is not altered
+    
+G. Layered System ************************
+    client cannot ordinarily tell whether it is connected directly to the end server
+        - or to an intermediary along the way
+    Intermediary servers may improve system scalability by enabling load-balancing and by providing shared caches
+    Layers may also enforce security policies.
+    
+H. Code on Demand (optional)  ************************
+    Servers able to temporarily extend or customize the functionality of a client by transferring logic to it that it can execute
+        - Examples of this may include compiled components such as Java applets and client-side scripts such as JavaScript
+
+Complying with these constraints, and thus conforming to the REST architectural style
+    - will enable any kind of distributed hypermedia system to have desirable emergent properties
+        performance
+        scalability
+        simplicity
+        modifiability
+        visibility
+        portability
+        reliability
+
+NOTE: The only optional constraint of REST architecture is code on demand. If a service violates any other constraint, it cannot strictly be referred to as RESTful.    
+
+
+
+** April 26 2015 **
+http://rest.elkstein.org/2008/02/using-rest-in-python.html
+
+
+####### END ############################################################################################

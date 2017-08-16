@@ -1,0 +1,126 @@
+Selenium Notes
+
+*** 02/28/2015 **************
+WebDriver API
+*****************************
+Page Objects are a way of constructing Selenium Webdriver using objects on the page so that the implementation of the Selenium code is
+not evident.
+
+
+
+*** 02/27/2015 **************
+WebDriver API
+*****************************
+
+1) API Notes
+http://selenium.googlecode.com/svn/trunk/docs/api/java/index.html?overview-summary.html
+
+
+
+
+*****************************
+4/27/2012
+*****************************
+
+Selenium APIs:
+
+RC
+Server 1.0
+http://release.seleniumhq.org/selenium-remote-control/1.0-beta-2/doc/server/index.html?org/openqa/selenium/server/package-summary.html
+
+Client
+http://www.cloudtesting.com/selenium-docs/1.0.1/selenium-java-client-driver/index.html?com/thoughtworks/selenium/package-summary.html
+
+WebDriver
+http://selenium.googlecode.com/svn/trunk/docs/api/java/index.html
+
+
+-------------------------------------------------------------------------------
+java junit.textui.TestRunner GoogleTest
+
+1) Class Paths
+
+ A) Client jars-
+
+C:\selenium-remote-control\selenium-remote-control-1.0-beta-1\selenium-java-client-driver-1.0-beta-1
+selenium-java-client-driver.jar
+selenium-java-client-driver-sources.jar
+selenium-java-client-driver-sources.jar
+
+ B) Server jars-
+
+C:\selenium-remote-control\selenium-remote-control-1.0-beta-1\selenium-server-1.0-beta-1
+selenium-server.jar
+selenium-server-coreless.jar
+selenium-server-sources.jar
+selenium-server-tests.jar
+
+
+
+2) JUnit
+http://supportweb.cs.bham.ac.uk/docs/tutorials/docsystem/build/tutorials/junit/junit.html
+
+Authentication Problem
+
+import java.net.Authenticator;
+import java.net.PasswordAuthentication;
+
+// ...
+
+/**
+ * Minimalist custom Authenticator to provide userid/password
+ * to Java protocols.
+ */
+class MyAuthenticator extends Authenticator
+   {
+   /**
+   * Called when password authorization is needed.
+   * @return The PasswordAuthentication collected from the
+   * user, or null if none is provided.
+   */
+   protected PasswordAuthentication getPasswordAuthentication()
+      {
+      return new PasswordAuthentication ( "Alladin", "sesame".toCharArray() );
+      }
+   }
+
+
+_________________________________________
+
+
+[randalld@dev bin]$ cat gotime
+
+#!/bin/bash
+
+/usr/bin/time -f"Time: %E\nCPU: %P\nSwaps: %W\nMemory: %K\nInvoluntary CS: %c\nVoluntary CS: %w" $@
+
+Example of usage:  
+
+$ gotime netstat –a
+
+__________________________________________
+
+Path
+%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;%MYSQL%;%JAVA_HOME%;%CYGWIN_HOME%;C:\Program Files\QuickTime\QTSystem\;%FIREFOX%
+
+CLASSPATH
+.;%JAVA_HOME%;%MYSQL_JDBC%;C:\Program Files\Java\jre1.6.0_05\lib\ext\QTJava.zip;%JUNIT%;%SELENIUM_CLIENT%
+
+QTJAVA
+C:\Program Files\Java\jre1.6.0_05\lib\ext\QTJava.zip
+
+FIREFOX
+ C:\Program Files\Mozilla Firefox
+
+JAVA_HOME
+C:\Program Files\Java\jdk1.6.0_05\bin
+
+MYSQL_JDBC
+C:\Classes\mysql-connector-java-5.1.6\mysql-connector-java-5.1.6-bin.jar
+
+
+SELENIUM_CLIENT
+C:\selenium-remote-control\selenium-remote-control-1.0-beta-1\selenium-java-client-driver-1.0-beta-1\selenium-java-client-driver.jar;C:\selenium-remote-control\selenium-remote-control-1.0-beta-1\selenium-java-client-driver-1.0-beta-1\selenium-java-client-driver-sources.jar;C:\selenium-remote-control\selenium-remote-control-1.0-beta-1\selenium-java-client-driver-1.0-beta-1\selenium-java-client-driver-tests.jar;
+
+JUNIT
+C:\eclipse-SDK-3.3.2-win32\eclipse\plugins\org.junit4_4.3.1\junit.jar

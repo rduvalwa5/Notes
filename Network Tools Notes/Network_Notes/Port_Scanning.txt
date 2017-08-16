@@ -1,0 +1,33 @@
+Links:
+http://en.wikipedia.org/wiki/Port_scanner
+
+1) port scanning rely on the assumption that the targeted host is compliant with 
+	RFC 793 - Transmission Control Protocol
+   http://www.faqs.org/rfcs/rfc793.html
+2) there is still a chance a host might send back strange packets or even generate false
+   positives when the TCP/IP stack of the host is non-RFC-compliant
+    - especially true for less common scan techniques  OS-dependent 
+      (FIN scanning, for example).[3] 
+3)  TCP/IP stack fingerprinting method relies on these types of different network
+    responses from a specific stimulus to guess the type of the operating system 
+    the host is running.
+
+Testing for remote server port:
+
+http://stackoverflow.com/questions/1168317/check-status-of-one-port-on-remote-host
+nmap:
+	nmap -A 192.168.0.5/32 -p 23
+	For example, look for open ports from 20 to 30 on host.example.com:
+
+	nc -z host.example.com 20-30
+
+	It has port to Windows too – dimba Jul 22 '09 at 21:35 	
+	Both of these are available for Windows. – Glenn Jul 22 '09 at 21:45
+
+	your nmap command should real "-p23" without the space. 
+	nmap treats each unit not immediately preceded by a flag as a separate scan 
+
+	In Command Prompt, you can use the command telnet.. 
+	For Example, to connect to IP 192.168.10.1 with port 80,
+
+	telnet 192.168.10.1 80

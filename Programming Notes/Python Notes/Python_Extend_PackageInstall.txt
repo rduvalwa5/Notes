@@ -1,0 +1,146 @@
+Lesson File: C:\Python_Code\PythonSync\Lesson_10_Python_DataBase
+
+Adding Python Drivers:
+------------------------------------------------------------------------------------------
+A. Getting a Mysql driver for Python 3.4
+    4.1 Installing Connector/Python from a Binary Distribution
+	4.2 Installing Connector/Python Source Distribution on Linux, Unix, or Mac OS X
+	4.3 Installing Connector/Python Source Distribution on Microsoft Windows
+	4.4 Verifying Your Connector/Python Installation
+	1. MySQL Links:
+	http://dev.mysql.com/doc/connector-python/en/connector-python-installation.html
+	Python Connector http://dev.mysql.com/downloads/connector/python/
+	-  C1246895-WIN64  C:\Users\Randall Duval\Downloads\mysql-connector-python-1.2.3-py3.3.msi
+
+ 4.3 Installing Connector/Python Source Distribution on Microsoft Windows
+		a. download Connector/Python as a Zip archive from http://dev.mysql.com/downloads/connector/python/
+           Make sure that the Python executable is available in the Windows %PATH% setting
+		b. For more information about installation and configuration of Python on Windows, 
+		   see the section Using Python on Windows in the Python documentation
+    2. To install Connector/Python from the .zip file, download the latest version and follow these steps:
+			1. To use a Zip archive, unpack it in the intended installation directory 
+			  (for example, C:\mysql-connector\) using WinZip or another tool that can read .zip files.
+            2. Start a console window (or a DOS window) and change location to the folder where you unpacked the Connector/Python Zip archive:
+			   shell> cd C:\mysql-connector\
+			3. Inside the Connector/Python folder, perform the installation using this command:
+			   shell> python setup.py install
+	3. On Windows, Connector/Python is installed in the default location 
+	   C:\PythonX.Y\Lib\site-packages\ where X.Y is the Python version you used to install the connector.
+       If you are not sure where Connector/Python was installed, do the following to determine the location:
+		shell> python
+		>>> from distutils.sysconfig import get_python_lib
+		>>> print get_python_lib()            # Python v2.x
+		>>> print(get_python_lib())           # Python v3.x
+	4. Location C:\Python33\Lib\site-packages\mysql\connector
+	
+ 4.2 Installing Connector/Python Source Distribution on Linux, Unix, or Mac OS XChapter 4 Connector/Python Installation
+	On Unix-like systems such as Linux distributions, Solaris, Mac OS X, and FreeBSD, 
+	1. download Connector/Python as a tar archive from:
+	   http://dev.mysql.com/downloads/connector/python/
+	2. sudo mv /Users/rduvalwa2/downloads/mysql-connector-python-2.0.1.tar /opt 
+	3. cd /opt
+    4. sudo tar xvf mysql-connector-python-2.0.1.tar 
+    5. cd /opt/mysql-connector-python-2.0.1
+    6. c1246895-osx:mysql-connector-python-2.0.1 rduvalwa2$ ls
+		CHANGES.txt	LICENSE.txt	MANIFEST.in	PKG-INFO	README.txt	docs		examples	lib		setup.py	
+		setupinfo.py	tests		unittests.py
+	7. c1246895-osx:mysql-connector-python-2.0.1 rduvalwa2$ sudo python3 setup.py install
+		byte-compiling /Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages/mysql/connector/version.py to version.cpython-34.pyc
+		running install_egg_info
+		Writing /Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages/mysql_connector_python-2.0.1-py3.4.egg-info
+	8. Test for install find install location:
+		c1246895-osx:mysql-connector-python-2.0.1 rduvalwa2$ python3
+		Python 3.4.0 (v3.4.0:04f714765c13, Mar 15 2014, 23:02:41) 
+		[GCC 4.2.1 (Apple Inc. build 5666) (dot 3)] on darwin
+		Type "help", "copyright", "credits" or "license" for more information.
+		>>> from distutils.sysconfig import get_python_lib
+		>>> print(get_python_lib())
+			/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages
+	9. Verify at location:
+		c1246895-osx:mysql-connector-python-2.0.1 rduvalwa2$ cd /Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages
+		c1246895-osx:site-packages rduvalwa2$ ls
+		README						easy_install.py					pip						setuptools
+		__pycache__					mysql						pip-1.5.4.dist-info				setuptools-2.1.dist-info
+		_markerlib					mysql_connector_python-2.0.1-py3.4.egg-info	pkg_resources.py
+		c1246895-osx:site-packages rduvalwa2$ 
+
+B. Using Pyhton Mysql connector:  http://dev.mysql.com/doc/connector-python/en/connector-python-examples.
+	These coding examples illustrate how to develop Python applications and scripts which connect to MySQL Server using MySQL Connector/Python.
+	Chapter 5 Connector/Python Coding Examples
+	Table of Contents
+	5.1 Connecting to MySQL Using Connector/Python
+	5.2 Creating Tables Using Connector/Python
+	5.3 Inserting Data Using Connector/Python
+	5.4 Querying Data Using Connector/Python
+	
+
+
+
+
+
+
+
+
+
+
+To install Connector/Python from the .tar.gz file, download the latest version and follow these steps:
+---------------------------------------------------	
+   1.  http://stackoverflow.com/questions/23376103/python-3-4-0-with-mysql-database
+		Summary:
+		MySQLdb does not support Python 3 but it is not the only MySQL driver for Python.
+		You can try using PyMySQL,http://www.pymysql.org/. 
+		It is a pure python MySQL driver, which means it is slower, 
+		but it does not require a compiled C component or MySQL libraries and 
+		header files to be installed on client machines. 
+		The latest version on pypi, https://pypi.python.org/pypi/PyMySQL,
+		0.6.2, has Python 3.4 support.
+        Another option is simply to use another database system like PostgreSQL.
+
+		2. Install pip https://pypi.python.org/pypi/pip   A tool for installing and managing Python packages.
+			Quickstart - install pip https://pip.pypa.io/en/latest/installing.html
+			Installation
+			Python & OS Support
+				pip works with CPython versions 2.6, 2.7, 3.1, 3.2, 3.3, 3.4 and also pypy.
+				pip works on Unix/Linux, OS X, and Windows.
+			Note
+			Python 2.5 was supported through v1.3.1, and Python 2.4 was supported through v1.1.
+			Install pip
+				To install or upgrade pip, securely download get-pip.py.
+				(download and move file to $PYTHON_HOME
+					Then run the following (which may require administrator access):
+					python get-pip.py
+					C:\Python34>python get-pip.py
+						Requirement already up-to-date: pip in c:\python34\lib\site-packages
+						Cleaning up...
+					C:\Python34>
+****** Issue downloading https://github.com/PyMySQL/PyMySQL/tarball/  getting curl and ssh to work
+$ # X.X is the desired PyMySQL version (e.g. 0.5 or 0.6).
+$ curl -L https://github.com/PyMySQL/PyMySQL/tarball/pymysql-X.X | tar xz
+$ cd PyMySQL*
+$ python setup.py install
+$ # The folder PyMySQL* can be safely removed now.
+
+		2.  http://www.pymysql.org/
+       Requirements
+		Python -- one of the following:
+        CPython >= 2.6 or >= 3.3
+			PyPy >= 2.0
+			IronPython 2.7
+		MySQL Server -- one of the following:
+			MySQL >= 4.1
+			MariaDB >= 5.1
+			
+		Installation
+		The last stable release is available on PyPI and can be installed with pip:
+		$ pip install PyMySQL
+		Alternatively (e.g. if pip is not available), a tarball can be downloaded from GitHub and installed with Setuptools:
+		$ # X.X is the desired PyMySQL version (e.g. 0.5 or 0.6).
+		$ curl -L https://github.com/PyMySQL/PyMySQL/tarball/pymysql-X.X | tar xz
+		$ cd PyMySQL*
+		$ python setup.py install
+		$ # The folder PyMySQL* can be safely removed now.
+
+		
+		
+Extending Python with C or C++:  https://docs.python.org/2/extending/extending.html
+------------------------------------------------------------------------------------------		

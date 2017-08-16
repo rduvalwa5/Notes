@@ -1,0 +1,349 @@
+
+Left off: http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#setting-custom-name-to-test-library
+
+
+Robot Framework User Guide  Version 2.8.7
+http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html
+
+1   Getting started
+
+    1.1   Introduction
+    1.2   Copyright and license
+    1.3   Installation instructions
+    1.4   Demonstrations
+
+1.1   Introduction
+1.1.2   High-level architecture
+Robot Framework is a generic, application and technology independent framework. It has a highly modular architecture 
+illustrated in the diagram below.
+
+Robot Framework architecture
+
+	-------------------------
+	|		Test Data		|
+	-------------------------
+	...........................Test Data Syntax
+	-------------------------
+	|    Robot Framework	|
+	-------------------------
+	...........................Test Library API
+	-------------------------
+	|     Test Libraries    |
+	-------------------------
+	-------------------
+	|    Test Tools   |
+	-------------------
+	...........................Application Interfaces
+	-------------------------
+	|       System Under    |
+	-------------------------
+	
+	test data
+	- simple, easy-to-edit tabular format
+	
+	When Robot Framework is started
+		- it processes the test data
+		- executes test cases 
+		- generates logs and reports
+		
+	core framework does not know anything about the target under test
+		- interaction with it is handled by test libraries
+		
+	Libraries
+		- either use application interfaces directly 
+		- or use lower level test tools as drivers
+		
+1.1.3   Screenshots
+		-	Test Data http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#creating-test-data
+		-	Reports	http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#report-file
+		-	Logs	http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#log-file
+	
+1.1.4   Getting more information  http://www.catb.org/~esr/faqs/smart-questions.html
+		- http://groups.google.com/group/robotframework-users
+		- http://groups.google.com/group/robotframework-announce
+		- http://groups.google.com/group/robotframework-devel
+
+
+*1.1.1   Why Robot Framework? Review These First
+
+1a.	Test Case Syntax
+		http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#creating-test-data
+
+1b.    Enables easy-to-use tabular syntax for creating test cases in a uniform way.  
+    	http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#creating-test-cases
+    	
+1c.    Provides ability to create reusable higher-level keywords from the existing keywords.
+    	http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#creating-user-keywords
+    	
+1d.    Provides easy-to-read result reports and logs in HTML format.
+    	http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#report-file
+    	http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#log-file
+    	
+1e.    Is platform and application independent.
+    
+1f.    Provides a simple library API for creating customized test libraries which can be implemented natively with either Python or Java.
+    	http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#creating-test-libraries
+    
+1g.    Provides a command line interface and XML based output files for integration into existing build infrastructure (continuous integration systems).
+    	http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#creating-test-libraries
+    	http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#output-file
+    	
+1h.    Provides support for Selenium for web testing, Java GUI testing, running processes, Telnet, SSH, and so on.
+    
+1i.    Supports creating data-driven test cases.
+    	http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#data-driven-style
+    	
+1j.    Has built-in support for variables, practical particularly for testing in different environments.
+    	http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#variables
+    	
+1k.    Provides tagging to categorize and select test cases to be executed.
+    	http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#tagging-test-cases
+    	http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#selecting-test-cases
+    	
+1l.    Enables easy integration with source control: test suites are just files and directories that can be versioned with the production code.
+    	http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#creating-test-suites
+    	
+1m.    Provides test-case and test-suite -level setup and teardown.
+    	http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#test-setup-and-teardown
+    	http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#suite-setup-and-teardown
+    	
+1n.   The modular architecture supports creating tests even for applications with several diverse interfaces.
+
+_________________________________________________________________________________________________________________
+1a  Test Case Syntax
+_________________________________________________________________________________________________________________
+*2.2.1   Test case syntax
+	Basic syntax
+	Test case construct test case tables from the available keywords
+	Keywords imported from:
+	 2.4	test libraries		http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#using-test-libraries
+	 2.7.1	resource files		http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#resource-files
+	 2.6	created in the keyword table of the test case file itself
+	 					http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#creating-user-keywords
+	 2.6.5  Key word return values User keyword return values	http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#user-keyword-return-values 				
+	 					
+
+	TEST CASE TABLE
+	- first column in the test case table contains test case names
+		- test case starts from the row with something in this column 
+		      continues to the next test case name 
+	    	  or to the end of the table
+		It is an error to have something between the table headers and the first test
+
+	- second column has keyword names
+	    - exception to this rule is setting variables from keyword return values
+	      when the second and possibly also the subsequent columns contain variable names and a keyword name is located after them
+	      In either case, columns after the keyword name contain possible arguments to the specified keyword.
+
+	Example test cases 
+	_________________________________________________________________________________________________________________
+	
+	Test Case 			Action 	                      Argument 			Argument
+	|------------------|------------==-------------|---------------|------------------------|
+	   Valid Login 		 Open Login Page 	  	 
+	|------------------|---------------------------|---------------|------------------------|
+	|				   |  Input Name 		       |  demo 	       |------------------------|
+	|                  |  Input Password 	       |  mode 	       |------------------------|
+	|                  | Submit Credentials        | 	     	   |------------------------|	 
+	|                  |Welcome Page Should Be Open|               |                        |   
+	|------------------|---------------------------|---------------|------------------------|
+	|Setting Variables | Do Something 	           |first argument |  second argument       |
+	|                  |${value} = 	               |Get Some Value |                        |	
+	|                  |Should Be Equal            | ${value}      |  Expected value        |
+	|------------------|---------------------------|---------------|------------------------|
+
+
+	Settings in the Test Case table
+	_________________________________________________________________________________________________________________
+  	Test cases can have their own settings
+		 - Setting names always in the second column, where keywords normally are
+	   		their values are in the subsequent columns
+	 
+	 	- Setting names have square [brackets around them] to distinguish them from keywords
+			available settings are listed below and explained later in this section.
+
+		[Documentation]    	Used for specifying a test case documentation.
+		[Tags]				Used for tagging test cases.
+		[Setup], [Teardown] Specify test setup and teardown. Have also synonyms [Precondition] and [Postcondition], respectively.
+		[Template]			Specifies the template keyword to use. The test itself will contain only data to use as arguments to that keyword.
+		[Timeout]			Used for setting a test case timeout. Timeouts are discussed in their own section.
+
+		Example test case with settings 
+		------------------------------------------------------------------------
+		|  Test Case 	    |   Action 	     |Argument          |	Argument   |
+		------------------------------------------------------------------------
+    	|Test With Settings |[Documentation] |Another dummy test|              |
+    	------------------------------------------------------------------------
+		|                   | [Tags] 	     | dummy 	        |owner-johndoe |
+		------------------------------------------------------------------------
+		|                   | Log 	         |Hello, world!     |              |
+		------------------------------------------------------------------------	
+		
+	Test case related settings in the Setting table
+	_________________________________________________________________________________________________________________
+
+	Setting table can have the following test case related settings
+		These settings are mainly default values for the test case specific settings listed earlier
+
+	- Force Tags, Default Tags		The forced and default values for tags.
+									http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#tagging-test-cases
+	- Test Setup, Test Teardown		The default values for test setup and teardown. Have also synonyms Test Precondition and Test Postcondition, respectively.
+									http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#test-setup-and-teardown
+	- Test Template					The default template keyword to use.
+									http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#test-templates
+	- Test Timeout					The default value for test case timeout. Timeouts are discussed in their own section.
+									http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#test-case-timeout
+									http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#timeouts
+
+ 
+*2.2.2   Using arguments
+_________________________________________________________________________________________________________________
+
+
+*2.4	Using test libraries
+	This section explains how to take test libraries into use and how to use the keywords they provide.
+	Creating test libraries is described in a separate section.
+
+	Test libraries contain lowest-level keywords
+		- called library keywords
+		- actually interact with the system under test
+	All test cases always use keywords from some library
+		- often through higher-level user keywords
+
+*2.4.1 Taking test libraries into use
+	Instructions for taking test libraries into use are given in the subsections below.
+	_____________________
+	Using Library setting
+	_____________________
+		- Test libraries are imported
+		- using the Library setting in the Setting table 
+		  and having the library name in the subsequent column
+		- library name is case-sensitive 
+		- the name of the module or class implementing the library and must be exactly correct
+		- any spaces in it are ignored
+		- With Python libraries in modules or Java libraries in packages, the full name including the module or package name must be used
+	In cases where the library needs arguments
+		- they are listed in the columns after the library name
+		- It is possible to use default values, variable number of arguments, and named arguments 
+		  in test library imports similarly as with arguments to keywords 
+		  (2.2.2   Using arguments  http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#using-arguments)
+	Both the library name and arguments can be set using variables
+	
+	Importing test libraries Table
+	|-----------|---------------------------|---------------|-------|
+	| Setting 	| Value 					|Value 			|Value  |
+	|-----------|---------------------------|---------------|-------|
+	| Library 	| OperatingSystem 			|				|		|
+	| Library 	| com.company.TestLib 		|				|		|
+	| Library 	| MyLibrary 				| arg1 			| arg2	|
+	| Library 	| ${LIBRARY} 				|				|		|
+	|-----------|---------------------------|---------------|-------|
+
+	Can import test libraries in:
+		- test case files
+	 	- resource files
+	 	- test suite initialization files
+	In all these cases, all the keywords in the imported library are available in that file
+	With resource files, those keywords are also available in other files using them
+
+	____________________________
+	Using Import Library keyword
+	____________________________
+	keyword Import Library from the BuiltIn library 
+		- keyword takes the library name and possible arguments as the Library setting
+		- Keywords from the imported library are available in the test suite where the Import Library keyword was used
+		- useful in cases where the library is not available when the test execution starts and only some other keywords make it available
+		
+	Using Import Library keyword 
+	|---------------|-----------------|------------|----------|----------|
+	| Test Case 	| Action 	      | Argument   | Argument | Argument |
+	| Example 	    |Do Something     |	           |          |          |
+	|               |Import Library   | MyLibrary  | arg1     | arg2     |
+	|               |KW From Mylibrary|            |          |          |
+	|---------------|-----------------|------------|----------|----------|
+
+	____________________________	
+	Library search path		
+	____________________________
+	common way to specify a test library to import is using its name
+		- like done in the examples in this section
+		- Robot Framework tries to find the class or module implementing the library from the library search path
+		  	means that the library code and all its possible dependencies must be in PYTHONPATH
+		  	when running tests on Jython, in a CLASSPATH
+		- Setting the library search path
+			explained in a section of its own
+		- Libraries can also set the search path automatically or have special instructions on how to do it
+			All standard libraries are in the library search path automatically
+	biggest benefit of this approach is that when the library search path has been configured
+		- using a custom start-up script
+		- normal users do not need to think where libraries actually are installed
+		- drawback is that getting your own libraries into the search path may require some additional configuration	
+			
+	____________________________			
+	Using physical path to library	
+	____________________________
+	Another mechanism for specifying the library to import
+		- using a path to it in the file system
+		- path is considered relative to the directory where current test data file is situated 
+		  similarly as paths to resource and variable files
+		- benefit of this approach is that there is no need to configure the library search path
+	the library is a file
+		- the path to it must contain extension
+	Python libraries the extension is naturally .py and 
+		- Java libraries it can either be .class or .java
+		- but the class file must always be available
+	Python library is implemented as a directory
+		- the path to it must have a trailing forward slash (/)
+	
+	Importing test libraries using physical paths to them 	
+	|---------------|-------------------------------|------------|----------------|	
+		Setting 		Value 			               Value 	    Value
+		Library 		PythonLib.py 		
+		Library 		/absolute/path/JavaLib.java 		
+		Library 		relative/path/PythonDirLib/ 	possible 	arguments
+		Library 	    ${RESOURCES}/Example.class 		
+	|---------------|-------------------------------|------------|----------------|	
+	
+*2.4.2   Setting custom name to test library	
+	library name is shown in test logs before keyword names
+		- if multiple keywords have the same name, they must be used so that the keyword name is prefixed with the library name
+		- library name is got from the module or class name implementing it
+		- some situations where changing it is desirable
+			1. There is a need to import the same library several times with different arguments. This is not possible otherwise.
+    		2. The library name is inconveniently long. This can happen, for example, if a Java library has a long package name.
+    		3. You want to use variables to import different libraries in different environments, but refer to them with the same name.
+    		4. The library name is misleading or otherwise poor. In this case, changing the actual name is, of course, a better solution.
+	basic syntax for specifying the new name is having the text WITH NAME (case-insensitive) 
+		- after the library name 
+		- then having the new name in the next cell
+	specified name is shown in logs and must be used in the test data when using keywords' full name (LibraryName.Keyword Name)
+	
+	Importing libraries with custom names 
+	|---------------|-------------------------------|------------|----------------|	
+	|	Setting |	Value 		        |  Value     |	Value         |
+	|---------------|-------------------------------|------------|----------------|	
+	| Library 	| com.company.TestLib 		| WITH NAME  | 	TestLib       |
+	|Library 	| ${LIBRARY} 	                | WITH NAME  | 	MyName        |
+	|---------------|-------------------------------|------------|----------------|	
+
+	Possible arguments to the library
+		- placed into cells between the original library name and the WITH NAME text
+
+	The following example illustrates how the same library can be imported several times with different arguments:
+
+	Setting 	Value 		Value 		Value 	Value 		Value
+	Library 	SomeLibrary 	localhost 	1234 	WITH NAME 	LocalLib
+	Library 	SomeLibrary 	server.domain 	8080 	WITH NAME 	RemoteLib
+
+	Test Case 	Action 				Argument 	Argument
+	My Test 	LocalLib.Some Keyword 		some arg 	second arg
+			RemoteLib.Some Keyword 		another arg 	whatever
+			LocalLib.Another Keyword 		
+	
+	Setting a custom name to a test library works both when importing a library in the Setting table and when using the Import Library keyword	
+	
+2.6   Creating user keywords
+
+2.6.5   User keyword return values
+
+2.7.1   Resource files

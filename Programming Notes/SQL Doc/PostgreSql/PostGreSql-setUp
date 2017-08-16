@@ -1,0 +1,66 @@
+PotgreSql 
+
+For better results:
+1) Apache to successfully install
+2) Install Java
+
+
+http://www.postgresql.org/download/
+
+https://www.enterprisedb.com/users/rduvalwa2
+rduvalwa2,
+
+Thank you for registering at EnterpriseDB. You may now log in to  
+https://www.enterprisedb.com/user using the following username and password:
+
+username: rduvalwa2
+password: 9xkexPmFFW
+
+You may also log in by clicking on this link or copying and pasting it in  
+your browser:
+
+https://www.enterprisedb.com/user/validate/214017/1317581792/f7e7ebde772e9713dc5ccb10ffab5b37
+
+This is a one-time login, so it can be used only once.
+
+After logging in, you will be redirected to  
+https://www.enterprisedb.com/user/214017/edit so you can change your  
+password.
+
+
+--  EnterpriseDB team
+
+
+Server SetUp
+
+Server C1246897-A
+Port: 5432
+OS:  Windows XP
+SuperUser
+ Pwd:  reddog
+ UID:  admin ??
+ 
+ Data Directory:
+ c:\pgData
+ 
+ Locale:  English United States
+ 
+ On successful installation the MSI installer will want to lauch Stack Builder.
+ 
+  
+ Stack Build:
+ This lets you down load additional plugins to include in db server stack:
+ 
+ 1. Select installation
+    - PostgreSQL 9.1 on port 5432
+    - next button
+ 2) Apache Php install port 8080 localhost
+ 3) phpPgAdmin install
+ 
+ 
+ ------
+ databaserole  mediawikiuser    
+ password	  same
+ database mediawiki  owned by mediawikiuser
+ 
+   

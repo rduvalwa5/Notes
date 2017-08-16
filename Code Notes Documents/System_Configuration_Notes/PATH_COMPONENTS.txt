@@ -1,0 +1,22 @@
+;%CYGWIN%;%ECLIPSE%;%GTK_BASEPATH%\bin;%MINGW%;%MYSQL%;%JAVA_HOME%;%JAVA_JRE%;;%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;;%JAVA_HOME%;C:\a_scripts;C:\batch;C:\bin;D:\Code\C++\src\bin;D:\Code\Java\bin;C:\Program Files\Microsoft SDK\Bin\.;C:\Program Files\Microsoft SDK\Bin\WinNT\.;D:\Code\Batch_script;;%MAVEN_HOME%;C:\Program Files\Perforce;D:\Perforce;%Perl_Code%;C:\Program Files\QuickTime\QTSystem\;
+
+
+
+
+
+%CYGWIN%
+C:\Cygwin\bin ;C:\Cygwin\usr\bin;C:\Cygwin\usr\local\bin:;C:\Cygwin\usr\sbin;C:\Cygwin\usr\X11R6\bin;C:\Cygwin\usr\X11R6\sbin;
+
+
+
+
+
+
+
+
+%PERL%
+C:\Perl\bin\
+
+
+%OPEN_SSH%
+C:\Program Files\OpenSSH\bin

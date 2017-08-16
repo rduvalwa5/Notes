@@ -1,0 +1,47 @@
+http://www.perforce.com/perforce/doc.073/manuals/p4guide/02_config.html#1069873
+
+C:\Documents and Settings\RDuval>p4d -h
+Usage:
+
+    p4d [ options ]
+    p4d -j? [ -z ] [ args ... ]
+
+        The first form starts the Perforce server.
+        The second form performs checkpoint/journaling operations.
+
+    Server options:
+        -d              run as a daemon (fork first, then run)
+        -f              run as single-threaded server
+        -i              run for inetd (socket on stdin/stdout)
+        -q              suppress startup messages
+        -s              run as an NT service (or invoke as p4s)
+        -xi             switch server database to Unicode mode and quit
+        -xu             run database upgrades and quit
+
+    Checkpointing options:
+        -c cmd          lock tables, run command, and exit
+        -jc [ prefix ]  checkpoint, then save and truncate journal
+        -jd [ file ]    checkpoint without saving/truncating journal
+        -jj [ prefix ]  save and truncate journal
+        -jr file        restore incrementally from file
+        -z              gzip checkpoint/journals
+
+    General Options:
+        -h -?           print this message
+        -V              print server version
+
+        -A auditlog     set audit log (default $P4AUDIT)
+        -J journal      set journal file (default $P4JOURNAL, 'journal')
+        -J off          turn off journalling
+        -L log          set error log (default $P4LOG, stderr)
+        -p port         set listen port (default $P4PORT, 1666)
+        -r root         set server root directory (default $P4ROOT)
+        -v level        debug modes (default $P4DEBUG)
+
+
+C:\Documents and Settings\RDuval>p4d -V
+Perforce - The Fast Software Configuration Management System.
+Copyright 1995-2007 Perforce Software.  All rights reserved.
+Portions copyright 1991-2005 Compuware Corporation.
+Rev. P4D/NTX86/2007.2/122958 (2007/05/22).
+License: none

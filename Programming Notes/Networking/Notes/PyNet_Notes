@@ -1,0 +1,448 @@
+Internet Programming
+
+Python’s role as a language for programming 
+	Internetbased applications
+	its library tools 
+	system and GUI tools 
+
+Chapter 12   Internet concepts and options
+   	Python low-level network tools such as sockets, and covers client and server basics
+   	brief overviews advanced Python Internet tools best covered in follow-up resources,
+   	such as Jython, Django, App Engine, Zope, PSP, pyjamas, and HTMLgen. 
+   	Here, you’ll learn the fundamentals needed to use such tools when you’re ready to step up.
+	Along the way, we’ll also put general programming concepts such as object-oriented
+	programming (OOP) and code refactoring and reuse to work here. As we’ll see, Python,
+	GUIs, and networking are a powerful combination.
+
+Chapter 13   how scripts can use Python to access common clientside network protocols l
+   FTP, email, HTTP, and more.
+
+Chapter 14   the client-side email tools
+	 as well as the GUI techniques of the prior part, to implement a full-featured email client.
+
+Chapter 15 the basics of Python server-side Common Gateway Interface
+	(CGI) scripts—a kind of program used to implement interactive websites.
+
+Chapter 16 Python website techniques 
+	by implementing a webbased	email tool on a server, in part to compare and contrast with Chapter 14’s nonweb approach.
+
+
+CHAPTER 12  Network Scripting
+*	1. the Internet  thought of as being composed of multiple functional layers:
+		a. Low-level networking layers
+			TCP/IP transport mechanism deal with transferring bytes between machines
+		b. Sockets
+			programmer’s interface to the network
+			- runs on top of physical networking layers like TCP/IP
+			- supports flexible client/server models in both IPC and networked modes
+		c. Higher-level protocols
+			Structured Internet communication schemes such as FTP and email
+			run on top of sockets and define message formats and standard addresses
+		d. Server-side web scripting
+			Application models such as CGI
+			define the structure of communication between web browsers and web servers
+			also run on top of sockets, and support the notion of web-based programs
+		e. Higher-level frameworks and tools
+			Third-party systems such as Django, App Engine, Jython, and pyjamas
+			leverage sockets and communication protocols
+			but address specific techniques or larger problem domains
+
+*	2. covers 
+		a. the middle three tiers in this list—sockets
+			the Internet protocols that run on them
+		 	the CGI model of web-based conversations 
+	   	b. learn also apply to more specific toolkits in the last tier above, because they are all ultimately
+	   		based upon the same Internet and web fundamentals
+
+		c. this and the next chapter
+	    		focus is on programming the second and third layers: 
+	    		- sockets
+	    		- higher-level Internet protocols
+	    		- start at the bottom learning about the socket model of network programming
+		d. Sockets NOT strictly tied to Internet scripting
+			-  in Chapter 5’s IPC examples, they are presented in full this one of their primary roles
+			-  most of what happens on the Internet happens through sockets
+		e. After sockets, the next two chapters the Python’s clientside interfaces to higher-level protocols
+		 	—  email and FTP transfers
+		  	-  run on top of sockets
+		f. Chapters 13 and 14 sample the flavor of Python client-side scripting
+		g. last two chapters in this part of the book present server-side
+		
+*	3.  I skipped a lot of bullshit here, several pages up fluff
+	
+*	4. Plumbing the Internet
+		a. use it as a communication and information medium
+			 	exchanging email
+			 	browsing web pages,
+				transferring files
+				data messaging
+		b. Internet consists of many layers of abstraction and devices
+		    -the actual wires used to send bits across the world
+		    - to the web browser that grabs and renders those bits into text, 
+		    	graphics, and audio
+*	5.  primarily concerned with the programmer’s interface to the Internet
+	 		consists of multiple layers: 
+	 			sockets, which are programmable interfaces
+				to the low-level connections between machines
+				standard protocols, which add structure to discussions carried out over sockets
+	 	A. look at each layer
+			1. The Socket Layer
+				A. sockets are a programmable interface to connections between programs
+					- possibly running on different computers of a network
+					- allow data formatted as byte strings to be passed between:
+							 processes
+							 machines
+				B. Sockets the basis and low-level “plumbing” of the Internet itself
+					-  higher-level Net protocols
+					     FTP, web pages,email
+				C. Sockets are communications endpoints
+					- the portals through which programs send and receive bytes during a conversation
+					- used for network conversations
+					- sockets used to communicate between programs on the same computer
+					     form of a general Inter-Process Communication (IPC) mechanism
+					- saw this socket usage mode briefly in Chapter 5
+				D. sockets are bidirectional data streams: 
+				   programs may both send and receive data through them
+				E. sockets take the form of a handful of calls available in a library
+					socket calls know how to send bytes between machines
+					- using lower-level operations
+					- TCP network transmission control protocol
+						TCP knows how to transfer bytes but it doesn’t care what those bytes mean
+						(this text will generally ignore how bytes sent to sockets are physically transferred)
+			2. Machine identifiers
+				telephone conversation with someone halfway across the world
+					- need either that person’s telephone number 
+					  or a directory that you could use to look up the number
+					- true on the Internet
+						 before a script can have a conversation with another computer somewhere in cyberspace
+						 it must first know that other computer’s number or name
+				A. Internet defines standard ways
+					- to name a remote machine
+					- to service provided by that machine
+				B. the computer program to be contacted through a socket 
+					- is identified by a pair of values—the 
+					  machine name
+					  specific port number on that machine
+				C. Machine names
+					A machine name a string of numbers separated by dots an IP address (e.g., 166.93.218.100)
+					or domain name (e.g., starship.python.net)
+				D. Domain names are automatically mapped
+					to dotted numeric address equivalent when used  by domain name server—a program 
+					  - on the Net that serves the same purpose as your local telephone directory assistance service
+				E. the machine name localhost, and its equivalent IP address 127.0.0.1
+				    always mean the same local machine
+				    this allows us to refer to servers running locally on the same computer as its clients
+			3. Port numbers
+				A. port number is an agreed-upon numeric identifier for a given conversation
+				B. computers support variety of services
+				   -  port numbers are used to name a particular conversation on a given machine
+				   -  For two machines to talk over the Net must associate sockets with the same machine name
+				      and port number when initiating network connections
+				C. Internet protocols such as email and the Web have standard reserved port numbers for their connections
+				    - clients can request a service regardless of the machine providing it
+				      Port number 80 usually provides web pages on any web server machine
+			4. The combination of a machine name and a port number identifies every dialog on the Net
+			   	A. ISP’s computer provide many kinds of services for customers
+			   	   web pages, Telnet, FTP transfers, email
+			   	B. Each service on the machine is assigned a unique port number to which requests may be sent
+			   	C. programs use sockets to communicate in specialized ways with another machine
+					- need to avoid using a port number reserved by a standard protocol—numbers in the range of 0 to 1023
+		B. The Protocol Layer
+			activity on the Net is programmed with protocols which are higher-level message models that run on top of sockets
+			- standard Internet protocols define a structured way to talk over sockets
+			- standardize both message formats and socket port numbers:
+				 Message formats provide structure for the bytes exchanged over sockets
+				 Port numbers are reserved numeric identifiers for the underlying sockets
+			- Raw sockets are still commonly used in many systems
+			  it is perhaps more common to communicate with one of the standard higher-level Internet protocols
+			  
+    † Some books also use the term protocol to refer to lower-level transport schemes such as TCP. In this book,
+	  we use protocol to refer to higher-level structures built on top of sockets; see a networking text if you are
+	  curious about what happens at lower levels.
+	  
+		C. Port number rules
+			socket port numbers can be any 16-bit integer value between 0 and 65,535
+			1.  make it easier for programs to locate the standard protocols
+				port numbers in the range of 0 to 1023 are reserved and preassigned to the standard higher-level protocols
+			Table 12-1. Port numbers reserved for common protocols
+			Protocol 		Common function 	Port number 		Python module
+			HTTP 			Web pages 			80 					http.client, http.server
+			NNTP 			Usenet news 		119 				nntplib
+			FTP data 
+			default 		File transfers 		20 					ftplib
+			FTP control 	File transfers 		21 					ftplib
+			SMTP 			Sending email 		25 					smtplib
+			POP3 			Fetching email 		110 				poplib
+			IMAP4 			Fetching email 		143 				imaplib
+			Finger 			Informational 		79 					n/a
+			SSH 			Command lines 		22 					n/a: third party
+			Telnet 			Command lines 		23 					telnetlib 
+			
+		D. Clients and servers
+			standard protocols mean that port numbers 0 to 1023 are off-limits to scripts
+			unless they really mean to use one of the higher-level protocols
+			1. Server
+				A. A machine that hosts websites usually runs a web server program that constantly
+				   	- listens for incoming connection requests, on a socket bound to port 80. 
+			   		- server itself does nothing but watch for requests on its port handling
+						requests is delegated to spawned processes or threads.
+			2. Clients
+				A. Programs that wish to talk to this server specify the server machine’s name
+				   port 80 to initiate a connection
+				   	- web servers, typical clients are web browsers
+					- Firefox, Internet Explorer, or Chrome
+					- any script can open a client-side connection on port 80 to fetch web pages from the server
+				B. server’s machine name can also be simply “localhost” if it’s the same as the client’s
+			3. clients may connect to a server over sockets
+				whether the server implements a standard protocol or something more specific to a given application
+			4. some applications notion of client and server is blurred—programs 
+					- can pass bytes between each other more as peers than as master and subordinate
+					- for instance agent in a peerto-peer file transfer system may be both client and server
+					  for parts of files transferred
+					- purposes of this book programs that listen on sockets servers
+					- those that connect clients
+					- call the machines that these programs run on server and client
+					
+		E. Protocol structures
+			1. Functionally protocols accomplish task
+			 	- reading email or posting a Usenet newsgroup message
+			 	- but they consist of message bytes sent over sockets
+			2. structure of those message bytes varies from protocol to protocol
+			   	- hidden by the Python library beyond the scope of this book
+			   	- a few general words may help demystify the protocol layer
+			3. protocols may define the contents of messages sent over sockets
+			   	- may specify the sequence of control messages exchanged during conversations
+			4. protocol defining regular patterns of communication make communication more robust
+				- can minimize deadlock conditions—machines waiting for messages that never arrive
+				- example: FTP protocol prevents deadlock by conversing over two sockets:
+					a. one for control messages only
+					b. one to transfer file data
+					c. FTP server listens for control messages on one port
+						and transfers file data over another
+					d. FTP clients:
+						1. open socket connections to the server machine’s control port
+						2. send requests, and send or receive file data over a socket connected to a data port on the server machine
+					e. FTP defines standard message structures passed between client and server
+						1. control message to request a file must follow a standard format
+						
+*	6. Python’s Internet Library Modules
+		1. Python’s standard protocol modules handle the details. 
+			a. example
+			the Python library’s ftplib module manages all the socket and message-level handshaking implied by the FTP protocol
+			b. Scripts that import ftplib have access to a much higher-level interface for FTPing files and can be largely
+				ignorant of both the underlying FTP protocol and the sockets over which it runs.
+			c. each supported protocol is represented in Python’s standard library 
+				- by a module package of the same name as the protocol or by a module file with a name of
+				  the form xxxlib.py, where xxx is replaced by the protocol’s name
+			d.  The last column in Table 12-1 gives the module name for some standard protocol modules
+				FTP is supported by the module file ftplib.py and HTTP by package http.*
+			e. the top-level interface object is often the name of the protocol
+				to start an FTP session in a Python script, you run import ftplib
+				pass appropriate parameters in a call to ftplib.FTP
+				for Telnet create a telnetlib.Telnet instance
+		2. protocol implementation modules in Table 12-1
+			a. Python’s standard library contains modules for fetching replies from web servers for a web page
+				request (urllib.request)
+			b. parsing and handling data once it has been transferred over sockets or protocols 
+			   (html.parser, the email.* and xml.* packages)
+		3. Table 12-2 lists commonly used modules
+		‡Since Python is an open source system, you can read the source code of the ftplib module if you are curious
+		about how the underlying protocol actually works. See the ftplib.py file in the standard source library directory
+		in your machine. Its code is complex (since it must format messages and manage two sockets), but with the
+		other standard Internet protocol modules, it is a good example of low-level socket programming.
+	
+	Table 12-2. 			Common Internet-related standard modules
+	---------------------|--------------------------------------------------------------------------------------------------
+	Python 					modules Utility
+	---------------------|--------------------------------------------------------------------------------------------------
+	socket,ssl 				Network and IPC communications support (TCP/IP, UDP, etc.), plus SSL secure sockets
+							wrapper
+	---------------------|--------------------------------------------------------------------------------------------------
+	cgi 					Server-side CGI script support: parse input stream, escape HTML text, and so on
+	---------------------|--------------------------------------------------------------------------------------------------
+	urllib.request 			Fetch web pages from their addresses (URLs)
+	---------------------|--------------------------------------------------------------------------------------------------
+	urllib.parse 			Parse URL string into components, escape URL text
+	---------------------|--------------------------------------------------------------------------------------------------
+	http.client, ftplib,	HTTP (web), FTP (file transfer), and NNTP (news) client protocol modules
+	nntplib
+	---------------------|--------------------------------------------------------------------------------------------------
+	http.cookies,			HTTP cookies support (data stored on clients by website request, server- and client-sidesupport)
+	http.cookiejar
+	---------------------|--------------------------------------------------------------------------------------------------
+	poplib,imaplib, 		POP, IMAP (mail fetch), and SMTP (mail send) protocol modules
+	smtplib
+	---------------------|--------------------------------------------------------------------------------------------------	
+	telnetlib 				Telnet protocol module
+	---------------------|--------------------------------------------------------------------------------------------------	
+	html.parser, xml.* 		Parse web page contents (HTML and XML documents)
+	---------------------|--------------------------------------------------------------------------------------------------
+	xdrlib, socket 			Encode binary data portably for transmission
+	---------------------|--------------------------------------------------------------------------------------------------	
+	struct, pickle 			Encode Python objects as packed binary data or serialized byte strings for transmission
+	---------------------|--------------------------------------------------------------------------------------------------
+	email.* 				Parse and compose email messages with headers, attachments, and encodings
+	---------------------|--------------------------------------------------------------------------------------------------
+	mailbox 				Process on disk mailboxes and their messages
+	---------------------|--------------------------------------------------------------------------------------------------
+	mimetypes 				Guess file content types from names and extensions from types
+	---------------------|--------------------------------------------------------------------------------------------------
+	uu, binhex, base64,		Encode and decode binary (or other) data transmitted as text (automatic in email package)
+	binascii, quopri, email.*
+	---------------------|--------------------------------------------------------------------------------------------------
+	socketserver 			Framework for general Net servers
+	---------------------|--------------------------------------------------------------------------------------------------
+	http.server 			Basic HTTP server implementation, with request handlers for simple and CGI-aware servers
+	---------------------|--------------------------------------------------------------------------------------------------
+
+	there are additional Internet modules in Python not shown here
+	see Python’s standard Library Reference Manual for more complete and up-to-date lists and details
+
+		4. More on Protocol Standards
+			If you want the full story on protocols and ports, at this writing you can find a comprehensive
+			list of all ports reserved for protocols or registered as used by various common
+			systems by searching the web pages maintained by the Internet Engineering Task
+			Force (IETF) and the Internet Assigned Numbers Authority (IANA). The IETF is the
+			organization responsible for maintaining web protocols and standards. The IANA is
+			the central coordinator for the assignment of unique parameter values for Internet protocols.
+			Another standards body, the W3 (for WWW), also maintains relevant documents.
+			
+			http://www.ietf.org
+			http://www.iana.org/numbers.html
+			http://www.iana.org/assignments/port-numbers
+			http://www.w3.org
+
+*	7. Socket Programming
+		1. how to use the Python socket interface to perform low-level network communications
+			Python’s socket interfaces can be used directly, to implement custom network dialogs and to access 
+			standard protocols manually.
+		2. previewed in Chapter 5, the basic socket interface in Python is the standard library’s socket module. 
+			Like the os POSIX module, Python’s socket module is just a thin wrapper(interface layer) 
+			over the underlying C library’s socket calls. Like Python files, it’s also object-based—methods of a socket object 
+			implemented by this module call out to the corresponding C library’s operations after data conversions. 
+			For instance, the C library’s send and recv function calls become methods of socket objects in Python.
+		3. Python’s socket module supports socket programming any machine 
+			- supports BSD-style sockets—Windows, Macs, Linux, Unix
+			- provides a portable socket interface
+		4. module supports all commonly used socket types
+		   —TCP/IP, UDP, datagram, and Unix domain—and can be used as both a network
+			interface API and a general IPC mechanism between processes running on the same machine.
+		5. sockets are a programmer’s device for transferring bytes
+			- sockets themselves transfer only byte strings
+			- we can also transfer Python objects through them by using Python’s pickle module
+			- this module converts Python objects such as lists, dictionaries, and class instances to and from byte strings
+			  it provides the extra step needed to ship higher-level objects through sockets when required.
+		6. Python’s struct module can also be used to format Python objects as packed binary data byte strings for transmission
+		   	- limited in scope to objects that map to types in the C programming language
+		7. pickle module supports transmission of larger object
+		   -  such as dictionaries and class instances
+		8. other tasks: standard Internet protocols
+			- simpler formatted byte strings suffice
+			- learn more about pickle later in this chapter and book
+		9. Beyond basic data communication tasks
+			- the socket module includes a advanced tools
+			- has calls for the following and more:
+				1. Converting bytes to a standard network ordering (ntohl, htonl)
+				2. Querying machine name and address (gethostname, gethostbyname)
+				3. Wrapping socket objects in a file object interface (sockobj.makefile)
+				4. Making socket calls nonblocking (sockobj.setblocking)
+				5. Setting socket timeouts (sockobj.settimeout)
+		10. Python was compiled with Secure Sockets Layer (SSL) support
+			- ssl standard library module supports encrypted transfers with ssl.wrap_socket call
+				call wraps a socket object in SSL logic
+				used in turn by other standard library modules to support 
+					a. the HTTPS secure website protocol (http.client and urllib.request)
+					b. secure email transfers (poplib and smtplib)
+*	9. Socket Basics
+		1. won’t get into advanced socket use in this chapter
+			- basic socket transfers easy to code in Python
+		2. To create a connection between machines,
+			1) Python programs import the socket module
+			2) create a socket object
+			3) call the object’s methods
+				- to establish connections 
+				- send and receive data
+		3. Sockets are bidirectional
+			- socket object methods map directly to socket calls in the C library
+			- For example
+			  Example 12-1 implements a program that simply listens for a connection on a socket
+			  and echoes back over a socket whatever it receives through that socket
+			  adding Echo=> string prefixes
+			  
+*	10. analysis Server socket calls
+		1. this is boilerplate code: 
+			a. most connected socket programs generally make the same socket calls that the two scripts do
+		2. Programs 12-1 that provide services for other programs with sockets generally start out by following this sequence of calls:
+			a. sockobj = socket(AF_INET, SOCK_STREAM)
+				Python socket module to create a TCP socket object
+				1. The names AF_INET and SOCK_STREAM 
+					- preassigned variables defined by and imported from the socket module
+					- using them in combination means “create a TCP/IP socket,”
+					  the standard communication device for the Internet
+				2. AF_INET means the IP address protocol
+				3. SOCK_STREAM means the TCP transfer protocol
+				4. AF_INET/SOCK_STREAM combination is the default because it is so common
+				5. use other names in this call can create things like UDP connectionless sockets 
+					a. (use SOCK_DGRAM second) 
+					b. Unix domain sockets on the local machine (use AF_UNIX first)
+				   		- but we won’t do so in this book
+				   		- See the Python library manual for details on these and other socket module options
+					c. Using other socket types is mostly a matter of using different forms of boilerplate code
+			b. sockobj.bind((myHost, myPort))
+				1. Associates the socket object with an address—for IP addresses
+					a. we pass a server machine name 
+					b. port number on that machine
+				2. the server identifies the machine and port associated with the socket
+				3. In server programs, the hostname is typically an empty string (“”)
+					a. means the machine that the script runs on
+						- (formally, all available local and remote interfaces on the machine)
+						- the port is a number outside the range 0 to 1023 
+						  (which is reserved for standard protocols, described earlier).
+				4. Note that each unique socket dialog you support must have its own port number;
+					if you try to open a socket on a port already in use, Python will raise an exception.
+				5. Also notice the nested parentheses in this call—for the AF_INET address protocol	socket here
+				   a. we pass the host/port socket address to bind as a two-item tuple object
+					  (pass a string for AF_UNIX). 
+					  Technically, bind takes a tuple of values appropriate for the type of socket created.
+			c. sockobj.listen(5)
+				1. Starts listening for incoming client connections 
+				2. allows for a backlog of up to five pending requests
+					a. value passed sets the number of incoming client requests queued by the operating system 
+					before new requests are denied 
+					- happens only if a server isn’t fast enough to process requests before the queues fill up
+					- value of 5 is usually enough for most socket-based programs
+					- the value must be at least 1
+			d. while True
+				1. At this point, the server is ready to accept connection requests 
+					- from client programs running on remote machines (or the same machine) 
+					- falls into an infinite loop—while True 
+					(or the equivalent while 1 for older Pythons and ex-C programmers)—waiting for them to arrive:
+			e. connection, address = sockobj.accept()
+				1. Waits for the next client connection request to occur
+				2. when it does, the accept call 
+				   returns a brand-new socket object 
+				    a. over which data can be transferred from and to the connected client
+				    	- Connections are accepted on sockobj
+				      		but communication with a client happens on connection, the new socket
+				    b. This call actually returns a two-item tuple—address is the connecting client’s Internet address
+				3. We can call accept more than one time, to service multiple client connections
+ 					a. that’s why each call returns a new, distinct socket for talking to a particular client
+				4. Once we have a client connection
+				 	a. fall into another loop to receive data from the client in blocks 
+				 	   - of up to 1,024 bytes at a time
+				 	   - and echo each block back to the client:
+			f. data = connection.recv(1024)
+				1. Reads at most 1,024 more bytes of the next message sent from a client 
+				(i.e., coming across the network or IPC connection)
+				2. and returns it to the script as a byte string
+				3. We get back an empty byte string when the client has finished—end-of-file is triggered
+					- when the client closes its end of the socket.
+			g. connection.send(b'Echo=>' + data)
+				1. Sends the latest byte string data block back to the client program
+				    - prepending the string 'Echo=>' to it first
+				2. client program can then recv what we send here—the next reply line
+				    - Technically this call sends as much data as possible, and returns the number of bytes actually sent
+				    - To be fully robust, some programs may need to resend unsent portions or use connection.sendall 
+				      to force all bytes to be sent.
+			h. connection.close()
+				1. Shuts down the connection with this particular client.

@@ -1,0 +1,29 @@
+Selenium Grid Notes
+
+1) Links
+http://www.packtpub.com/sites/default/files/downloads/Distributed_Testing_with_Selenium_Grid.pdf
+http://docs.seleniumhq.org/docs/07_selenium_grid.jsp
+http://stackoverflow.com/questions/6287458/selenium-grid-2-ready-how-do-i-send-a-test-job-to-the-remote-server
+
+2) 
+I am not sure I understood the xml submitting part in your question. However, I can tell you an example which 
+will help to you understand how to submit the tests to grid.
+Three people, PersonA, PersonB and PersonC are creating selenium tests in their local machine. 
+They currently run the test using an ANT build (or something similar) against the selenium server jar 
+which is in their local machine. In their code they would be having a line of code which tells which selenium instance 
+should be used to run this test. This will be mostly like
+
+new DefaultSelenium("localhost",port,browsername,URL)
+Now these people want to move to selenium grid (1 or 2). Here is what they will have to do to use the grid
+
+All they have to do is change the command
+
+new DefaultSelenium("localhost",port,browsername,URL)
+to
+
+new DefaultSelenium("hubIPAddress",portInWhichHubWasStarted,browsername,URL)
+Note:- browserName - Make sure there is a remote node registered in Hub for the same browserName.
+
+Now all the commands will be sent to Selenium Hub and Hub would execute the commands using the remote nodes.
+
+Hope this helps. Please post if you have any questions.
