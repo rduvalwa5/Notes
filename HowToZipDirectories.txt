@@ -1,0 +1,67 @@
+
+
+Problem:  Copy Python code to the Windows 7, C1246895-XPS, from OSXAir, Mac OSX
+
+On OSXAir:
+	a) TAR and Compress directory
+  		1.	cd Desktop/
+ 		2.	GoogleDriveBackup
+		3.  tar -zcvf python.tar.gz python
+
+On C1246895-XPS:
+	a) RDuval@C1246895-XPS /cygdrive/c/users/rduval/PyCode 
+	$ ssh rduvalwa2@OSXAir
+	Password:
+	Last login: Mon Nov  6 23:47:03 2017
+
+	OSXAir:~ rduvalwa2$ cd Desktop
+
+	OSXAir:Desktop rduvalwa2$ cd GoogleDriveBackup
+
+	OSXAir:GoogleDriveBackup rduvalwa2$ pwd
+	/Users/rduvalwa2/Desktop/GoogleDriveBackup
+
+	OSXAir:GoogleDriveBackup rduvalwa2$ ls
+	2015-16 Current Resume                                  MusicDataBase.sql
+	ActivePasswordsCurrent.zip                              MusicImport_songs_and_process.xlsx
+	All_Music.xlsx                                          NetworkDevices.xlsx
+	Calculated Value of Your Paper Savings Bond(s).zip      PasswordSchemaData
+	Current_Notes                                           VB_Scripts
+	Duval_Limited_Partnership 2.zip                         python
+	Java                                                    workspace_c
+
+	OSXAir:GoogleDriveBackup rduvalwa2$ tar -zcf python.tar.gz python
+
+	OSXAir:GoogleDriveBackup rduvalwa2$ ls *.gz
+	python.tar.gz
+
+	OSXAir:GoogleDriveBackup rduvalwa2$ exit
+	logout
+	Connection to osxair closed.
+
+	RDuval@C1246895-XPS /cygdrive/c/users/rduval/PyCode
+	$ sftp rduvalwa2@OSXAir
+	Password:
+	Connected to OSXAir.
+
+	sftp> cd Desktop
+	sftp> pwd
+	Remote working directory: /Users/rduvalwa2/Desktop
+	sftp> cd GoogleDriveBackup
+	sftp> ls
+	2015-16 Current Resume                                                    ActivePasswordsCurrent.zip
+	All_Music.xlsx                                                            Calculated Value of Your Paper Savings Bond(s).zip
+	Current_Notes                                                             Duval_Limited_Partnership 2.zip
+	Java                                                                      MusicDataBase.sql
+	MusicImport_songs_and_process.xlsx                                        NetworkDevices.xlsx
+	PasswordSchemaData                                                        VB_Scripts
+	python                                                                    python.tar.gz
+	workspace_c
+
+	sftp> get python.tar.gz
+	Fetching /Users/rduvalwa2/Desktop/GoogleDriveBackup/python.tar.gz to python.tar.gz
+	/Users/rduvalwa2/Desktop/GoogleDriveBackup/python.tar.gz                                                          100%   11MB   1.4MB/s   00:07
+	sftp>
+	sftp> quit
+	RDuval@C1246895-XPS /cygdrive/c/users/rduval/PyCode
+	
