@@ -1,0 +1,42 @@
+https://pymysql.readthedocs.io/en/latest/user/examples.html
+
+A)  Getting pymysql into Python 3.7
+
+C1246895-OSX:bin rduvalwa2$ python3.7 -m pip install PyMySQL
+Collecting PyMySQL
+  Downloading https://files.pythonhosted.org/packages/ed/39/15045ae46f2a123019aa968dfcba0396c161c20f855f11dea6796bcaae95/PyMySQL-0.9.3-py2.py3-none-any.whl (47kB)
+     |████████████████████████████████| 51kB 2.1MB/s 
+Installing collected packages: PyMySQL
+Successfully installed PyMySQL-0.9.3
+C1246895-OSX:bin rduvalwa2$ 
+
+B)  Example
+
+import pymysql.cursors
+
+# Connect to the database
+connection = pymysql.connect(host='localhost',
+                             user='user',
+                             password='passwd',
+                             db='db',
+                             charset='utf8mb4',
+                             cursorclass=pymysql.cursors.DictCursor)
+
+try:
+    with connection.cursor() as cursor:
+        # Create a new record
+        sql = "INSERT INTO `users` (`email`, `password`) VALUES (%s, %s)"
+        cursor.execute(sql, ('webmaster@python.org', 'very-secret'))
+
+    # connection is not autocommit by default. So you must commit to save
+    # your changes.
+    connection.commit()
+
+    with connection.cursor() as cursor:
+        # Read a single record
+        sql = "SELECT `id`, `password` FROM `users` WHERE `email`=%s"
+        cursor.execute(sql, ('webmaster@python.org',))
+        result = cursor.fetchone()
+        print(result)
+finally:
+    connection.close()
