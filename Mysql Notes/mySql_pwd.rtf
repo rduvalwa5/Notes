@@ -1,6 +1,6 @@
 {\rtf1\ansi\ansicpg1252\cocoartf1348\cocoasubrtf170
-{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 AndaleMono;\f2\fswiss\fcharset0 ArialMT;
-\f3\fmodern\fcharset0 Courier;}
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 AndaleMono;\f2\fnil\fcharset0 Menlo-Regular;
+\f3\fswiss\fcharset0 ArialMT;\f4\fmodern\fcharset0 Courier;}
 {\colortbl;\red255\green255\blue255;\red47\green255\blue18;\red26\green26\blue26;\red148\green108\blue71;
 \red246\green246\blue246;\red12\green99\blue153;\red67\green67\blue67;\red133\green0\blue67;\red135\green135\blue135;
 \red247\green247\blue247;\red67\green121\blue181;\red32\green29\blue26;}
@@ -11,9 +11,10 @@
 \margl1440\margr1440\vieww17060\viewh14700\viewkind0
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 
-\f0\fs24 \cf0 /* Create Remote access */\
+\f0\b\fs48 \cf0 /* Create Remote access */
+\b0\fs24 \
 \
-\'97 On host:\
+\'97 On host server:\
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
 
 \f1 \cf2 \cb0 \CocoaLigature0 base 'root'\
@@ -38,7 +39,57 @@ mysql> \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 
 \f0 \cf0 \cb1 \CocoaLigature1 \
+\'97 On Client server:\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f2\fs22 \cf0 \CocoaLigature0 C1246895-OSX:~ rduvalwa2$ mysql -u rduvalwa2 -p -h 10.0.0.11\
+Enter password: \
+Welcome to the MySQL monitor.  Commands end with ; or \\g.\
+Your MySQL connection id is 7\
+Server version: 5.7.14 MySQL Community Server (GPL)\
 \
+Copyright (c) 2000, 2016, Oracle and/or its affiliates. All rights reserved.\
+\
+Oracle is a registered trademark of Oracle Corporation and/or its\
+affiliates. Other names may be trademarks of their respective\
+owners.\
+\
+Type 'help;' or '\\h' for help. Type '\\c' to clear the current input statement.\
+\
+mysql> connect music;\
+Reading table information for completion of table and column names\
+You can turn off this feature to get a quicker startup with -A\
+\
+Connection id:    8\
+Current database: music\
+\
+mysql> show tables;\
++-----------------------+\
+| Tables_in_music       |\
++-----------------------+\
+| Counts                |\
+| album2songs           |\
+| album_covers          |\
+| artist                |\
+| artist_albums         |\
+| derived_album2songs   |\
+| derived_album_covers  |\
+| derived_artist        |\
+| derived_artist_albums |\
+| derived_genre         |\
+| genre                 |\
+| normal_song           |\
+| temp_album_covers     |\
+| temp_albums           |\
++-----------------------+\
+14 rows in set (0.12 sec
+\f0\fs24 \CocoaLigature1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \
+\
+
+\b\fs48 /* After initial Mysql installation */
+\b0\fs24 \
 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 \cf0 mySql pwd for root:\
@@ -62,7 +113,7 @@ If you lose this password, please consult the section How to Reset the Root Pass
 \cf0 \
 \pard\pardeftab720\partightenfactor0
 
-\f2\b\fs32 \cf3 \expnd0\expndtw0\kerning0
+\f3\b\fs32 \cf3 \expnd0\expndtw0\kerning0
 Use the mysqladmin command-line utility to alter the MySQL password, using the following syntax:
 \b0 \
 \pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
@@ -183,7 +234,7 @@ https://community.jaspersoft.com/wiki/uninstall-mysql-mac-os-x\
 \
 \pard\pardeftab720\partightenfactor0
 
-\f2\b\fs22\fsmilli11400 \cf0 \cb10 \expnd0\expndtw0\kerning0
+\f3\b\fs22\fsmilli11400 \cf0 \cb10 \expnd0\expndtw0\kerning0
 Table of Contents [\cf11 hide\cf0 ]\cb1 \
 \pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
 \ls2\ilvl0
@@ -221,22 +272,22 @@ Use mysqldump to backup your databases to text files!\
 Stop the database server\
 \pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
 \ls3\ilvl0
-\f3\fs19\fsmilli9750 \cf0 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+\f4\fs19\fsmilli9750 \cf0 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
 sudo rm /usr/local/mysql
 \f0\fs24 \expnd0\expndtw0\kerning0
 \
 \ls3\ilvl0
-\f3\fs19\fsmilli9750 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+\f4\fs19\fsmilli9750 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
 sudo rm -rf /usr/local/mysql*
 \f0\fs24 \expnd0\expndtw0\kerning0
 \
 \ls3\ilvl0
-\f3\fs19\fsmilli9750 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+\f4\fs19\fsmilli9750 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
 sudo rm -rf /Library/StartupItems/MySQLCOM
 \f0\fs24 \expnd0\expndtw0\kerning0
 \
 \ls3\ilvl0
-\f3\fs19\fsmilli9750 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+\f4\fs19\fsmilli9750 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
 sudo rm -rf /Library/PreferencePanes/My*
 \f0\fs24 \expnd0\expndtw0\kerning0
 \
@@ -253,22 +304,22 @@ MYSQLCOM=-YES-
 \
 \pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
 \ls3\ilvl0
-\f3\fs19\fsmilli9750 \cf0 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+\f4\fs19\fsmilli9750 \cf0 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
 rm -rf ~/Library/PreferencePanes/My*
 \f0\fs24 \expnd0\expndtw0\kerning0
 \
 \ls3\ilvl0
-\f3\fs19\fsmilli9750 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+\f4\fs19\fsmilli9750 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
 sudo rm -rf /Library/Receipts/mysql*
 \f0\fs24 \expnd0\expndtw0\kerning0
 \
 \ls3\ilvl0
-\f3\fs19\fsmilli9750 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+\f4\fs19\fsmilli9750 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
 sudo rm -rf /Library/Receipts/MySQL*
 \f0\fs24 \expnd0\expndtw0\kerning0
 \
 \ls3\ilvl0
-\f3\fs19\fsmilli9750 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+\f4\fs19\fsmilli9750 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
 sudo rm -rf /private/var/db/receipts/*mysql*
 \f0\fs24 \expnd0\expndtw0\kerning0
 \
