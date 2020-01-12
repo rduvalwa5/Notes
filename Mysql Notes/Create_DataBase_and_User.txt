@@ -50,6 +50,11 @@ mysql> show databases;
 +--------------------+
 4 rows in set (0.12 sec)
 
+create user `rduvalwa2`@`RandalluvalsMBP.hsd1.wa.comcast.net` identified by 'blu4jazz';
+
+grant all privileges on Music.* to 'rduvalwa2'@'RandalluvalsMBP.hsd1.wa.comcast.net';
+
+---------------
 mysql> create user `rduvalwa2`@`127.0.0.1` identified by 'blu4jazz';
 Query OK, 0 rows affected (0.01 sec)
 
