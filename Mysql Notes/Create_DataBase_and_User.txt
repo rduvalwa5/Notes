@@ -68,11 +68,9 @@ mysql> show databases;
 +--------------------+
 5 rows in set (0.00 sec)
 
-mysql> mysql> grant all privil Music.* to 'root'@'localhost';
+mysql> grant all privileges Music.* to 'root'@'localhost';
 Query OK, 0 rows affected (0.03 sec)
 
-mysql> grant all privileges on Music.* to 'rduvalwa2'@'localhost';
-ERROR 1133 (42000): Can't find any matching row in the user table
 mysql> grant all privileges on Music.* to 'rduvalwa2'@'127.0.0.1';
 Query OK, 0 rows affected (0.00 sec)
 
