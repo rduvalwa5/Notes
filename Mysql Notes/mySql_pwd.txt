@@ -1,0 +1,215 @@
+﻿/* Create Remote access */
+
+— On host server:
+base 'root'
+RandalluvalsMBP:~ rduvalwa2$ mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 6
+Server version: 5.7.14 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2016, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> GRANT ALL ON music.* TO `rduvalwa2`@'10.0.0.57' IDENTIFIED BY 'blu4jazz'; 
+Query OK, 0 rows affected, 1 warning (0.06 sec)
+
+mysql> 
+
+— On Client server:
+C1246895-OSX:~ rduvalwa2$ mysql -u rduvalwa2 -p -h 10.0.0.11
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 7
+Server version: 5.7.14 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2016, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> connect music;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Connection id:    8
+Current database: music
+
+mysql> show tables;
++-----------------------+
+| Tables_in_music       |
++-----------------------+
+| Counts                |
+| album2songs           |
+| album_covers          |
+| artist                |
+| artist_albums         |
+| derived_album2songs   |
+| derived_album_covers  |
+| derived_artist        |
+| derived_artist_albums |
+| derived_genre         |
+| genre                 |
+| normal_song           |
+| temp_album_covers     |
+| temp_albums           |
++-----------------------+
+14 rows in set (0.12 sec
+
+
+/* After initial Mysql installation */
+
+mySql pwd for root:
+
+ 01/10/2020
+
+2020-01-12T00:43:20.919832Z 1 [Note] A temporary password is generated for root@localhost: 4qyQXsaaaO&r
+
+If you lose this password, please consult the section How to Reset the Root Password in the MySQL reference manual.
+
+2020-01-11T07:14:33.205477Z 1 [Note] A temporary password is generated for root@localhost: fxW2ktFy>r%q
+If you lose this password, please consult the section How to Reset the Root Password in the MySQL reference manual.
+
+./mysql -u root -p
+
+
+
+Use the mysqladmin command-line utility to alter the MySQL password, using the following syntax:
+    1 mysqladmin --user=root password "newpassword"
+    2 /opt/lampp/bin/mysqladmin --user=root password "gue55me"
+    3 mysqladmin --user=root --password=oldpassword password "newpassword"
+
+Trace:
+C1246895-OSX:~ rduvalwa2$ mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 41
+Server version: 5.7.14
+
+Copyright (c) 2000, 2016, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> quit
+Bye
+
+C1246895-OSX:~ rduvalwa2$ mysqladmin --user=root -p password blu4jazz
+Enter password: 
+mysqladmin: [Warning] Using a password on the command line interface can be insecure.
+Warning: Since password will be sent to server in plain text, use ssl connection to ensure password safety.
+
+C1246895-OSX:~ rduvalwa2$ mysql -u root -p
+Enter password: blu4jazz
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 47
+Server version: 5.7.14 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2016, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> quit
+Bye
+C1246895-OSX:~ rduvalwa2$ 
+
+
+
+
+
+C1246895-OSX:bin rduvalwa2$ ./mysql -u root -p
+Enter password:  blu4jazz
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 19
+Server version: 5.7.12 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2016, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.01 sec)
+
+mysql> 
+
+shell> mysql --user=user_name --password db_name
+Enter password: your_password
+
+
+https://community.jaspersoft.com/wiki/uninstall-mysql-mac-os-x
+
+Table of Contents [hide]
+    • 		Summary
+    • 		Symptom
+    • 		Resolution
+Summary
+To completely uninstall MySql OS X it is neccessary to remove numerous files.
+Symptom
+You unable to install an older version of MySql even though you thought you have removed everything.
+Resolution
+To uninstall MySQL and completely remove it (including all databases) from your Mac do the following:
+    • Open a terminal window
+    • Use mysqldump to backup your databases to text files!
+    • Stop the database server
+    • sudo rm /usr/local/mysql
+    • sudo rm -rf /usr/local/mysql*
+    • sudo rm -rf /Library/StartupItems/MySQLCOM
+    • sudo rm -rf /Library/PreferencePanes/My*
+    • edit /etc/hostconfig and remove the line MYSQLCOM=-YES-
+    • rm -rf ~/Library/PreferencePanes/My*
+    • sudo rm -rf /Library/Receipts/mysql*
+    • sudo rm -rf /Library/Receipts/MySQL*
+    • sudo rm -rf /private/var/db/receipts/*mysql*
+The last three lines are particularly important as otherwise, you can't install an older version of MySQL even though you think that you've completely deleted the newer version!
+
+C1246895-OSX:bin rduvalwa2$ ./mysqladmin -u root password blu4jazz -p
+Enter password: 
+mysqladmin: [Warning] Using a password on the command line interface can be insecure.
+Warning: Since password will be sent to server in plain text, use ssl connection to ensure password safety.
+C1246895-OSX:bin rduvalwa2$ mysql -u root -p
+-bash: mysql: command not found
+C1246895-OSX:bin rduvalwa2$ ./mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 15
+Server version: 5.7.12 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2016, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> 
+
+
+1.  Create User:
