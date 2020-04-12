@@ -1,0 +1,71 @@
+Links:
+	https://coolestguidesontheplanet.com/get-apache-mysql-php-phpmyadmin-working-osx-10-10-yosemite/
+	
+OSX 10.10.5  Yosemite
+ A. Verify From terminal:
+  1	 sudo apachectl start
+  2   sudo apachectl stop
+  3   sudo apachectl restart
+  4   sudo apachectl start
+  5   httpd -v
+     	MaxBookPro17OSX:~ rduvalwa2$ httpd -v
+		Server version: Apache/2.4.16 (Unix)
+		Server built:   Jul 22 2015 21:03:09
+  6   sudo apachectl stop
+  7   sudo apachectl start
+  8	  MaxBookPro17OSX:~ rduvalwa2$ apachectl configtest
+		Syntax OK
+ B. Document location
+ 	Document root is the location where the files are shared from the file system and is similar to the traditional names 
+ 	of ‘public_html‘ and ‘htdocs‘, OSX has historically had 2 web roots one at a system level 
+ 	and one at a user level – you can set both up or just run with one, the user level one allows multiple accounts to 
+ 	have their own web root whilst the system one is global for all users. It seems there is less effort from Apple in 
+ 	continuing with the user level one but it still can be set up with a couple of extra tweaks in configuration files. 
+ 	It is easier to use the user level one as you don’t have to keep on authenticating as an admin user.
+
+	System Level Web Root
+		– the default system document root is still found at –
+		  http://localhost/
+
+	The files are shared in the filing system at –
+	/Library/WebServer/Documents/
+	from Terminal:
+	MaxBookPro17OSX:~ rduvalwa2$ sudo find / -name apachectl
+					Password:
+					/usr/sbin/apachectl
+	MaxBookPro17OSX:~ rduvalwa2$ ls -l /usr/sbin/apachectl
+								-rwxr-xr-x  1 root  wheel  3822 Jul 22  2015 /usr/sbin/apachectl
+								
+	MaxBookPro17OSX:~ rduvalwa2$ ps -ef | grep httpd
+    	0  5304     1   0 10:14PM ??         0:00.21 /usr/sbin/httpd -D FOREGROUND
+	    70  5305  5304   0 10:14PM ??         0:00.00 /usr/sbin/httpd -D FOREGROUND
+   		70  5440  5304   0 12:11AM ??         0:00.00 /usr/sbin/httpd -D FOREGROUND
+  		501  5442  5421   0 12:11AM ttys002    0:00.00 grep httpd
+	
+					
+    MaxBookPro17OSX:WebServer rduvalwa2$ pwd
+		/Library/WebServer
+	MaxBookPro17OSX:WebServer rduvalwa2$ ls -l
+	total 0
+	drwxr-xr-x  4 root  wheel  136 Jul 22  2015 CGI-Executables
+	drwxr-xr-x  5 root  wheel  170 Jul 22  2015 Documents
+	drwxr-xr-x  3 root  wheel  102 Jul 22  2015 share
+    
+    MaxBookPro17OSX:Documents rduvalwa2$ pwd
+	/Library/WebServer/Documents
+	MaxBookPro17OSX:Documents rduvalwa2$ ls -l
+	total 72
+	-rw-r--r--  1 root  wheel   3726 Jul 22  2015 PoweredByMacOSX.gif
+	-rw-r--r--  1 root  wheel  31958 Jul 22  2015 PoweredByMacOSXLarge.gif
+	-rw-r--r--  1 root  wheel     45 Jun 11  2007 index.html.en
+	
+	/Library/WebServer/share
+	MaxBookPro17OSX:share rduvalwa2$ ls -l
+	total 0
+	drwxr-xr-x  3 root  wheel  102 Jul 22  2015 httpd
+	
+	
+Create Web Server  - writing web server on mac osx yosemite
+	https://discussions.apple.com/docs/DOC-3083
+    	https://discussions.apple.com/docs/DOC-11236
+	
