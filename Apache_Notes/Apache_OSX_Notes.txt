@@ -64,8 +64,16 @@ OSX 10.10.5  Yosemite
 	total 0
 	drwxr-xr-x  3 root  wheel  102 Jul 22  2015 httpd
 	
-	
-Create Web Server  - writing web server on mac osx yosemite
+*******  	Create Web Server  - writing web server on mac osx yosemite  ********
 	https://discussions.apple.com/docs/DOC-3083
     	https://discussions.apple.com/docs/DOC-11236
 	
+	
+*******     Python and HTML    ********
+	
+	http://karrigell.sourceforge.net/en/pythoninsidehtml.html
+	
+	
+*******     Data output as HTML  ********
+
+https://programminghistorian.org/en/lessons/output-data-as-html-file
